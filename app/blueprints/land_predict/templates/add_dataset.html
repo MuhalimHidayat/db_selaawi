@@ -21,8 +21,9 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
-    <h1>{{prediction}}</h1>
-    <!-- /#page-content-wrapper -->
+    <a href="{{ url_for('download_dataset', dataset_name='dataset_KNN.xlsx') }}">Unduh Dataset</a>
+
+    
 
 </div>
 {% endblock content %}

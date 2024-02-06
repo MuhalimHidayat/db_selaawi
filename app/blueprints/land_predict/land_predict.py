@@ -1,7 +1,7 @@
 import functools
 
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for
+    Blueprint, flash, g, redirect, render_template, request, session, url_for, send_from_directory
 )
 from markupsafe import escape
 import pandas as pd
@@ -14,7 +14,7 @@ UPLOAD_FOLDER = 'app/blueprints/land_predict/static/datasets'
 ALLOWED_EXTENSIONS = {'xlsx','csv'}
 
 # masih salah di bagian static_url_path
-lp = Blueprint('land_predict', __name__, url_prefix='/land_predict', template_folder='templates', static_folder='static', static_url_path='/static/land_predict')
+lp = Blueprint('land_predict', __name__, url_prefix='/land_predict', template_folder='templates', static_folder='static', static_url_path='blueprints/land_predict/static')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @lp.route('/add-manual-data', methods=('GET', 'POST'))
@@ -66,7 +66,10 @@ def add_dataset():
             df.to_excel('app/blueprints/land_predict/static/datasets/'+filename, index=False)
             # file.save(UPLOAD_FOLDER+'/'+filename)
             flash('File berhasil di upload', "success")
-            return render_template('add_dataset.html', prediction="berhasil di prediksi")
+            # return render_template('add_dataset.html', prediction="berhasil di prediksi", dataset=download_dataset(filename))
+            return render_template('add_dataset.html', dataset_name=filename)
         return render_template('add_dataset.html')
     return render_template('add_dataset.html')
+
+# download dataset
     

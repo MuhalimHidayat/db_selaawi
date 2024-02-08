@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <!-- link css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
+    <!-- link pallete -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pallete.css') }}">
+    <!-- tailwind -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/output.css') }}">
+</head>
+
+<body>
+    <div>
+        <!-- navbar -->
+        <div class="bg-navbar-color flex justify-between items-center px-5 py-3" id="navbar">
+            <div id="logo">
+                <img class="w-14 rounded-full" src="{{ url_for('static', filename='img/logo_web.png') }}" alt="">
+            </div>
+            <div class="flex items-center" id="navbar-content">
+                <ul class="flex gap-x-5">
+                    <li><a href="#about-us">About Us</a></li>
+                    <li><a href="#">Education Selaawi</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+                <div class="ms-5">
+                    <button class="bg-button-user-color hover:bg-orange-400 text-white font-bold py-2 px-6 rounded">Sign
+                        In</button>
+                </div>
+            </div>
+        </div>
+        <!-- end navbar -->
+
+        <div class="bg-slate-200 flex justify-around p-7" id="header">
+            <div class="flex justify-around flex-col w-7/12" id="header-left-content">
+                <div class="w-9/12">
+                    <h1 class="text-3xl font-bold">Land Suitability Classification System of Selaawi Sub-district</h1>
+                    <h3 class="text-xl font-light mt-5">Predicting the suitability of shallot farming land in Selaawi
+                        sub-district.</h3>
+                </div>
+
+                <div>
+                    <button class="bg-button-user-color text-white font-bold py-2 px-6 rounded">Sign
+                        In</button>
+                </div>
+
+            </div>
+            <div class="" id="header-right-content">
+                <img class="rounded-full" src="{{ url_for('static', filename='img/user/gambar.png') }}" alt="" class="">
+            </div>
+        </div>
+
+        <!-- About Us -->
+        <div id="about-us">
+            <div class="flex justify-center" id="about-us-header">
+                <h1 class="text-3xl font-header-color my-10">About Us</h1>
+            </div>
+            <div class="flex" id="about-us-content">
+                <div class="basis-1/2" id="about-us-content-left">
+                    <img class="w-9/12" src="{{ url_for('static', filename='img/user/aboutusGambar.png') }}" alt="">
+                </div>
+                <div class="basis-1/2" id="about-us-content-right">
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
+                        but also the leap into electronic typesetting, remaining
+                        essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
+                        containing Lorem.</p>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!-- footer -->
+        <div class="bg-footer-color flex flex-col" id="footer">
+            <div class="flex">
+                <div class="bg-slate-300 basis-1/2 flex items-center" id="footer-content">
+                    <div class="basis-1/4" id="footer-content-left">
+                        <img class="w-24 rounded-full" src="{{ url_for('static', filename='img/logo_web.png') }}" alt="">
+                    </div>
+    
+                    <div class="basis-1/2 bg-red-300">
+                        <h4 class="">Website Selaawi</h4>
+                        <p>Lorem Ipsum is simply dummy text of the printing. Lorem Ipsum is simply dummy text of the
+                            printing. Lorem Ipsum is simply dummy text of the printing. Lorem Ipsum is simply dummy text of
+                            the printing. </p>
+                        <div>
+    
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-red-300 basis-1/2 flex flex-col ">
+                    <a href="">selaawi@gmail.com</a>
+                    <p>08131140350</p>
+                    <p>Selaawi, Garutt Jawa Barat</p>
+                </div>
+            </div>
+            
+            <div class="flex justify-center">
+                <p>copyright 2018 Selaawi Website </p>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</body>
+
+</html>

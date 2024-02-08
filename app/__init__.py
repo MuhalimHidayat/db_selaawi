@@ -14,13 +14,8 @@ def download_dataset(dataset_name):
     return send_from_directory(dataset_path, dataset_name)
 
 
-@app.route('/')
-def index():
-    return render_template('base.html')
 
+from app import routes
 
-@app.route('/index')
-def index2():
-    return render_template('predictions/base.html')
 if __name__ == '__main__':
     app.run(debug=True)

@@ -7,5 +7,25 @@
 }
 .bg-tertiary-color {
   background-color: #D9D9D9;
-  ;
+}
+.bg-navbar-color {
+  background-color: #F5F5F5;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.bg-footer-color {
+  background-color: #F5F5F5;
+}
+
+.bg-button-user-color {
+  background-color: #CD5C08;
+}
+
+.bg-button-user-color:hover {
+  background-color: #CD5C08B2;
+}
+
+.font-header-color {
+  color: #41644A;
+  font-weight: 700;
 }

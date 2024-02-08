@@ -17,5 +17,10 @@ def download_dataset(dataset_name):
 @app.route('/')
 def index():
     return render_template('base.html')
+
+
+@app.route('/index')
+def index2():
+    return render_template('predictions/base.html')
 if __name__ == '__main__':
     app.run(debug=True)

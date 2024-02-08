@@ -24,27 +24,27 @@
     <!-- <div class="container"> -->
     <div class="flex">
         <!-- side navbar  -->
-        <div id="sidebar" class="pt-5 px-3">
+        <div id="sidebar" class="pt-5">
             <!-- logo -->
-            <div class="logo flex items-center">
+            <div class="logo flex items-center px-3">
                 <img class="w-16 rounded-full me-3" src="{{ url_for('static', filename='img/logo_web.png') }}" alt="">
                 <h1 class="text-xl">Land Suitability Predicted</h1>
             </div>
             <!-- nav-content -->
             <!-- <div class="nav-content"> -->
-            <ul class="nav-content mt-5 mb-2">
+            <ul class="nav-content mt-5 mb-2 ">
 
-                <li><i class="fa-solid fa-cube me-2"></i> <a href="dashboard.html">Dashboard</a></li>
+                <li class="px-4"><i class="fa-solid fa-cube me-2 py-4"></i> <a href="dashboard.html">Dashboard</a></li>
                 <!-- dropdown -->
                 <div id="dropdown-menu" class="">
-                    <button class="btn" id="btn">
+                    <button class="btn px-4" id="btn">
+                        <i class="fa-solid fa-arrow-down me-3" id="arrow"></i>
                         Prediction
-                        <i class="fa-solid fa-arrow-down ms-2" id="arrow"></i>
                     </button>
-                    <ul class="dropdown-content-show ms-4" id="dropdown">
-                        <li><a href="prediction.html">Data Real Time</a></li>
-                        <li><a href="">Add Manual Data</a></li>
-                        <li><a href="">Upload Data</a></li>
+                    <ul class="dropdown-content-show " id="dropdown">
+                        <li class="ps-11"><a href="prediction.html">Data Real Time</a></li>
+                        <li class="ps-11"><a href="">Add Manual Data</a></li>
+                        <li class="ps-11"><a href="">Upload Data</a></li>
                     </ul>
                 </div>
 

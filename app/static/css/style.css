@@ -22,16 +22,19 @@
     visibility: visible;
     opacity: 1;
 }
+/* and symbol in css */
 
-.dropdown-content-show>li {
-    margin: 10px 0;
+#sidebar>ul>li:hover, #dropdown-menu>.dropdown-content-show>li:hover {
+    background-color: #D9D9D9;
+    /* drop shadow */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
-
-li{
-    margin: 15px 0;
+#dropdown-menu>.dropdown-content-show>li {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /* background-color: aqua; */
 }
-
 
 #arrow-up {
     transform: rotate(180deg);
@@ -43,7 +46,7 @@ li{
 
 #right-content {
     /* background-color: blue; */
-    width: 78%;
+    width: 100%;
     /* padding: 20px; */
 
 }

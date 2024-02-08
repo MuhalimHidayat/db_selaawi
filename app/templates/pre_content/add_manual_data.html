@@ -6,9 +6,9 @@
   <link rel="stylesheet" href="{{ url_for('land_predict.static', filename='css/add_manual_data.css') }}">
 {% endblock link %}
 {% block content %}
-  <div class="">
-
-    <div id="content-header" class="">
+<div class="flex justify-center w-full">
+  <div class="w-4/5">
+    <div id="content-header" class="w-full">
       <h1 class="">Add Manual Data</h1>
     </div>
 
@@ -75,5 +75,5 @@
     {% endfor %}
   {% endif %}
 {% endwith %}
-<h1>{{prediction}}</h1>
+<!-- <h1>{{prediction}}</h1> -->
 {% endblock content %}

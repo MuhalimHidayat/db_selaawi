@@ -1,0 +1,44 @@
+{% extends 'predictions/base.html' %}
+
+{% block link %}
+
+{% endblock link %}
+
+{% block content %}
+<div class="flex justify-center w-full">
+    <div class="w-4/5 bg-tertiary-color">
+        <div class="">
+            <div id="main-content-header" class="w-full bg-secondary-color">
+                <h1 class="font-bold p-6 text-xl">Upload File</h1>
+            </div>
+        </div>
+        <div class="w-full flex justify-center">
+            <div class="my-12 w-10/12">
+                <div class="w-full bg-secondary-color">
+                    <h1>Form Upload</h1>
+                </div>
+                <div class="w-full">
+                    <form action="" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="dataset">Dataset (xlsx): </label>
+                            <input type="file" class="form-control-file" id="dataset" name="dataset">
+                        </div>
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Prediksi</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        {{ message }}
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <a class="underline" href="{{ url_for('download_dataset', dataset_name='dataset_KNN.xlsx') }}">Unduh Dataset</a>
+
+    </div>
+</div>
+    
+{% endblock content %}

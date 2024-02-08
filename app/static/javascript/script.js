@@ -3,6 +3,7 @@ console.log("Hello World from script.js!");
 const btn = document.getElementById("btn");
 const arrowIcon = document.getElementById("arrow")
 const dropdown = document.getElementById("dropdown");
+const dropdownMenu = document.getElementById("dropdown-menu");
 
 // navbar 
 const btnNav = document.getElementById("btn-nav");
@@ -38,7 +39,13 @@ btn.addEventListener("click", (e) => {
     e.preventDefault();
     dropdownToggle(dropdown);
     arrowToggle(arrowIcon);
-    console.log(arrowIcon)
+    // jika dropdown-content-show ada, maka ganti warna background dropdown-menu
+    if (dropdown.classList.contains("dropdown-content-show")) {
+        document.getElementById("dropdown-menu").style.backgroundColor = "#D9D9D9";
+    } else {
+        document.getElementById("dropdown-menu").style.backgroundColor = "#41644A";
+    }
+    console.log(arrowIcon)  
 
 });
 

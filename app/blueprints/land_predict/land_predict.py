@@ -14,7 +14,7 @@ UPLOAD_FOLDER = 'app/blueprints/land_predict/static/datasets'
 ALLOWED_EXTENSIONS = {'xlsx','csv'}
 
 # masih salah di bagian static_url_path
-lp = Blueprint('land_predict', __name__, url_prefix='/land_predict', template_folder='templates', static_folder='static', static_url_path='blueprints/land_predict/static')
+lp = Blueprint('land_predict', __name__, url_prefix='/land_predict', static_folder='static', static_url_path='blueprints/land_predict/static')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @lp.route('/add-manual-data', methods=('GET', 'POST'))
@@ -37,8 +37,8 @@ def add_manual_data():
         
         # print(humidity)
         flash("data berhasil di prediksi", "success")
-        return render_template('add_manual_data.html', prediction=prediction)
-    return render_template('add_manual_data.html', prediction="Belum Memasukkan Data")
+        return render_template('pre_content/add_manual_data.html', prediction=prediction)
+    return render_template('pre_content/add_manual_data.html', prediction="Belum Memasukkan Data")
 
 # dataset upload
 def allowed_file(filename):
@@ -67,9 +67,9 @@ def add_dataset():
             # file.save(UPLOAD_FOLDER+'/'+filename)
             flash('File berhasil di upload', "success")
             # return render_template('add_dataset.html', prediction="berhasil di prediksi", dataset=download_dataset(filename))
-            return render_template('add_dataset.html', dataset_name=filename)
-        return render_template('add_dataset.html')
-    return render_template('add_dataset.html')
+            return render_template('pre_content/add_dataset.html', dataset_name=filename)
+        return render_template('pre_content/add_dataset.html')
+    return render_template('pre_content/add_dataset.html')
 
 # download dataset
     

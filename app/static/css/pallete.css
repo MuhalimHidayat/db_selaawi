@@ -1,3 +1,7 @@
+* {
+    font-family: 'Inter var', sans;
+}
+
 /* Color pallete */
 .bg-primary-color {
   background-color: #41644A;
@@ -28,4 +32,21 @@
 .font-header-color {
   color: #41644A;
   font-weight: 700;
+}
+
+.font-color-highlight {
+  color: #18551E;
+}
+.font-color-link {
+  color: #CD5C08;
+}
+.font-color-link:hover {
+  color: #CD5C08B2;
+}
+
+.border-color {
+  border-color: #CD5C08;
+}
+.border-color:hover {
+  border-color: #CD5C08B2;
 }

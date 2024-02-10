@@ -1,0 +1,43 @@
+{% extends 'auth.html' %}
+{% block css_url %}
+    <!-- link pallete -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pallete.css') }}">
+
+    <!-- link css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/authen/signup.css') }}">
+{% endblock css_url %}
+
+{% block content %}
+<!-- <p class="text-end "><a class="border-b-2 border-color px-2 py-1 m-4" href="">Home</a></p> -->
+<h1 class="my-8 text-3xl font-bold">{{title}}</h1>
+<!-- flash message -->
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="alert alert-danger">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+<div>
+    <form action="" method="post">
+        <div class="flex flex-col gap-y-4 mb-4">
+            <input
+                class="shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                name="username" id="username" type="text" placeholder="Username">
+
+            <br><br>
+            <!-- Submit Button -->
+            <button
+                class="bg-button-user-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                type="submit">
+                Submit
+            </button>
+
+        </div>
+
+    </form>
+</div>
+
+{% endblock content %}

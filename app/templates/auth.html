@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Authentications</title>
+
+    
+    <!-- tailwind -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/output.css') }}">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+
+    <!-- link font awesome -->
+    <script src="https://kit.fontawesome.com/f740e7af0d.js" crossorigin="anonymous"></script>
+    
+    <!-- link css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+
+    {% block css_url %} {% endblock css_url %}
+
+</head>
+
+<body>
+    <div class="flex gap-x-2">
+        <div class="basis-1/2 flex flex-col justify-center gap-y-8 ps-14 pe-12" id="content-left">
+            <p class="font-bold text-lg">Selamat Datang</p>
+            <h1 class="font-bold text-4xl">Land Suitability Classification System of Selaawi Sub-district</h1>
+        </div>
+        <div class="basis-1/2 m-3" id="content-right">
+            {% block content %}
+
+            {% endblock content %}
+        </div>
+    </div>
+</body>
+
+</html>

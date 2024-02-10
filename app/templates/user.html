@@ -6,12 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
 
-    <!-- link css -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
     <!-- link pallete -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/pallete.css') }}">
     <!-- tailwind -->
     <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/output.css') }}">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+
+    <!-- link font awesome -->
+    <script src="https://kit.fontawesome.com/f740e7af0d.js" crossorigin="anonymous"></script>
+
+    <!-- link css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
 </head>
 
 <body>
@@ -54,17 +59,17 @@
             </div>
         </div>
 
-        <!-- About Us -->
+        <!-- about-us -->
         <div id="about-us">
             <div class="flex justify-center" id="about-us-header">
                 <h1 class="text-3xl font-header-color my-10">About Us</h1>
             </div>
-            <div class="flex" id="about-us-content">
-                <div class="basis-1/2" id="about-us-content-left">
-                    <img class="w-9/12" src="{{ url_for('static', filename='img/user/aboutusGambar.png') }}" alt="">
+            <div class="flex p-7" id="about-us-content">
+                <div class="basis-1/2 flex justify-center" id="about-us-content-left">
+                    <img class="w-9/12 rounded-md" src="{{ url_for('static', filename='img/user/aboutusGambar.png') }}" alt="">
                 </div>
                 <div class="basis-1/2" id="about-us-content-right">
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                    <p class="text-center mt-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
                         the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
                         of type and scrambled it to make a type specimen book. It has survived not only five centuries,
                         but also the leap into electronic typesetting, remaining
@@ -73,40 +78,69 @@
                 </div>
             </div>
         </div>
+        <!-- end-about-us -->
 
 
 
 
         <!-- footer -->
-        <div class="bg-footer-color flex flex-col" id="footer">
-            <div class="flex">
-                <div class="bg-slate-300 basis-1/2 flex items-center" id="footer-content">
+        <div class="pt-10 px-6 bg-footer-color flex flex-col" id="footer">
+            <div class="flex ">
+                <div class="basis-1/2 flex " id="footer-content">
                     <div class="basis-1/4" id="footer-content-left">
-                        <img class="w-24 rounded-full" src="{{ url_for('static', filename='img/logo_web.png') }}" alt="">
+                        <img class="w-28 rounded-full ml-3" src="{{ url_for('static', filename='img/logo_web.png') }}"
+                            alt="">
                     </div>
-    
-                    <div class="basis-1/2 bg-red-300">
-                        <h4 class="">Website Selaawi</h4>
-                        <p>Lorem Ipsum is simply dummy text of the printing. Lorem Ipsum is simply dummy text of the
-                            printing. Lorem Ipsum is simply dummy text of the printing. Lorem Ipsum is simply dummy text of
-                            the printing. </p>
-                        <div>
-    
+
+                    <div class="basis-8/12 pt-1 px-3 ">
+                        <h4 class="text-xl font-semibold mb-3 text-center">Website Selaawi</h4>
+                        <p class="text-xs text-center">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos
+                            optio accusamus, vel eaque minus doloribus deleniti, dolore numquam quis delectus voluptatem
+                            unde beatae atque aut voluptate excepturi aspernatur a nam! </p>
+                        <div class="flex mt-4 gap-x-6">
+                            <div class="flex gap-x-3">
+                                <i class="fa-regular fa-map fa-lg pt-4"></i>
+                                <div>
+                                    <p class="font-bold text-gray-500">Alamat : </p>
+                                    <p class="font-bold">Selaawi, Garut</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-x-3">
+                                <i class="fa-regular fa-clock fa-lg pt-4"></i>
+                                <div>
+                                    <p class="font-bold text-gray-500">Jam Operasional : </p>
+                                    <p class="font-bold">Sen - Jum    8.00 - 17.00</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="basis-1/2 flex justify-around">
+                    <div class="flex flex-col gap-y-3">
+                        <div class="flex gap-4 items-center">
+                            <i class="fa-sharp fa-regular fa-envelope fa-lg"></i>
+                            <a class="font-color-highlight" href="">selaawi@gmail.com</a>
+                        </div>
+                        <div class="flex gap-4 items-center">
+                            <i class="fa-brands fa-whatsapp fa-lg"></i>
+                            <p class="ml-1">08131140350</p>
+                        </div>
+                        <div class="flex gap-4 items-center">
+                            <i class="fa-regular fa-map fa-lg"></i>
+                            <p class="">Selaawi, Garut Jawa Barat</p>
+                        </div>
 
-                <div class="bg-red-300 basis-1/2 flex flex-col ">
-                    <a href="">selaawi@gmail.com</a>
-                    <p>08131140350</p>
-                    <p>Selaawi, Garutt Jawa Barat</p>
+
+                    </div>
                 </div>
+
             </div>
-            
-            <div class="flex justify-center">
+
+            <div class="flex justify-center mt-6 mb-3">
                 <p>copyright 2018 Selaawi Website </p>
             </div>
         </div>
+        <!-- end-footer -->
 
     </div>
 

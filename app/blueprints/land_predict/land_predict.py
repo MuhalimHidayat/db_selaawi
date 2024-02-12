@@ -1,9 +1,10 @@
 import functools
+import html
 
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for, send_from_directory
 )
-from markupsafe import escape
+from markupsafe import escape, Markup
 import pandas as pd
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
@@ -35,12 +36,12 @@ def add_manual_data():
         columns = ['hum', 'soil_nitro1', 'soil_phos1', 'soil_pot1', 'soil_temp1', 'soil_ph1', 'temp']
         data_test = pd.DataFrame(data, columns=columns)
         prediction = model.predict(data_test)
-        print("PREDIKSI: ",prediction)
+        data_test['prediction'] = prediction
+        # print("PREDIKSI: ",prediction)
         # nilai akurasinya 
-        
-        # print(humidity)
+        prediction_data = data_test.to_html(index=False, classes='table-auto', table_id='prediction_results')
         flash("data berhasil di prediksi", "success")
-        return render_template('pre_content/add_manual_data.html', prediction=prediction)
+        return render_template('pre_content/result/manual_data.html', prediction_data=Markup(prediction_data), prediction = prediction)
     return render_template('pre_content/add_manual_data.html', prediction="Belum Memasukkan Data")
 
 # dataset upload
@@ -71,9 +72,13 @@ def add_dataset():
             # df.to_excel(UPLOAD_FOLDER+'/'+filename)
             df.to_excel('app/blueprints/land_predict/static/datasets/'+filename, index=False)
             # file.save(UPLOAD_FOLDER+'/'+filename)
+            prediction_data = df.to_html(index=False, classes='table-auto', table_id='prediction_results')
+            rows = len(df.axes[0])
+            cols = len(df.axes[1])
             flash('File berhasil di upload', "success")
             # return render_template('add_dataset.html', prediction="berhasil di prediksi", dataset=download_dataset(filename))
-            return render_template('pre_content/add_dataset.html', dataset_name=filename)
+            # return render_template('pre_content/add_dataset.html', dataset_name=filename)
+            return render_template('pre_content/result/dataset.html', dataset_name=filename, prediction_data=Markup(prediction_data), dimensions=[rows, cols])
         return render_template('pre_content/add_dataset.html')
     return render_template('pre_content/add_dataset.html')
 

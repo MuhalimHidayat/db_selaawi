@@ -55,7 +55,6 @@ def sign_in():
         password = escape(request.form['password'])
         # jika username tidak ada maka tidak bisa login
         admin = db.session.query(Admin).filter(Admin.username == username).first() 
-        print("Ini user: ", admin.id)
         if admin is None:
             flash('Incorrect username.')
             return redirect(url_for('auth.sign_in'))
@@ -121,20 +120,14 @@ def settings():
     if request.method == 'POST':
         username = escape(request.form['username'])
         email = escape(request.form['email'])
-        
-
         if db.session.query(Admin).filter(Admin.username == username).first() is not None or db.session.query(Admin).filter(Admin.email == email).first() is not None:
             if (username == admin.username or email == admin.email):
                 flash('Username or email has not been changed.')
-                # ini harus tetep jalan dan bisa merubah
                 admin.username = username
                 admin.email = email
                 admin.image_file = upload_photo(request.files['image_file'])
                 admin.verified = True
                 db.session.commit()
-                # print(username)
-                # print(email)
-                # print(upload_photo(request.files['image_file']))
                 flash('Berhasil Mengubah database')
                 return redirect(url_for('auth.settings'))
                 # berhasil

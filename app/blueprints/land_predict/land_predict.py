@@ -41,7 +41,9 @@ def add_manual_data():
         # nilai akurasinya 
         prediction_data = data_test.to_html(index=False, classes='table-auto', table_id='prediction_results')
         flash("data berhasil di prediksi", "success")
+        # kodingan untuk menampilkan hasil prediksi
         return render_template('pre_content/result/manual_data.html', prediction_data=Markup(prediction_data), prediction = prediction)
+    # kodingan untuk menampilkan form input data
     return render_template('pre_content/add_manual_data.html', prediction="Belum Memasukkan Data")
 
 # dataset upload

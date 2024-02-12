@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
-{% block tailwind %}
-  
-{% endblock tailwind %}
+
 {% block link %}
   <link rel="stylesheet" href="{{ url_for('land_predict.static', filename='css/add_manual_data.css') }}">
 {% endblock link %}
+
+
 {% block content %}
 <div class="flex justify-center w-full">
   <div class="w-4/5">
-    <div id="content-header" class="w-full">
-      <h1 class="">Add Manual Data</h1>
+    <div id="content-header" class="w-full bg-primary-color rounded-md">
+      <h1 class="text-3xl font-bold">Add Manual Data</h1>
     </div>
     <!-- flash message -->
     {% with messages = get_flashed_messages() %}

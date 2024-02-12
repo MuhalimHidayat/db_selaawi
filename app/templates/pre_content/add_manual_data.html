@@ -1,4 +1,4 @@
-{% extends 'predictions/base.html' %}
+{% extends 'base.html' %}
 {% block tailwind %}
   
 {% endblock tailwind %}
@@ -11,6 +11,16 @@
     <div id="content-header" class="w-full">
       <h1 class="">Add Manual Data</h1>
     </div>
+    <!-- flash message -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="alert alert-danger">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% endwith %}
 
     <div id="content-main">
       <form action="" method="post">

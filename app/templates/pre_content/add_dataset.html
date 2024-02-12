@@ -1,4 +1,4 @@
-{% extends 'predictions/base.html' %}
+{% extends 'base.html' %}
 
 {% block link %}
 
@@ -21,7 +21,8 @@
                     <form action="" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="dataset">Dataset (xlsx): </label>
-                            <input type="file" class="form-control-file" id="dataset" name="dataset">
+                            <input type="file" class="form-control-file" id="dataset" name="dataset", accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                            <!-- 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' -->
                         </div>
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Prediksi</button>
                     </form>

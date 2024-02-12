@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+
+    <!-- link pallete -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pallete.css') }}">
+    <!-- tailwind -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/output.css') }}">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+
+    <!-- link font awesome -->
+    <script src="https://kit.fontawesome.com/f740e7af0d.js" crossorigin="anonymous"></script>
+
+    <!-- link css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/settings.css') }}">
+</head>
+
+<body>
+    <div>
+        <!-- Navbar -->
+        <div class="bg-tertiary-color py-3">
+            <div class="text-end">
+                <button class="btn px-8" id="btn">
+                    Prediction
+                    <i class="fa-solid fa-arrow-down me-3" id="arrow"></i>
+                </button>
+            </div>
+        </div>
+        <!-- End Navbar -->
+
+        <!-- content -->
+        <div class="py-8 px-14">
+            <h1 class="font-bold text-3xl">Hello {{ admin.username }}</h1><br><br>
+            <!-- flash messege -->
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="alert alert-success">
+                    {% for message in messages %}
+                    <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            {% endwith %}
+            <div class="flex justify-center items-center gap-x-10">
+                <!-- <div class="flex flex-row gap-x-10 ms-5"> -->
+                <div class="basis-1/4">
+                    <img class="rounded-full" src="{{ url_for('static', filename='img/uploads/' + admin.image_file) }}" alt="">
+                </div>
+
+                
+
+                <div class="basis-1/2">
+                    <form action="" method="post" enctype="multipart/form-data">
+                        <!-- <div class="flex flex-col gap-y-5"> -->
+                        <div class="flex flex-col gap-y-5">
+                            <input
+                                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-4 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                                name="username" id="username" type="text" value="{{ admin.username }}">
+
+                            <input
+                                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-4 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                                name="email" id="email" type="email" value="{{ admin.email }}"
+                                placeholder="Email">
+
+                            <!-- upload file -->
+                            <input type="file" id="avatar" name="image_file" accept="image/png, image/jpeg">
+
+                            <input type="hidden" name="last_image" value="{{admin.image_file}}">
+
+                            <div class="flex gap-x-6">
+                                <!-- Save Button -->
+                                <button
+                                    class="bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                    type="submit">
+                                    Save
+                                </button>
+
+                                <!-- delete button -->
+                                <button
+                                    class="bg-red-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                    type="submit">
+                                    <a href="{{ url_for('auth.delete') }}">Delete</a>
+                                </button>
+                                <!-- </div> -->
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

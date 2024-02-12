@@ -8,14 +8,20 @@
 
 
     <!-- tailwind -->
-    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='dist/css/output.css')}}">
+    {% block tailwind %}
+        
+    {% endblock tailwind %}
+    
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 
     <!-- link font awesome -->
     <script src="https://kit.fontawesome.com/f740e7af0d.js" crossorigin="anonymous"></script>
 
     <!-- link css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pallete.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block link %} {% endblock link %}
 
 
 </head>
@@ -43,8 +49,8 @@
                     </button>
                     <ul class="dropdown-content-show " id="dropdown">
                         <li class="ps-11"><a href="prediction.html">Data Real Time</a></li>
-                        <li class="ps-11"><a href="">Add Manual Data</a></li>
-                        <li class="ps-11"><a href="">Upload Data</a></li>
+                        <li class="ps-11"><a href="/land_predict/add-manual-data">Add Manual Data</a></li>
+                        <li class="ps-11"><a href="/land_predict/add-dataset">Upload Data</a></li>
                     </ul>
                 </div>
 
@@ -65,8 +71,8 @@
                 </div>
                 
                     <ul class="dropdown-content-show mt-4" id="dropdown-nav">
-                        <li><a href="">Settings</a></li>
-                        <li><a href="">Log Out</a></li>
+                        <li><a href="{{ url_for('auth.settings') }}">Settings</a></li>
+                        <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
                     </ul>
                 
             </div>

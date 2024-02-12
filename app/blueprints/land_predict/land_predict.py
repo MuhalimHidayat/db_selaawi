@@ -10,15 +10,18 @@ from werkzeug.utils import secure_filename
 from app import model, app
 
 
-UPLOAD_FOLDER = 'app/blueprints/land_predict/static/datasets'
+# UPLOAD_FOLDER = 'app/blueprints/land_predict/static/datasets'
 ALLOWED_EXTENSIONS = {'xlsx','csv'}
 
 # masih salah di bagian static_url_path
 lp = Blueprint('land_predict', __name__, url_prefix='/land_predict', static_folder='static', static_url_path='blueprints/land_predict/static')
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @lp.route('/add-manual-data', methods=('GET', 'POST'))
 def add_manual_data():
+    if 'id' not in session:
+        flash('You must be logged in to access this page', 'danger')
+        return redirect(url_for('auth.sign_in'))
     if request.method == 'POST':
         humidity = float(escape(request.form['humidity']))
         nitro = float(escape(request.form['nitro']))
@@ -47,6 +50,9 @@ def allowed_file(filename):
 
 @lp.route('/add-dataset', methods=('GET', 'POST'))
 def add_dataset():
+    if 'id' not in session:
+        flash('You must be logged in to access this page', 'danger')
+        return redirect(url_for('auth.sign_in'))
     if request.method == 'POST':
         if 'dataset' not in request.files:
             flash('No file part', "danger")

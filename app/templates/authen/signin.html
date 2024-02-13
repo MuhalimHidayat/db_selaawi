@@ -8,7 +8,7 @@
 {% endblock css_url %}
 
 {% block content %}
-<p class="text-end "><a class="border-b-2 border-color px-2 py-1 m-4" href="{{ url_for('index') }}">Home</a></p>
+
 <h1 class="my-8 text-3xl font-bold">{{title}}</h1>
 <!-- flash message -->
 {% with messages = get_flashed_messages() %}
@@ -24,11 +24,11 @@
     <form action="" method="post">
         <div class="flex flex-col gap-y-4 mb-4">
             <input
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 name="username" id="username" type="text" placeholder="Username">
 
             <input
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 name="password" id="password" type="password" placeholder="Password">
 
             <p><a href="{{ url_for('auth.forgot_password') }}">Forgot Password? </a></p>

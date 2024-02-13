@@ -17,20 +17,28 @@
     <!-- link css -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
 
+    <!-- link pallete -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pallete.cs') }}">
+
     {% block css_url %} {% endblock css_url %}
 
 </head>
 
 <body>
-    <div class="flex gap-x-2">
-        <div class="basis-1/2 flex flex-col justify-center gap-y-8 ps-14 pe-12" id="content-left">
-            <p class="font-bold text-lg">Selamat Datang</p>
-            <h1 class="font-bold text-4xl">Land Suitability Classification System of Selaawi Sub-district</h1>
+    <div class="flex gap-x-2 min-h-screen">
+        <div class="basis-1/2 ps-14 pe-12" id="content-left">
+            <div class="flex flex-col mt-32 gap-y-8 text-white">
+                <p class="font-bold text-2xl font-color-E86A33">Welcome</p>
+            <h1 class="font-bold text-5xl">Land Suitability Classification System of Selaawi Sub-district</h1>    
+            </div>
         </div>
         <div class="basis-1/2 m-3" id="content-right">
-            {% block content %}
+            <p class="text-end "><a class="border-b-2 border-color px-2 py-1 m-4" href="{{ url_for('index') }}">Home</a></p>
+            <div class="mt-20">
+                {% block content %}
 
-            {% endblock content %}
+                {% endblock content %}
+            </div>
         </div>
     </div>
 </body>

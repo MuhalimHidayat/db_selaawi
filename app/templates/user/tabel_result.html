@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <!-- tailwind -->
+     <link rel="stylesheet" href="{{url_for('static', filename='dist/css/output.css')}}">
+    
+     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+ 
+     <!-- link font awesome -->
+     <script src="https://kit.fontawesome.com/f740e7af0d.js" crossorigin="anonymous"></script>
+ 
+     <!-- link css -->
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/pallete.css') }}">
+
+     <!-- link css table -->
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/pred/table_result.css') }}">
+</head>
+<body>
+  <div class="p-5">
+    <h1 class="text-3xl">Hasil Prediksi Dataset</h1>
+    <div id="scroll-table">
+      <table class="dataframe" id="prediction_results">
+        <thead class="heading">
+            <tr>
+                <th>hum</th>
+                <th>soil_nitro1</th>
+                <th>soil_phos1</th>
+                <th>soil_pot1</th>
+                <th>soil_temp1</th>
+                <th>soil_ph1</th>
+                <th>temp</th>
+                <th>output</th>
+                <th>prediction</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>96.0</td>
+                <td>13</td>
+                <td>77</td>
+                <td>69</td>
+                <td>21.8</td>
+                <td>5.3</td>
+                <td>18.3</td>
+                <td>Tidak</td>
+                <td>Tidak</td>
+              </tr>
+              <tr>
+                <td>86.9</td>
+                <td>13</td>
+                <td>76</td>
+                <td>68</td>
+                <td>21.5</td>
+                <td>5.2</td>
+                <td>19.8</td>
+                <td>Tidak</td>
+                <td>Tidak</td>
+              </tr>
+              <tr>
+                <td>76.8</td>
+                <td>13</td>
+                <td>76</td>
+                <td>68</td>
+                <td>21.6</td>
+                <td>5.2</td>
+                <td>22.2</td>
+                <td>Tidak</td>
+                <td>Tidak</td>
+              </tr>
+              <tr>
+                <td>72.6</td>
+                <td>16</td>
+                <td>83</td>
+                <td>76</td>
+                <td>21.7</td>
+                <td>5.2</td>
+                <td>23.2</td>
+                <td>Tidak</td>
+                <td>Tidak</td>
+              </tr>
+              <tr>
+                <td>72.7</td>
+                <td>16</td>
+                <td>83</td>
+                <td>76</td>
+                <td>21.8</td>
+                <td>5.1</td>
+                <td>23.1</td>
+                <td>Tidak</td>
+                <td>Tidak</td>
+              </tr>
+              <tr>
+                <td>64.9</td>
+                <td>18</td>
+                <td>88</td>
+                <td>81</td>
+                <td>22.0</td>
+                <td>5.2</td>
+                <td>25.4</td>
+                <td>Tidak</td>
+                <td>Tidak</td>
+              </tr>
+              <tr>
+                <td>61.5</td>
+                <td>18</td>
+                <td>88</td>
+                <td>81</td>
+                <td>22.0</td>
+                <td>5.4</td>
+                <td>26.3</td>
+                <td>Tidak</td>
+                <td>Tidak</td>
+              </tr>
+        </tbody>
+    </table>
+    </div>
+    
+  </div>
+    
+    
+</body>
+</html>

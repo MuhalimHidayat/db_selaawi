@@ -12,6 +12,9 @@
 .bg-tertiary-color {
   background-color: #D9D9D9;
 }
+.bg-quaternary-color {
+  background-color: #F5F5F5;
+}
 .bg-navbar-color {
   background-color: #F5F5F5;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);

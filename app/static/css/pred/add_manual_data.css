@@ -1,0 +1,27 @@
+
+.form-group{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.form-group label{
+    margin-right: 10px;
+    flex-basis: 25%;
+    font-weight: 600;
+}
+.form-group input{
+    flex-basis: 75%;
+    /* class="shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" */
+}
+
+/* .form-group{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+}
+.form-group>input{
+    border: 1px solid #ccc;
+} */

@@ -8,8 +8,7 @@
 
 
     <!-- tailwind -->
-    <link rel="stylesheet" href="{{url_for('static', filename='dist/css/output.css')}}">
-    
+    <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/output.css') }}">
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 
     <!-- link font awesome -->
@@ -18,7 +17,7 @@
     <!-- link css -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/pallete.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    {% block link %} {% endblock link %}
+    {% block css_url %} {% endblock css_url %}
 
 
 </head>

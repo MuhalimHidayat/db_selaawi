@@ -1,27 +1,25 @@
 {% extends 'base.html' %}
 
-{% block link %}
-
-{% endblock link %}
+{% block css_url %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pred/add_dataset.css') }}">
+{% endblock css_url %}
 
 {% block content %}
 <div class="flex justify-center w-full">
-    <div class="w-4/5 bg-tertiary-color">
-        <div class="">
+    <div class="w-4/5">
+        <div class="p-6 mb-8">
             <div id="main-content-header" class="w-full bg-secondary-color">
                 <h1 class="font-bold p-6 text-xl">Upload File</h1>
             </div>
         </div>
-        <div class="w-full flex justify-center">
-            <div class="my-12 w-10/12">
-                <div class="w-full bg-secondary-color">
-                    <h1>Form Upload</h1>
-                </div>
+        <div class="flex justify-center ">
+            <div class="flex flex-col w-5/6 bg-predictions-content-color rounded-b-md ">
+                <h1 class="text-center font-bold text-2xl bg-subheader-predictions-color p-5 rounded-t-md text-slate-100">Form Upload</h1>
                 <div class="w-full">
                     <form action="" method="post" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label for="dataset">Dataset (xlsx): </label>
-                            <input type="file" class="form-control-file" id="dataset" name="dataset", accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                        <div class="p-10 flex justify-around ">
+                            <label for="dataset" class="basis-1/4">Dataset (xlsx): </label>
+                            <input type="file" class="basis-3/4 custom-file-upload" id="dataset" name="dataset", accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
                             <!-- 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' -->
                         </div>
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Prediksi</button>
@@ -29,6 +27,7 @@
                 </div>
             </div>
         </div>
+        
 
         {% with messages = get_flashed_messages() %}
         {% if messages %}

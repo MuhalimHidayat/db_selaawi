@@ -57,3 +57,19 @@
 .border-color:hover {
   border-color: #CD5C08B2;
 }
+
+/* predictions page pallete */
+.bg-predictions-content-color {
+  background-color: #EEF0EE;
+  /* drop shadow */
+  box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2);
+}
+.bg-header-predictions-color {
+  background-color: rgba(65, 100, 74, 0.335);
+}
+.bg-subheader-predictions-color {
+  background-color: rgba(65, 100, 74, 0.742)
+}
+.font-predictions-color-header{
+  color: #41644A;
+}

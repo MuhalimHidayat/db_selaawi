@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-{% block link %}
+{% block css_url %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/pred/table_result.css') }}">
-{% endblock link %}
+{% endblock css_url %}
 
 {% block content %}
 <div class="p-10">
@@ -12,6 +12,9 @@
      -->
     <div class="scroll-table scroll-smooth focus:scroll-auto">
         {{ prediction_data }} 
+    </div>
+    <div>
+        <p class="font-semibold text-sm">{{ dimensions[0] }} rows X {{ dimensions[1] }} columns</p>
     </div>
     
 </div>

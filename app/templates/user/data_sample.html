@@ -1,6 +1,6 @@
 {% extends 'user.html' %}
 {% block css_link %}
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user/data_sample.css') }}">
 {% endblock css_link %}
 
 {% block content %}
@@ -10,19 +10,19 @@
     </div>
     <div id="content-data-sample">
         <div class="m-7 mx-12">
-            <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            <p class="indent-8 text-wrap text-justify"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
                 industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
                 scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
-                electronic typesetting, remaining</p>
-            <p>
+                electronic typesetting, remaining</p><br>
+            <p class="ms-10 ps-5 indent-10 text-wrap text-justify border-s-4 border-orange-600">
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
                 industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
                 scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
                 electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
                 Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
                 Aldus PageMaker including versions of Lorem Ipsum.
-            </p>
-            <p>
+            </p><br>
+            <p class="indent-8 text-wrap text-justify">
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
                 industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
                 scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
@@ -35,24 +35,24 @@
             
             <ol class="list-decimal">
                 <li class="font-bold text-lg">Lorem</li>
-                <p>
+                <p class="indent-8">
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum, neque necessitatibus. Repudiandae amet
                     ex, cupiditate placeat mollitia aliquid saepe sit. Dolore magnam itaque necessitatibus rerum adipisci
                     consequatur nihil a alias.
-                </p>
+                </p><br>
                 <li class="font-bold text-lg">Lorem</li>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eos vero non error consectetur provident
+                <p class="indent-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eos vero non error consectetur provident
                     mollitia ratione totam molestiae hic delectus, accusantium temporibus quisquam iusto sed harum quibusdam
-                    obcaecati aspernatur?</p>
+                    obcaecati aspernatur?</p><br>
                 <li class="font-bold text-lg">Lorem</li>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Itaque incidunt doloribus facilis id rem
+                <p class="indent-8">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Itaque incidunt doloribus facilis id rem
                     tempora eaque tempore. Rerum error ullam officiis, dolor distinctio nesciunt debitis voluptate, dolorem
-                    nulla optio necessitatibus.</p>
+                    nulla optio necessitatibus.</p><br>
             </ol>
         </div>
 
-        <div class="h-36">
-            <h2>Interested in trying out prediction data? <span>Sign In</span></h2>
+        <div class="banner h-64 flex flex-col justify-center items-center">
+            <h2 class="text-3xl text-white font-bold">Interested in trying out prediction data? <a class="text-orange-600" href="{{ url_for('auth.sign_in') }}">Sign In</a></h2>
         </div>
         
     </div>

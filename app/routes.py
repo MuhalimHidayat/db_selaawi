@@ -13,3 +13,7 @@ def tabel_result():
 @app.route('/data-sample')
 def data_sample():
     return render_template('user/data_sample.html')
+
+@app.route('/predictions')
+def predictions():
+    return render_template('user/predictions.html')

@@ -15,8 +15,10 @@
     <!-- link font awesome -->
     <script src="https://kit.fontawesome.com/f740e7af0d.js" crossorigin="anonymous"></script>
 
-    <!-- link css -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
+    
+    {% block css_link %}
+        
+    {% endblock css_link %}
 </head>
 
 <body>
@@ -30,7 +32,7 @@
                 <ul class="flex gap-x-5">
                     <li><a href="#about-us">About Us</a></li>
                     <li><a href="#education-selaawi">Education Selaawi</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="{{ url_for('data_sample') }}">Contact Us</a></li>
                 </ul>
                 <div class="ms-5">
                     <button class="bg-button-user-color hover:bg-orange-400 text-white font-bold py-2 px-6 rounded"><a
@@ -39,80 +41,13 @@
             </div>
         </div>
         <!-- end navbar -->
-
-        <div class="bg-slate-200 flex justify-around p-7" id="header">
-            <div class="flex justify-around flex-col w-7/12" id="header-left-content">
-                <div class="w-9/12">
-                    <h1 class="text-4xl font-bold">Land Suitability Classification System of Selaawi Sub-district</h1>
-                    <h3 class="text-xl font-light mt-5">Predicting the suitability of shallot farming land in Selaawi
-                        sub-district.</h3>
-                </div>
-                <div>
-                    <button class="bg-button-user-color text-white font-bold py-2 px-6 rounded"><a
-                            href="{{ url_for('auth.sign_in') }}">Sign In</a></button>
-                </div>
-
-            </div>
-            <div id="header-right-content">
-                <img class="rounded-full" src="{{ url_for('static', filename='img/user/gambar.png') }}" alt="">
-            </div>
-        </div>
-
-        <!-- about-us -->
-        <div id="about-us">
-            <div class="flex justify-center" id="about-us-header">
-                <h1 class="text-3xl font-header-color my-10">About Us</h1>
-            </div>
-            <div class="flex p-7" id="about-us-content">
-                <div class="basis-1/2 flex justify-center" id="about-us-content-left">
-                    <img class="w-9/12 rounded-md" src="{{ url_for('static', filename='img/user/aboutusGambar.png') }}"
-                        alt="">
-                </div>
-                <div class="basis-1/2" id="about-us-content-right">
-                    <p class="text-center mt-5">Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been
-                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                        but also the leap into electronic typesetting, remaining
-                        essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                        containing Lorem.</p>
-                </div>
-            </div>
-        </div>
-        <!-- end-about-us -->
-        <!-- education selaawi -->
-        <div class="bg-quaternary-color pb-8" id="education-selaawi">
-            <div class="flex justify-center" id="about-us-header">
-                <h1 class="text-3xl font-header-color my-10">Education Selaawi</h1>
-            </div>
-            <div class="flex justify-center gap-x-16 p-9 pt-1">
-                <div class="basis-1/4 flex flex-col gap-y-4 items-center bg-white drop-shadow-md p-8 rounded-md" id="edu-data">
-                    <i class="fa-brands fa-nfc-symbol fa-xl fa-fade" style="color: #63E6BE;"></i>
-                    <h1 class="font-bold text-xl">Data Sample</h1>
-                    <p class="text-center">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the</p>
-                </div>
-                <div class="basis-1/4 flex flex-col items-center gap-y-4 bg-white drop-shadow-md p-8 rounded-md" id="edu-pred">
-                    <i class="fa-solid fa-prescription-bottle fa-xl" style="color: #74C0FC;"></i>
-                    <h1 class="font-bold text-xl">Prediction</h1>
-                    <p class="text-center">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the</p>
-                </div>
-                
-            </div>
-        </div>
-        <!-- end-education-selaawi -->
-        <!-- address -->
-        <div id="address">
-            <div class="flex justify-center" id="about-us-header">
-                <h1 class="text-3xl font-header-color my-10">WE ARE IN <SPAN class="font-color-E86A33">HERE</SPAN></h1>
-            </div>
-            <div>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126723.15723662979!2d107.92684210944789!3d-6.997661284845236!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68cb7dab306ed5%3A0xc429b6e1e9ab7a9!2sSelaawi%2C%20Garut%20Regency%2C%20West%20Java!5e0!3m2!1sen!2sid!4v1707829394694!5m2!1sen!2sid" width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-        </div>
-        <!-- end-address -->
+        {% block content %}
+            
+        {% endblock content %}
+        
         <!-- footer -->
+
+
         <div class="pt-10 px-6 bg-footer-color flex flex-col" id="footer">
             <div class="flex ">
                 <div class="basis-1/2 flex " id="footer-content">

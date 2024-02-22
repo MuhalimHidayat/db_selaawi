@@ -1,6 +1,6 @@
 #content-left{
     /* tidak bisa menggunakan url_for */
-    background-image: url('../img/authen/leftBg.jpg');
+    background-image: url('../img/authen/leftImg.png');
     /* background-image: url("https://media.istockphoto.com/id/1493377024/photo/old-master-portrait-background-oil-painting-texture-photography-studio-background-retro.webp?b=1&s=170667a&w=0&k=20&c=6J5nYwRjT04xyBal33FNmt4hguXfEqjxYDXjzkxG2TY="); */
     background-size: cover;
     background-position: center;

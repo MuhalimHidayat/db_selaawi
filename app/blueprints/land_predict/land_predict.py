@@ -35,16 +35,66 @@ def add_manual_data():
         data = [[humidity, nitro, phosphor, pottalium, soil, ph, temperature]]
         columns = ['hum', 'soil_nitro1', 'soil_phos1', 'soil_pot1', 'soil_temp1', 'soil_ph1', 'temp']
         data_test = pd.DataFrame(data, columns=columns)
-        prediction = model.predict(data_test)
-        data_test['prediction'] = prediction
-        # print("PREDIKSI: ",prediction)
-        # nilai akurasinya 
-        prediction_data = data_test.to_html(index=False, classes='table-auto', table_id='prediction_results')
-        flash("data berhasil di prediksi", "success")
-        # kodingan untuk menampilkan hasil prediksi
-        return render_template('pre_content/result/manual_data.html', prediction_data=Markup(prediction_data), prediction = prediction)
+        data_test_json = data_test.to_json(orient='records')
+        # data_test_dataframe = data_test.to_html(index=False, classes='table-auto', table_id='prediction_results')
+        # return render_template('pre_content/stage/add_manual.html', data_test2=Markup(data_test_dataframe), data_test=data_test.to_json(orient='records'), data_test_coba=data_test_coba)
+        return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), data_test_json = data_test_json)
+        # prediction = model.predict(data_test)
+        # data_test['prediction'] = prediction
+        # # print("PREDIKSI: ",prediction)
+        # # nilai akurasinya 
+        # prediction_data = data_test.to_html(index=False, classes='table-auto', table_id='prediction_results')
+        # flash("data berhasil di prediksi", "success")
+        # # kodingan untuk menampilkan hasil prediksi
+        # return render_template('pre_content/result/manual_data.html', prediction_data=Markup(prediction_data), prediction = prediction)
     # kodingan untuk menampilkan form input data
     return render_template('pre_content/add_manual_data.html', prediction="Belum Memasukkan Data")
+
+# mencoba memodelkan data
+# @lp.route('/stage-manual-data')
+# def stage_manual_data():
+#     data = [[12, 13, 14, 15, 12, 11, 12]]
+#     columns = ['hum', 'soil_nitro1', 'soil_phos1', 'soil_pot1', 'soil_temp1', 'soil_ph1', 'temp']
+#     data_test = pd.DataFrame(data, columns=columns)
+#     data_test_coba = pd.DataFrame(data, columns=columns)
+#     data_test_json = data_test.to_json(orient='records')
+#     return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), data_test_json=data_test_json)
+
+@lp.route('/update-manual-data/<dataset>', methods=['GET', 'POST'])
+def update_manual_data(dataset):
+    if 'id' not in session:
+        flash('You must be logged in to access this page', 'danger')
+        return redirect(url_for('auth.sign_in'))
+    
+    data_test_coba = pd.read_json(dataset, orient='records')
+
+    if request.method == 'POST':
+        print("NILAI AKHIR INI HARUS ADA")
+        humidity = float(escape(request.form['humidity']))
+        nitro = float(escape(request.form['nitro']))
+        phosphor = float(escape(request.form['phosphor']))
+        pottalium = float(escape(request.form['pottalium']))
+        soil = float(escape(request.form['soil']))
+        ph = float(escape(request.form['ph']))
+        temperature = float(escape(request.form['temperature']))
+
+        data = [[humidity, nitro, phosphor, pottalium, soil, ph, temperature]]
+        columns = ['hum', 'soil_nitro1', 'soil_phos1', 'soil_pot1', 'soil_temp1', 'soil_ph1', 'temp']
+        data_test = pd.DataFrame(data, columns=columns)
+        data_test_json = data_test.to_json(orient='records')
+        # data_test_dataframe = data_test.to_html(index=False, classes='table-auto', table_id='prediction_results')
+        # return render_template('pre_content/stage/add_manual.html', data_test2=Markup(data_test_dataframe), data_test=data_test.to_json(orient='records'), data_test_coba=data_test_coba)
+        return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), data_test_json = data_test_json)
+    return render_template('pre_content/update_manual_data.html', dataset=dataset)
+
+@lp.route('/result-manual-data/<dataset>', methods=('GET', 'POST'))
+def result_manual_data(dataset):
+    data_test_execute = pd.read_json(dataset, orient='records')
+    prediction = model.predict(data_test_execute)
+    data_test_execute['prediction'] = prediction
+    prediction_data = data_test_execute.to_html(index=False, classes='table-auto', table_id='prediction_results')
+    flash("data berhasil di prediksi", "success")
+    return render_template('pre_content/result/manual_data.html', prediction_data=Markup(prediction_data), prediction = prediction)
 
 # dataset upload
 def allowed_file(filename):

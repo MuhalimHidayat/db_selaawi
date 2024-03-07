@@ -6,7 +6,7 @@
 
 
 {% block content %}
-<div class="bg-slate-200 flex justify-around p-7" id="header">
+<div class="bg-slate-200 flex justify-around p-12" id="header">
     <div class="flex justify-around flex-col w-7/12" id="header-left-content">
         <div class="w-9/12">
             <h1 class="text-4xl font-bold">Land Suitability Classification System of Selaawi Sub-district</h1>
@@ -52,19 +52,35 @@
         <h1 class="text-3xl font-header-color my-10">Education Selaawi</h1>
     </div>
     <div class="flex justify-center gap-x-16 p-9 pt-1">
-        <div class="basis-1/4 flex flex-col gap-y-4 items-center bg-white drop-shadow-md p-8 rounded-md" id="edu-data">
-            <i class="fa-brands fa-nfc-symbol fa-xl fa-fade" style="color: #63E6BE;"></i>
-            <h1 class="font-bold text-xl">Data Sample</h1>
-            <p class="text-center">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+        <div class="basis-1/4 flex flex-col items-center gap-y-4 bg-white drop-shadow-md p-8 rounded-md" id="edu-data">
+            <!-- icon data sample -->
+            <div class="h-2/5 flex items-center">
+                <img src="{{ url_for('static', filename='img/user/data_sample_icon.png') }}" alt="">
+            </div>
+            <!-- end icon data sample -->
+            <h1 class="font-bold text-2xl">Data Sample</h1>
+            <p class="text-center font-light">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
                 the</p>
-            <button><a href="{{ url_for('data_sample') }}">Read More</a></button>
+            <a href="{{ url_for('data_sample') }}">
+                <div class="read-more-button flex align-middle justify-center">
+                    <button><a href="{{ url_for('data_sample') }}">Read More</a></button>
+                </div>
+            </a>
         </div>
-        <div class="basis-1/4 flex flex-col items-center gap-y-4 bg-white drop-shadow-md p-8 rounded-md" id="edu-pred">
-            <i class="fa-solid fa-prescription-bottle fa-xl" style="color: #74C0FC;"></i>
-            <h1 class="font-bold text-xl">Prediction</h1>
-            <p class="text-center">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+        <div class="basis-1/4 flex flex-col items-center gap-y-4 bg-white drop-shadow-md p-8 rounded-md" id="edu-data">
+            <!-- icon data sample -->
+            <div class="h-2/5 flex items-center">
+                <img src="{{ url_for('static', filename='img/user/data_sample_icon.png') }}" alt="">
+            </div>
+            <!-- end icon data sample -->
+            <h1 class="font-bold text-2xl">Predictions</h1>
+            <p class="text-center font-light">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
                 the</p>
-            <button><a href="{{ url_for('predictions') }}">Read More</a></button>
+            <a href="{{ url_for('data_sample') }}">
+                <div class="read-more-button flex align-middle justify-center">
+                    <button><a href="{{ url_for('data_sample') }}">Read More</a></button>
+                </div>
+            </a>
         </div>
         
     </div>

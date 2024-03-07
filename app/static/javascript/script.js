@@ -41,7 +41,7 @@ btn.addEventListener("click", (e) => {
     arrowToggle(arrowIcon);
     // jika dropdown-content-show ada, maka ganti warna background dropdown-menu
     if (dropdown.classList.contains("dropdown-content-show")) {
-        document.getElementById("dropdown-menu").style.backgroundColor = "#D9D9D9";
+        document.getElementById("dropdown-menu").style.backgroundColor = "rgb(217 217 217 / 40%)";
     } else {
         document.getElementById("dropdown-menu").style.backgroundColor = "#41644A";
     }

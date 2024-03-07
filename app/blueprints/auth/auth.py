@@ -13,11 +13,13 @@ from app.blueprints.auth.models.Admin import Admin
 
 import hashlib
 import time
+from datetime import timedelta
 
 ALLOWED_EXTENSIONS_IMG = {'png', 'jpg', 'jpeg', 'gif'}
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/user-auth')
 app.config['UPLOAD_FOLDER'] = 'app/static/img/uploads'
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
 
 @auth_bp.route('/')
 def authen():
@@ -34,8 +36,9 @@ def sign_up():
             return redirect(url_for('auth.sign_up'))
         password = generate_password_hash(escape(request.form['password']))
         # if username or password is same as the previous one
-        if db.session.query(Admin).filter(Admin.username == username).first() is not None:
-            flash(f'Username {username} is already registered.')
+        if db.session.query(Admin).filter(Admin.username == username).first() is not None or db.session.query(Admin).filter(Admin.email == email).first() is not None:
+            # flash(f'Username {username} is already registered.')
+            flash('Username or email has been used')
             return redirect(url_for('auth.sign_up'))
         
         admin = Admin(username=username, email=email, password_hash=password)
@@ -66,6 +69,7 @@ def sign_in():
             else: 
                 # add session 
                 session['id'] = admin.id
+                session.permanent = True
                 return redirect(url_for('land_predict.add_manual_data'))
     return render_template('authen/signin.html', title='Sign In')
 

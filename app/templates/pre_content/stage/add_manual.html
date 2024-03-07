@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block css_url %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pred/table_result.css') }}">
+{% endblock css_url %}
+
+{% block content %}
+<div class="p-8">
+    <h1 class="my-8 text-3xl font-bold">Staging Area untuk input Data Manual</h1>
+    <!-- 
+        description: 
+        id = prediction_results
+     -->
+    <!-- <div class="scroll-table scroll-smooth focus:scroll-auto">
+        {{ data_test2 }} 
+    </div> -->
+
+    <!-- <h1>{{ data_test_coba }}</h1> -->
+
+    <div class="scrol-table scroll-smooth focus:scroll-auto">
+        <table class="dataframe table-auto" id="prediction_results">
+            <thead>
+                <tr id="tr-thead">
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="tr-tbody">
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="flex justify-end me-14 mb-5">
+        <button type="submit" class="px-5 py-2 rounded bg-primary-color font-semibold text-slate-100">Run</button>
+    </div>
+
+    <!-- Menyimpan URL dalam atribut data -->
+    <div id="updLinkData" data-url="{{ url_for('land_predict.update_manual_data', dataset=data_test_json) }}" style="display: none;"></div>
+
+    <form action="{{ url_for('land_predict.result_manual_data', dataset=data_test_json) }}" method="post">
+        <input type="submit">
+    </form>
+</div>
+
+<script>
+    var data_test = JSON.parse('{{ data_test | safe }}')[0];
+    // console.log(data_test); 
+    for (property in data_test) {
+        console.log(`${property}: ${data_test[property]}`)
+    }
+
+    const thead = document.getElementById('tr-thead');
+    const tbody = document.getElementById('tr-tbody');
+    const updIcon = document.createElement('i');
+    const dltIcon = document.createElement('i');
+    const buttonUpd = document.createElement('button');
+    const buttonDlt = document.createElement('button');
+    const updLink = document.createElement('a');
+    const dltLink = document.createElement('a');
+    
+    for (property in data_test) {
+        var theadTh = document.createElement('th');
+        theadTh.innerText = `${property}`;
+        thead.appendChild(theadTh);
+
+        var tbodyTd = document.createElement('td');
+        tbodyTd.innerText = `${data_test[property]}`;
+        tbody.appendChild(tbodyTd);
+    }
+    // action th button icon td
+    const actionTh = document.createElement('th');
+    actionTh.innerText = "Action";
+    thead.appendChild(actionTh);
+
+    // update and trash icon 
+    const actionTd = document.createElement('td');
+    // update button
+    updIcon.classList.add('fa-regular', 'fa-pen-to-square');
+    var updLinkData = document.getElementById('updLinkData');
+    var url = updLinkData.getAttribute('data-url');
+    updLink.setAttribute('href', url);
+    buttonUpd.appendChild(updLink);
+    updLink.appendChild(updIcon);
+    actionTd.appendChild(buttonUpd);  
+    // delete button
+    dltIcon.classList.add('fa-solid', 'fa-trash');
+    dltLink.setAttribute('href', '/')
+    buttonDlt.appendChild(dltLink);
+    dltLink.appendChild(dltIcon);
+    actionTd.appendChild(buttonDlt);
+    tbody.appendChild(actionTd);
+</script>
+
+{% endblock content %}

@@ -8,7 +8,8 @@ from markupsafe import escape, Markup
 import pandas as pd
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
-from app import model, app
+from app.blueprints.land_predict.models.ManualData import ManualData
+from app import model, app, db
 
 
 # UPLOAD_FOLDER = 'app/blueprints/land_predict/static/datasets'
@@ -17,6 +18,12 @@ ALLOWED_EXTENSIONS = {'xlsx','csv'}
 # masih salah di bagian static_url_path
 lp = Blueprint('land_predict', __name__, url_prefix='/land_predict', static_folder='static', static_url_path='blueprints/land_predict/static')
 # app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+# @lp.route('/add-manual-data', methods=['GET', 'POST'])
+# def add_manual_dataa():
+#     if 'id' not in session: 
+#         flash('You must be logged in to access this page', 'danger')
+#         return redirect(url_for('auth.sign_in'))
+    
 
 @lp.route('/add-manual-data', methods=('GET', 'POST'))
 def add_manual_data():
@@ -31,7 +38,7 @@ def add_manual_data():
         soil = float(escape(request.form['soil']))
         ph = float(escape(request.form['ph']))
         temperature = float(escape(request.form['temperature']))
-
+        print("INNI SESSSION", session['id'])
         data = [[humidity, nitro, phosphor, pottalium, soil, ph, temperature]]
         columns = ['hum', 'soil_nitro1', 'soil_phos1', 'soil_pot1', 'soil_temp1', 'soil_ph1', 'temp']
         data_test = pd.DataFrame(data, columns=columns)
@@ -48,6 +55,7 @@ def add_manual_data():
         # # kodingan untuk menampilkan hasil prediksi
         # return render_template('pre_content/result/manual_data.html', prediction_data=Markup(prediction_data), prediction = prediction)
     # kodingan untuk menampilkan form input data
+    print("INNI SESSSION", session['id'])
     return render_template('pre_content/add_manual_data.html', prediction="Belum Memasukkan Data")
 
 # mencoba memodelkan data
@@ -135,4 +143,21 @@ def add_dataset():
     return render_template('pre_content/add_dataset.html')
 
 # download dataset
-    
+
+@lp.route('/input-manual-data')
+def input_manual_data():
+    # manual_data = ManualData(hum=0.5, soil_nitro1=0.5, soil_phos1=0.5, soil_pot1=0.5, temp=0.5, prediction='Tidak Tahu', id=1)
+    manual_data = ManualData(hum=0.5, soil_nitro1=0.5, soil_phos1=0.5, soil_pot1=0.5, temp=0.5, prediction='Tidak Tahu', id=1)
+    # manual_data = "Nilai ini diambil dari database."
+    # return "<h1> Broken Heart</h1>"
+    db.session.add(manual_data)
+    db.session.commit()
+    return render_template('pre_content/add_dataset.html')
+
+@lp.route('/looking-new-data')
+def looking_new_data():
+    new_manual_data = ManualData(hum=0.5, soil_nitro1=0.5, soil_phos1=0.5, soil_pot1=0.5, temp=0.5, prediction='Tidak Tahu', id=1)
+    for data in new_manual_data:
+        print(data.hum)
+    return render_template('pre_content/add_manual_data.html')
+

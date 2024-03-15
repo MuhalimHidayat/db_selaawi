@@ -196,5 +196,5 @@ def logout():
     flash('You have been logged out')
     return redirect(url_for('auth.sign_in'))
 
-with app.app_context():
-    db.create_all()
+# with app.app_context():
+#     db.create_all()

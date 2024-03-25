@@ -67,8 +67,7 @@
 
 
     <script>
-        var data_test = JSON.parse('{{ dataset | safe }}')[0];
-        console.log(data_test['hum']);
+        var data_test = JSON.parse('{{ data_input | safe }}')[0];  
         
         document.getElementById('humidity').value = data_test['hum'];
         document.getElementById('nitro').value = data_test['soil_nitro1'];

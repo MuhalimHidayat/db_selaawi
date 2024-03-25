@@ -5,16 +5,8 @@
 
 {% block content %}
 <div class="p-8">
+    
     <h1 class="my-8 text-3xl font-bold">Staging Area untuk input Data Manual</h1>
-    <!-- 
-        description: 
-        id = prediction_results
-     -->
-    <!-- <div class="scroll-table scroll-smooth focus:scroll-auto">
-        {{ data_test2 }} 
-    </div> -->
-
-    <!-- <h1>{{ data_test_coba }}</h1> -->
 
     <div class="scrol-table scroll-smooth focus:scroll-auto">
         <table class="dataframe table-auto" id="prediction_results">
@@ -23,10 +15,8 @@
                     
                 </tr>
             </thead>
-            <tbody>
-                <tr id="tr-tbody">
-                    
-                </tr>
+            <tbody id="tbody">
+                
             </tbody>
         </table>
     </div>
@@ -36,60 +26,102 @@
     </div>
 
     <!-- Menyimpan URL dalam atribut data -->
-    <div id="updLinkData" data-url="{{ url_for('land_predict.update_manual_data', dataset=data_test_json) }}" style="display: none;"></div>
+    <!-- <div id="updLinkData" data-url="{{ url_for('land_predict.update_manual_data', dataset=data_test_json) }}" style="display: none;"></div> -->
+    <div id="updLinkData" data-url="{{ url_for('land_predict.update_manual_data') }}" style="display: none;"></div>
+    <div id="dltLinkData" data-url="{{ url_for('land_predict.delete_manual_data') }}" style="display: none;"></div>
 
-    <form action="{{ url_for('land_predict.result_manual_data', dataset=data_test_json) }}" method="post">
+    <form action="{{ url_for('land_predict.result_manual_data', dataset=data_test) }}" method="post">
         <input type="submit">
     </form>
+
+
+
+    
 </div>
 
 <script>
-    var data_test = JSON.parse('{{ data_test | safe }}')[0];
-    // console.log(data_test); 
+    var data_test = JSON.parse('{{ data_test | safe }}');
+    console.log("INI data_test:")
+    console.log(data_test); 
+
     for (property in data_test) {
-        console.log(`${property}: ${data_test[property]}`)
+        // console.log(`${property}: ${data_test[property]}`);
     }
 
+    const tbody = document.getElementById('tbody');
     const thead = document.getElementById('tr-thead');
-    const tbody = document.getElementById('tr-tbody');
-    const updIcon = document.createElement('i');
-    const dltIcon = document.createElement('i');
-    const buttonUpd = document.createElement('button');
-    const buttonDlt = document.createElement('button');
-    const updLink = document.createElement('a');
-    const dltLink = document.createElement('a');
-    
-    for (property in data_test) {
-        var theadTh = document.createElement('th');
-        theadTh.innerText = `${property}`;
-        thead.appendChild(theadTh);
+    // ini untuk head
+    for (property in data_test[0]) {
+        // jika th sama dengan 'id_m' maka tidak di tampilkan
+        if (property != 'id_m') {
+            var th = document.createElement('th');
+            th.innerText = `${property}`;
+            thead.appendChild(th);
+        }
+    }
 
-        var tbodyTd = document.createElement('td');
-        tbodyTd.innerText = `${data_test[property]}`;
-        tbody.appendChild(tbodyTd);
+    // ini untuk body
+    for (property in data_test) {
+        // membuatnya dari tr
+        var trbody = document.createElement('tr');
+        // console.log(data_test[property]['id_m']);
+        for (nilai in data_test[property]){
+            // console.log(nilai);
+            // jika nilai sama dengan 'id_m' maka tidak di tampilkan
+            // if (nilai != 'id_m') {
+            //     var td = document.createElement('td');
+            //     td.innerText = `${data_test[property][nilai]}`;
+            //     trbody.appendChild(td);
+            // } else {
+            //     var id_m = data_test[property][nilai];
+            //     // trbody.setAttribute('id', id_m);
+            // }
+
+            if (nilai == 'id_m') {
+                var id_m = data_test[property][nilai];
+            } else {
+                var td = document.createElement('td');
+                td.innerText = `${data_test[property][nilai]}`;
+                trbody.appendChild(td);
+            }
+            
+            // console.log(data_test[property][nilai]);
+        }
+
+        // ini untuk icon trash dan update
+        // update button
+        var url = updLinkData.getAttribute('data-url');
+        var urlDlt = dltLinkData.getAttribute('data-url');
+
+        var actionTd = document.createElement('td');
+        var updLink = document.createElement('a')
+        updLink.setAttribute('href', url + '?id_m=' + id_m);
+        var buttonUpd = document.createElement('button');
+        var updIcon = document.createElement('i');
+        updIcon.classList.add('fa-regular', 'fa-pen-to-square');
+        buttonUpd.appendChild(updLink);
+        updLink.appendChild(updIcon);
+        actionTd.appendChild(buttonUpd);
+        // delete button
+        var dltLink = document.createElement('a');
+        dltLink.setAttribute('href', urlDlt + '?id_m=' + id_m);
+        var buttonDlt = document.createElement('button');
+        var dltIcon = document.createElement('i');
+        dltIcon.classList.add('fa-solid', 'fa-trash');
+        buttonDlt.appendChild(dltLink);
+        dltLink.appendChild(dltIcon);
+        actionTd.appendChild(buttonDlt);
+        trbody.appendChild(actionTd);
+        
+        
+
+        // delete button
+        tbody.appendChild(trbody);
     }
     // action th button icon td
     const actionTh = document.createElement('th');
     actionTh.innerText = "Action";
     thead.appendChild(actionTh);
-
-    // update and trash icon 
-    const actionTd = document.createElement('td');
-    // update button
-    updIcon.classList.add('fa-regular', 'fa-pen-to-square');
-    var updLinkData = document.getElementById('updLinkData');
-    var url = updLinkData.getAttribute('data-url');
-    updLink.setAttribute('href', url);
-    buttonUpd.appendChild(updLink);
-    updLink.appendChild(updIcon);
-    actionTd.appendChild(buttonUpd);  
-    // delete button
-    dltIcon.classList.add('fa-solid', 'fa-trash');
-    dltLink.setAttribute('href', '/')
-    buttonDlt.appendChild(dltLink);
-    dltLink.appendChild(dltIcon);
-    actionTd.appendChild(buttonDlt);
-    tbody.appendChild(actionTd);
 </script>
 
 {% endblock content %}

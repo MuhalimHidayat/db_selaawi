@@ -17,7 +17,11 @@
                 <h1 class="text-center font-semibold text-xl bg-primary-color p-3 rounded-t-md text-slate-100">Form Upload</h1>
                 <div class="w-full">
                     <form action="" method="post" enctype="multipart/form-data">
-                        <div class="p-10 flex justify-around ">
+                        <div class="p-5 pt-10 flex justify-around">
+                            <label for="name" class="basis-1/4">Name </label>
+                            <input type="text" class="basis-3/4 py-1.5 px-2" id="name" name="name">
+                        </div>
+                        <div class="p-5 flex justify-around ">
                             <label for="dataset" class="basis-1/4">Dataset (xlsx): </label>
                             <input type="file" class="basis-3/4 custom-file-upload" id="dataset" name="dataset", accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
                             <!-- 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' -->
@@ -30,11 +34,11 @@
         
 
         {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        {% for message in messages %}
-        {{ message }}
-        {% endfor %}
-        {% endif %}
+            {% if messages %}
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            {% endif %}
         {% endwith %}
         <a class="underline" href="{{ url_for('download_dataset', dataset_name='dataset_KNN.xlsx') }}">Unduh Dataset</a>
 

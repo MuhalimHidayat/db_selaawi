@@ -8,6 +8,8 @@ instance/
 *.csv
 *.log
 
+# datasets
+/app/blueprints/land_predict/static/datasets
 # dependencies
 /app/node_modules
 # build

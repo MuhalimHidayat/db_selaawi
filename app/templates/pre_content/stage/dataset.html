@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="overflow-x-auto shadow-md sm:rounded-lg px-5 py-3">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    No
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Prediction
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Date Uploaded
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in datasets %}
+            <tr class="bg-white border-b dark:bg-gray-800">
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-900 dark:text-gray-400">
+                        {{loop.index}}
+                    </div>
+                </td>
+                <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <div class="text-sm text-gray-900 dark:text-gray-400">
+                        {{data.file_name}}
+                    </div>
+                </th>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-500 dark:text-gray-400">
+                        <!-- {{data.prediction}} -->
+                        Prediksi saja
+                    </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-500 dark:text-gray-400">
+                        {{data.created_at}}
+                    </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-500 dark:text-gray-400">
+                        <a href="{{ url_for('land_predict.predict_dataset', file_hash=data.file_hash) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Lihat Prediksi</a>
+                        <br>
+                        <a href=" {{ url_for('land_predict.delete_dataset', id=data.id_d) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" onclick="return confirm('Apakah yakin akan menghapus?')">Hapus</a>
+                        <br>
+                        <a href="{{ url_for('land_predict.static', filename='datasets/' + data.file_hash) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Download Dataset</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<br><br>
+
+
+{% endblock content %}

@@ -69,7 +69,7 @@ def add_manual_data():
         # # kodingan untuk menampilkan hasil prediksi
         # return render_template('pre_content/result/manual_data.html', prediction_data=Markup(prediction_data), prediction = prediction)
     # kodingan untuk menampilkan form input data
-    print("INNI SESSSION", session['id'])
+    # print("INNI SESSSION", session['id'])
     return render_template('pre_content/add_manual_data.html', prediction="Belum Memasukkan Data")
 
 # debug untuk halaman add_manual_data

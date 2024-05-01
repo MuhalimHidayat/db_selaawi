@@ -41,8 +41,7 @@
 
 <script>
     var data_test = JSON.parse('{{ data_test | safe }}');
-    console.log("INI data_test:")
-    console.log(data_test); 
+    // console.log(typeof data_test); // object
 
     for (property in data_test) {
         // console.log(`${property}: ${data_test[property]}`);

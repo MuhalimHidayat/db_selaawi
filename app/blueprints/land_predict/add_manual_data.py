@@ -61,16 +61,6 @@ def add_manual_data():
         print(data_test)
         data_test_json = data_test.to_json(orient='records')
         return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), data_test_json = data_test_json)
-        # prediction = model.predict(data_test)
-        # data_test['prediction'] = prediction
-        # # print("PREDIKSI: ",prediction)
-        # # nilai akurasinya 
-        # prediction_data = data_test.to_html(index=False, classes='table-auto', table_id='prediction_results')
-        # flash("data berhasil di prediksi", "success")
-        # # kodingan untuk menampilkan hasil prediksi
-        # return render_template('pre_content/result/manual_data.html', prediction_data=Markup(prediction_data), prediction = prediction)
-    # kodingan untuk menampilkan form input data
-    # print("INNI SESSSION", session['id'])
     return render_template('pre_content/add_manual_data.html', prediction="Belum Memasukkan Data")
 
 # debug untuk halaman add_manual_data
@@ -139,6 +129,7 @@ def update_manual_data():
     
     return render_template('pre_content/update_manual_data.html', data_input=data_test.to_json(orient='records'))
 
+
 @lp.route('/update-manual-data/<dataset>', methods=['GET', 'POST'])
 def update_manual_data2(dataset):
     if 'id' not in session:
@@ -190,10 +181,9 @@ def delete_manual_data():
 @lp.route('/result-manual-data/<dataset>', methods=('GET', 'POST'))
 def result_manual_data(dataset):
     data_test_execute = pd.read_json(dataset, orient='records')
-    # print(data_test_execute.dtypes)
-    # print(data_test_execute.iloc[:, :-1])
-    print("ini data test Execute")
-    print(data_test_execute)
+    print(data_test_execute.dtypes)
+    print(data_test_execute.iloc[:, :-1])
+    
     prediction = model.predict(data_test_execute.iloc[:, :-1])
     data_test_execute['prediction'] = prediction
     prediction_data = data_test_execute.to_html(index=False, classes='table-auto', table_id='prediction_results')

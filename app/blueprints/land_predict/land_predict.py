@@ -22,7 +22,7 @@ ALLOWED_EXTENSIONS = {'xlsx','csv'}
 lp = Blueprint('land_predict', __name__, url_prefix='/land_predict', static_folder='static', static_url_path='blueprints/land_predict/static')
 
 # mengambil seluruh yang ada pada file add_manual_data
-from app.blueprints.land_predict import add_manual_data
+from app.blueprints.land_predict import add_manual_data, real_time_data
 
 
 # dataset upload

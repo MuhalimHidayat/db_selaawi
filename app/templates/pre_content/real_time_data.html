@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block css_url %}
+
+{% endblock css_url %}
+
+{% block content %}
+<form action="" method="post">
+    <label for="area">Area:</label><br>
+    <input type="text" id="area" name="area"><br>
+    <label for="start_date">Start Date:</label><br>
+    <input type="date" id="start_date" name="start_date" placeholder="YYYY-MM-DD" required><br>
+    <label for="end_date">End Date:</label><br>
+    <input type="datetime-local" id="end_date" name="end_date" min="2024-04-25T00:00:00" max="2024-12-31T23:59:59"
+        placeholder="YYYY-MM-DD HH:MM:SS" required>
+    <label for="slave">Slave:</label>
+    <select name="slave" id="slave">
+        <option value="slave-1">Slave 1</option>
+        <option value="slave-2">Slave 2</option>
+    </select>
+
+    <input type="submit" value="Submit">
+</form>
+
+
+{% endblock content %}

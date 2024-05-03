@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block css_url %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/pred/add_manual_data.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pred/form.css') }}">
 {% endblock css_url %}
 
 
@@ -10,60 +10,79 @@
   <div class="w-4/5">
     <div id="content-header" class="w-full bg-header-predictions-color rounded-md p-6 mb-8">
       <h1 class="text-2xl font-semibold font-predictions-color-header">Add Manual Data</h1>
+      <p class="text-slate-50 mt-5">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda ipsa quas quae debitis, consequuntur beatae
+        laborum, suscipit exercitationem voluptatum distinctio vel cum odio unde. Amet omnis id ea in modi molestiae
+        odio quasi quam dolor quidem! Minus, dolores provident ipsum sapiente, harum deserunt sed beatae mollitia quos
+        corporis, ut quod.</p>
     </div>
     <!-- flash message -->
     <div class="flex justify-center mb-5">
       <div id="content-main" class="w-5/6 bg-predictions-content-color rounded-b-md">
-        <h1 class="text-center font-semibold text-xl bg-primary-color p-3 rounded-t-md text-slate-100">Form Upload</h1>
+        <h1 class="text-center font-semibold text-xl bg-primary-color py-5 rounded-t-md text-slate-100">Form Upload</h1>
         <form action="" method="post">
           <div class="flex flex-col gap-y-6 p-10">
             <!-- Humidity -->
             <div class="form-group">
-              <label for="humidity">Humidity</label>
-              <input type="number" step="any" class="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="humidity" name="humidity" placeholder="Soil Humidity" required>
+              <label for="humidity">hum (%)</label>
+              <input type="number" step="any"
+                class="shadow appearance-none border rounded w-2/4 py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="humidity" name="humidity" placeholder="Soil Humidity" required>
             </div>
             <!-- Nitrogen -->
             <div class="form-group">
-              <label for="nitro">Nitrogen</label>
-              <input type="number" step="any" class="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nitro" name="nitro" placeholder="Values Natrium" required>
+              <label for="nitro">soil_nitro (kg/ha)</label>
+              <input type="number" step="any"
+                class="shadow appearance-none border rounded w-2/4 py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="nitro" name="nitro" placeholder="Values Natrium" required>
             </div>
             <!-- Phosphor -->
             <div class="form-group">
-              <label for="phosphor">Phosphor</label>
-              <input type="number" step="any" class="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="phosphor" name="phosphor" placeholder="Values Phosphor" required>
+              <label for="phosphor">soil_phos (g/m)</label>
+              <input type="number" step="any"
+                class="shadow appearance-none border rounded w-2/4 py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="phosphor" name="phosphor" placeholder="Values Phosphor" required>
             </div>
             <!-- Pottasium -->
             <div class="form-group">
-              <label for="pottalium">Pottasium</label>
-              <input type="number" step="any" class="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="pottalium" name="pottalium" placeholder="Values Kalium" required>
+              <label for="pottalium">soil_pot (g/m)</label>
+              <input type="number" step="any"
+                class="shadow appearance-none border rounded w-2/4 py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="pottalium" name="pottalium" placeholder="Values Kalium" required>
             </div>
             <!-- Soil Type -->
             <div class="form-group">
-              <label for="soil">Soil Type</label>
-              <input type="number" step="any" class="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="soil" name="soil" placeholder="Soil Temperature" required>
+              <label for="soil">soil temp (<span>&#176;</span> C)</label>
+              <input type="number" step="any"
+                class="shadow appearance-none border rounded w-2/4 py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="soil" name="soil" placeholder="Soil Temperature" required>
             </div>
             <!-- PH -->
             <div class="form-group">
-              <label for="ph">PH</label>
-              <input type="number" step="any" class="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="ph" name="ph" placeholder="pH" required>
+              <label for="ph">soil_ph</label>
+              <input type="number" step="any"
+                class="shadow appearance-none border rounded w-2/4 py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="ph" name="ph" placeholder="pH" required>
             </div>
             <!-- Temperature -->
             <div class="form-group">
-              <label for="temperature">Temperature</label>
-              <input type="number" step="any" class="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="temperature" name="temperature" placeholder="Environment Temperature" required>
+              <label for="temperature">temp (<span>&#176;</span> C)</label>
+              <input type="number" step="any"
+                class="shadow appearance-none border rounded w-2/4 py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="temperature" name="temperature" placeholder="Environment Temperature" required>
             </div>
           </div>
           <div class="flex justify-end me-14 mb-5">
-            <button type="submit" class="px-5 py-2 rounded bg-primary-color font-semibold text-slate-100">Convert</button>
+            <button type="submit"
+              class="px-8 py-3 rounded bg-primary-color font-medium text-slate-100">Save</button>
           </div>
         </form>
       </div>
     </div>
-    
+
   </div>
   <!-- /#page-content-wrapper -->
 
   <br>
-  
+
   <!-- <h1>{{prediction}}</h1> -->
   {% endblock content %}

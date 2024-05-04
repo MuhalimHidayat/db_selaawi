@@ -4,8 +4,8 @@
 
 /* sidebar navbar dropdown */
 #sidebar {
-    background-color: #41644A;
-    color: white;
+    background-color: #F5F5F5;
+    color: #41644A;
     width: 22%;
 }
 
@@ -22,12 +22,14 @@
     visibility: visible;
     opacity: 1;
 }
+
 /* and symbol in css */
 
-#sidebar>ul>li:hover, #dropdown-menu>.dropdown-content-show>li:hover {
+#sidebar>ul>li:hover,
+#dropdown-menu>.dropdown-content-show>li:hover {
     background-color: rgb(217 217 217 / 42%);
     /* drop shadow */
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 #dropdown-menu>.dropdown-content-show>li {
@@ -55,12 +57,12 @@
     background-color: #F5F5F5;
     color: #000000;
     /* drop shadow */
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    padding: 10px; 
+
+    padding: 10px;
     margin-bottom: 20px;
 }
 
-#navbar > .dropdown-content-show{
+#navbar>.dropdown-content-show {
     position: absolute;
     color: black;
     background-color: white;

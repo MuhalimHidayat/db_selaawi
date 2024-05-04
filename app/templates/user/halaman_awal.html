@@ -6,7 +6,7 @@
 
 
 {% block content %}
-<div class="bg-slate-200 flex justify-around p-12" id="header">
+<div class="flex justify-around p-12" id="header">
     <div class="flex justify-around flex-col w-7/12" id="header-left-content">
         <div class="w-9/12">
             <h1 class="text-4xl font-bold">Land Suitability Classification System of Selaawi Sub-district</h1>
@@ -20,7 +20,7 @@
 
     </div>
     <div id="header-right-content">
-        <img class="rounded-full" src="{{ url_for('static', filename='img/user/gambar.png') }}" alt="">
+        <img class="rounded-full w-24 h-10" src="{{ url_for('static', filename='img/user/1.png') }}" alt="">
     </div>
 </div>
 
@@ -35,13 +35,20 @@
                 alt="">
         </div>
         <div class="basis-1/2" id="about-us-content-right">
-            <p class="text-center mt-5">Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been
-                the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                but also the leap into electronic typesetting, remaining
-                essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                containing Lorem.</p>
+            <p class="text-justify mt-5">Dalam aplikasi web kami, kami 
+                menawarkan layanan yang bertujuan untuk membantu penyuluh bawang merah 
+                dalam menemukan <b class="text-lime-900">kecocokan tanah yang ideal untuk tanaman bawang merah.</b> 
+                Kami menggunakan <b class="text-lime-900">teknologi machine learning</b>  untuk menganalisis berbagai faktor tanah, 
+                termasuk kandungan Nitro, Fosfor, Kalium, Ph, Kelembapan lingkungan, Kelembapan tanah dan Temperatur tanah.
+
+            </p>
+            <p class="text-justify mt-5">
+                Dengan memasukkan data tentang tanah dari penyuluh, 
+                aplikasi kami akan melakukan <b class="text-lime-900">analisis mendalam dan memberikan statement atau laporan yang memberi penyuluh 
+                informasi tentang sejauh mana tanah tersebut cocok untuk bawang merah</b>. Laporan ini akan memberikan rekomendasi 
+                tentang langkah-langkah yang dapat diambil untuk memperbaiki atau mempersiapkan tanah, jika diperlukan, untuk mencapai
+                hasil panen yang optimal.
+            </p>
         </div>
     </div>
 </div>
@@ -49,16 +56,16 @@
 <!-- education selaawi -->
 <div class="bg-quaternary-color pb-8" id="education-selaawi">
     <div class="flex justify-center" id="about-us-header">
-        <h1 class="text-3xl font-header-color my-10">Education Selaawi</h1>
+        <h1 class="text-3xl font-header-color my-10">Education Tanera</h1>
     </div>
     <div class="flex justify-center gap-x-16 p-9 pt-1">
         <div class="basis-1/4 flex flex-col items-center gap-y-4 bg-white drop-shadow-md p-8 rounded-md" id="edu-data">
             <!-- icon data sample -->
             <div class="h-2/5 flex items-center">
-                <img src="{{ url_for('static', filename='img/user/data_sample_icon.png') }}" alt="">
+                <img src="{{ url_for('static', filename='img/user/data_sample_new.png') }}" alt="">
             </div>
             <!-- end icon data sample -->
-            <h1 class="font-bold text-2xl">Data Sample</h1>
+            <h1 class="font-bold text-2xl">Dataset</h1>
             <p class="text-center font-light">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
                 the</p>
             <a href="{{ url_for('data_sample') }}">
@@ -70,10 +77,10 @@
         <div class="basis-1/4 flex flex-col items-center gap-y-4 bg-white drop-shadow-md p-8 rounded-md" id="edu-data">
             <!-- icon data sample -->
             <div class="h-2/5 flex items-center">
-                <img src="{{ url_for('static', filename='img/user/data_sample_icon.png') }}" alt="">
+                <img src="{{ url_for('static', filename='img/user/prediction_new.png') }}" alt="">
             </div>
             <!-- end icon data sample -->
-            <h1 class="font-bold text-2xl">Predictions</h1>
+            <h1 class="font-bold text-2xl">Machine Learning</h1>
             <p class="text-center font-light">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
                 the</p>
             <a href="{{ url_for('data_sample') }}">

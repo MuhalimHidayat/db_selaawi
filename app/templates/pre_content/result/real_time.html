@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block css_url %}
+
+{% endblock css_url %}
+{% block content %}
+
+<div class="overflow-x-auto shadow-md sm:rounded-lg px-5 py-3">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr id="thead-tr">
+
+            </tr>
+        </thead>
+        <tbody class="">
+            <tr class="bg-white border-b dark:bg-gray-800" id="tbody-tr">
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- tombol prediksi -->
+<div class="flex justify-end mt-5">
+    <a href="#"
+        class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" id="prediksi-button">Lihat Prediksi</a>
+</div>
+
+<div id="data-json" data='{{ data | tojson | safe }}' style="display: none;"></div>
+<div id="slave-data" slave-data={{slave}} style="display: none;"></div>
+
+<script>
+    var data = JSON.parse(document.getElementById('data-json').getAttribute('data'));
+    var slave_data = document.getElementById('slave-data').getAttribute('slave-data');
+    if (slave_data == 'slave-1') {
+        slave_data = '1'
+    } else {
+        slave_data = '2'
+    }
+    data_parameter = {}
+    data_parameter_key = ['hum', `soil_nitro${slave_data}`, `soil_phos${slave_data}`, `soil_pot${slave_data}`,
+        `soil_temp${slave_data}`, `soil_ph${slave_data}`, 'temp'
+    ]
+    for (const area in data) {
+        for (const area2 in data[area]) {
+            console.log(area2)
+            for (const key in data[area][area2]) {
+                const nilai = data[area][area2][key]
+                if (data_parameter_key.includes(nilai.id)) {
+                    data_parameter[nilai.id] = nilai.average
+                }
+            }
+        }
+    }
+    console.log('ini nilai data_parameter')
+    console.log(data_parameter)
+    var thead_tr = document.getElementById('thead-tr')
+    var tbody_tr = document.getElementById('tbody-tr')
+    for (const key of data_parameter_key) {
+        var th = document.createElement('th')
+        th.setAttribute('scope', 'col')
+        th.setAttribute('class', 'px-6 py-3')
+        th.innerHTML = key
+        thead_tr.appendChild(th)
+
+        var td = document.createElement('td')
+        td.setAttribute('class', 'px-6 py-4 whitespace-nowrap')
+        td.innerHTML = data_parameter[key]
+        tbody_tr.appendChild(td)
+    }
+
+
+    // prediksi button
+    // var prediksi_button = document.getElementById('prediksi-button')
+    document.addEventListener("DOMContentLoaded", function() {
+        var prediksiButton = document.getElementById('prediksi-button');
+        prediksiButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            var url = "{{ url_for('land_predict.real_time_data_predict') }}";
+
+            var parameterString = Object.keys(data_parameter).map(function(key) {
+                return encodeURIComponent(key) + '=' + encodeURIComponent(data_parameter[key]);
+            }).join('&');
+
+            if (url.indexOf('?') !== -1) {
+                url += '&' + parameterString;
+            } else {
+                url += '?' + parameterString;
+            }
+
+            window.location.href = url;
+        });
+    });
+    
+    
+</script>
+{% endblock content %}

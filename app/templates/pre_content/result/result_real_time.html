@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block css_url %}
+
+{% endblock css_url %}
+
+{% block content %}
+<div class="overflow-x-auto shadow-md sm:rounded-lg px-5 py-3">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-800 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr id="thead-tr">
+
+            </tr>
+        </thead>
+        <tbody class="">
+            <tr class="bg-white border-b dark:bg-gray-800" id="tbody-tr">
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    var data = JSON.parse('{{ data | safe }}')[0];
+    var thead_tr = document.getElementById('thead-tr')
+    var tbody_tr = document.getElementById('tbody-tr')
+    for (const key in data) {
+        var th = document.createElement('th')
+        th.setAttribute('scope', 'col')
+        th.setAttribute('class', 'px-6 py-3')
+        th.innerText = key
+        thead_tr.appendChild(th)
+
+        var td = document.createElement('td')
+        td.setAttribute('class', 'px-6 py-4 whitespace-nowrap ')
+        td.innerText = data[key]
+        tbody_tr.appendChild(td)
+    }
+    
+</script>
+{% endblock content %}

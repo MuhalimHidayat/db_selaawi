@@ -4,7 +4,7 @@
 
 /* Color pallete */
 .bg-primary-color {
-  background-color: #41644A;
+  background-color: rgba(65, 100, 74, 0.7);
 }
 
 .bg-secondary-color {
@@ -68,7 +68,7 @@
 
 /* predictions page pallete */
 .bg-predictions-content-color {
-  background-color: #EEF0EE;
+  background-color: rgba(226, 226, 226, 0.5);
   /* drop shadow */
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2);
 }

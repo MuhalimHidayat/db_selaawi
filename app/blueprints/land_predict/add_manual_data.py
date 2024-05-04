@@ -58,18 +58,9 @@ def add_manual_data():
         data = data_input_manual
         columns = ['hum', 'soil_nitro1', 'soil_phos1', 'soil_pot1', 'soil_temp1', 'soil_ph1', 'temp', 'id_m']
         data_test = pd.DataFrame(data, columns=columns)
+        print(data_test)
         data_test_json = data_test.to_json(orient='records')
         return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), data_test_json = data_test_json)
-        # prediction = model.predict(data_test)
-        # data_test['prediction'] = prediction
-        # # print("PREDIKSI: ",prediction)
-        # # nilai akurasinya 
-        # prediction_data = data_test.to_html(index=False, classes='table-auto', table_id='prediction_results')
-        # flash("data berhasil di prediksi", "success")
-        # # kodingan untuk menampilkan hasil prediksi
-        # return render_template('pre_content/result/manual_data.html', prediction_data=Markup(prediction_data), prediction = prediction)
-    # kodingan untuk menampilkan form input data
-    # print("INNI SESSSION", session['id'])
     return render_template('pre_content/add_manual_data.html', prediction="Belum Memasukkan Data")
 
 # debug untuk halaman add_manual_data
@@ -137,27 +128,6 @@ def update_manual_data():
         return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), data_test_json = data_test_json.to_json(orient='records'))
     
     return render_template('pre_content/update_manual_data.html', data_input=data_test.to_json(orient='records'))
-# @lp.route('/update-manual-data3/<id_m>', methods=['GET', 'POST'])
-# def update_manual_data3(id_m):
-    # if 'id' not in session:
-    #     flash('You must be logged in to access this page', 'danger')
-    #     return redirect(url_for('auth.sign_in'))
-    # data_input = ManualData.query.filter_by(id_m=id_m).first()
-    # data_array = [{key: value for key, value in data_input.__dict__.items() if not key.startswith('_sa_')}]
-    # print("DATA ARRAY", data_array)
-    # df = pd.DataFrame(data_array)
-    # print(df)
-
-    # data_input_manual = []
-    # for data in data_array:
-    #     data_input_manual.append([data['hum'], data['soil_nitro1'], data['soil_phos1'], data['soil_pot1'], data['soil_temp1'], data['soil_ph1'], data['temp'], data['id_m']])
-
-    # data = data_input_manual
-    # columns = ['hum', 'soil_nitro1', 'soil_phos1', 'soil_pot1', 'soil_temp1', 'soil_ph1', 'temp', 'id_m']
-    # data_test = pd.DataFrame(data, columns=columns)
-    # data_test_coba = pd.DataFrame(data, columns=columns)
-    # data_test_json = data_test.to_json(orient='records')
-    # return render_template('pre_content/stage/update_manual.html', data_test=data_test.to_json(orient='records'), data_test_json=data_test_json, data_array=data_array, data_input=data_input)
 
 
 @lp.route('/update-manual-data/<dataset>', methods=['GET', 'POST'])

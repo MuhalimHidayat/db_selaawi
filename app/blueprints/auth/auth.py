@@ -52,7 +52,7 @@ def sign_up():
 def sign_in():
     if 'id' in session:
         flash('You are already logged in.')
-        return redirect(url_for('land_predict.add_manual_data'))
+        return redirect(url_for('land_predict.dashboard'))
     if request.method == 'POST':
         username = escape(request.form['username'])
         password = escape(request.form['password'])
@@ -70,7 +70,7 @@ def sign_in():
                 # add session 
                 session['id'] = admin.id
                 session.permanent = True
-                return redirect(url_for('land_predict.add_manual_data'))
+                return redirect(url_for('land_predict.dashboard'))
     return render_template('authen/signin.html', title='Sign In')
 
 @auth_bp.route('/all-user')

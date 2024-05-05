@@ -3,27 +3,37 @@
 
 {% endblock css_url %}
 {% block content %}
+<div class="flex justify-center w-full">
+    <div class="w-4/5">
+        <div id="content-header" class="w-full bg-header-predictions-color rounded-md p-6 mb-8">
+            <h1 class="text-2xl font-semibold font-predictions-color-header">Real Time Data</h1>
+            <p class="text-slate-50 mt-3 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, nesciunt.
+            </p>
+        </div>
+        <div class="overflow-x-auto shadow-md sm:rounded-lg px-5 py-3">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr id="thead-tr">
 
-<div class="overflow-x-auto shadow-md sm:rounded-lg px-5 py-3">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr id="thead-tr">
+                    </tr>
+                </thead>
+                <tbody class="">
+                    <tr class="bg-white border-b dark:bg-gray-800" id="tbody-tr">
 
-            </tr>
-        </thead>
-        <tbody class="">
-            <tr class="bg-white border-b dark:bg-gray-800" id="tbody-tr">
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- tombol prediksi -->
+        <div class="flex justify-end me-14 my-5">
+            <a href="#" class="px-8 py-3 rounded bg-primary-color font-medium text-slate-100" id="prediksi-button">Lihat
+                Prediksi</a>
+        </div>
+    </div>
 
-            </tr>
-        </tbody>
-    </table>
 </div>
 
-<!-- tombol prediksi -->
-<div class="flex justify-end mt-5">
-    <a href="#"
-        class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" id="prediksi-button">Lihat Prediksi</a>
-</div>
+
 
 <div id="data-json" data='{{ data | tojson | safe }}' style="display: none;"></div>
 <div id="slave-data" slave-data={{slave}} style="display: none;"></div>
@@ -71,13 +81,13 @@
 
     // prediksi button
     // var prediksi_button = document.getElementById('prediksi-button')
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         var prediksiButton = document.getElementById('prediksi-button');
-        prediksiButton.addEventListener('click', function(event) {
+        prediksiButton.addEventListener('click', function (event) {
             event.preventDefault();
             var url = "{{ url_for('land_predict.real_time_data_predict') }}";
 
-            var parameterString = Object.keys(data_parameter).map(function(key) {
+            var parameterString = Object.keys(data_parameter).map(function (key) {
                 return encodeURIComponent(key) + '=' + encodeURIComponent(data_parameter[key]);
             }).join('&');
 
@@ -90,7 +100,5 @@
             window.location.href = url;
         });
     });
-    
-    
 </script>
 {% endblock content %}

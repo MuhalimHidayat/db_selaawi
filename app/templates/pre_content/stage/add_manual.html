@@ -1,42 +1,45 @@
 {% extends 'base.html' %}
 {% block css_url %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/pred/table_result.css') }}">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pallete.css') }}">
 {% endblock css_url %}
 
 {% block content %}
-<div class="p-8">
-    
-    <h1 class="my-8 text-3xl font-bold">Staging Area untuk input Data Manual</h1>
+<div class="flex justify-center w-full">
+    <div class="w-4/5">
+        <div id="content-header" class="w-full bg-header-predictions-color rounded-md p-6 mb-8">
+            <h1 class="text-2xl font-semibold font-predictions-color-header">Staging Area Input Data</h1>
+            <p class="text-slate-50 mt-3 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, nesciunt.</p>
+        </div>
+        <div class="overflow-x-auto shadow-md sm:rounded-lg px-5 py-3">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-center text-white uppercase bg-primary-color  dark:bg-gray-700 dark:text-gray-400">
+                    <tr id="tr-thead">
 
-    <div class="scrol-table scroll-smooth focus:scroll-auto">
-        <table class="dataframe table-auto" id="prediction_results">
-            <thead>
-                <tr id="tr-thead">
-                    
-                </tr>
-            </thead>
-            <tbody id="tbody">
-                
-            </tbody>
-        </table>
+                    </tr>
+                </thead>
+                <tbody class="text-center" id="tbody">
+
+                </tbody>
+            </table>
+
+            
+        </div>
+
+        <!-- Menyimpan URL dalam atribut data -->
+        <!-- <div id="updLinkData" data-url="{{ url_for('land_predict.update_manual_data', dataset=data_test_json) }}" style="display: none;"></div> -->
+        <div id="updLinkData" data-url="{{ url_for('land_predict.update_manual_data') }}" style="display: none;"></div>
+        <div id="dltLinkData" data-url="{{ url_for('land_predict.delete_manual_data') }}" style="display: none;"></div>
+        <div class="flex justify-end me-14 my-5">
+            <form action="{{ url_for('land_predict.result_manual_data', dataset=data_test) }}" method="post">
+                <button type="submit" class="px-8 py-3 rounded bg-primary-color font-medium text-slate-100">Convert</button>
+            </form>
+        </div>
     </div>
 
-    <div class="flex justify-end me-14 mb-5">
-        <button type="submit" class="px-5 py-2 rounded bg-primary-color font-semibold text-slate-100">Run</button>
-    </div>
-
-    <!-- Menyimpan URL dalam atribut data -->
-    <!-- <div id="updLinkData" data-url="{{ url_for('land_predict.update_manual_data', dataset=data_test_json) }}" style="display: none;"></div> -->
-    <div id="updLinkData" data-url="{{ url_for('land_predict.update_manual_data') }}" style="display: none;"></div>
-    <div id="dltLinkData" data-url="{{ url_for('land_predict.delete_manual_data') }}" style="display: none;"></div>
-
-    <form action="{{ url_for('land_predict.result_manual_data', dataset=data_test) }}" method="post">
-        <input type="submit">
-    </form>
 
 
 
-    
 </div>
 
 <script>
@@ -54,6 +57,8 @@
         // jika th sama dengan 'id_m' maka tidak di tampilkan
         if (property != 'id_m') {
             var th = document.createElement('th');
+            th.setAttribute('scope', 'col')
+            th.setAttribute('class', 'px-6 py-3')
             th.innerText = `${property}`;
             thead.appendChild(th);
         }
@@ -63,8 +68,9 @@
     for (property in data_test) {
         // membuatnya dari tr
         var trbody = document.createElement('tr');
+        trbody.setAttribute('class', 'bg-white border-b dark:bg-gray-800');
         // console.log(data_test[property]['id_m']);
-        for (nilai in data_test[property]){
+        for (nilai in data_test[property]) {
             // console.log(nilai);
             // jika nilai sama dengan 'id_m' maka tidak di tampilkan
             // if (nilai != 'id_m') {
@@ -80,10 +86,11 @@
                 var id_m = data_test[property][nilai];
             } else {
                 var td = document.createElement('td');
+                td.setAttribute('class', 'px-6 py-4 whitespace-nowrap ')
                 td.innerText = `${data_test[property][nilai]}`;
                 trbody.appendChild(td);
             }
-            
+
             // console.log(data_test[property][nilai]);
         }
 
@@ -111,14 +118,16 @@
         dltLink.appendChild(dltIcon);
         actionTd.appendChild(buttonDlt);
         trbody.appendChild(actionTd);
-        
-        
+
+
 
         // delete button
         tbody.appendChild(trbody);
     }
     // action th button icon td
     const actionTh = document.createElement('th');
+    actionTh.setAttribute('scope', 'col');
+    actionTh.setAttribute('class', 'px-6 py-3');
     actionTh.innerText = "Action";
     thead.appendChild(actionTh);
 </script>

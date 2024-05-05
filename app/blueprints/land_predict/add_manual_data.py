@@ -67,6 +67,9 @@ def add_manual_data():
 # mencoba memodelkan data
 @lp.route('/stage-manual-data')
 def stage_manual_data():
+    if 'id' not in session:
+        flash('You must be logged in to access this page', 'danger')
+        return redirect(url_for('auth.sign_in'))
     data_input = ManualData.query.filter_by(id=session['id']).all()
     data_array = [{key: value for key, value in data.__dict__.items() if not key.startswith('_sa_')} for data in data_input]
 
@@ -190,5 +193,4 @@ def result_manual_data(dataset):
     flash("data berhasil di prediksi", "success")
     return render_template('pre_content/result/manual_data.html', prediction_data=Markup(prediction_data), prediction = prediction)
 
-    # print(data_test_execute.iloc[[0, 1, 2, 3, 4, 5, 6]])
-    # return "berhasil"
+    

@@ -9,11 +9,23 @@
     <div class="w-4/5">
         <div id="content-header" class="w-full bg-header-predictions-color rounded-md p-6 mb-8">
             <h1 class="text-2xl font-semibold font-predictions-color-header">Staging Area Input Data</h1>
-            <p class="text-slate-50 mt-3 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, nesciunt.</p>
+            <p class="text-slate-50 mt-3 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, nesciunt.
+            </p>
         </div>
+        <div class="flex justify-start mx-5 my-2">
+            <a href="{{ url_for('land_predict.add_manual_data') }}" class="flex text-white text-sm font-semibold justify-between items-center gap-x-2 ps-4 pe-5 py-1 bg-button-user-color rounded">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                    <path
+                        d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+                </svg>
+                <span>ADD</span>
+            </a>
+        </div>
+        
         <div class="overflow-x-auto shadow-md sm:rounded-lg px-5 py-3">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-center text-white uppercase bg-primary-color  dark:bg-gray-700 dark:text-gray-400">
+                <thead
+                    class="text-xs text-center text-white uppercase bg-primary-color  dark:bg-gray-700 dark:text-gray-400">
                     <tr id="tr-thead">
 
                     </tr>
@@ -23,7 +35,7 @@
                 </tbody>
             </table>
 
-            
+
         </div>
 
         <!-- Menyimpan URL dalam atribut data -->
@@ -32,7 +44,8 @@
         <div id="dltLinkData" data-url="{{ url_for('land_predict.delete_manual_data') }}" style="display: none;"></div>
         <div class="flex justify-end me-14 my-5">
             <form action="{{ url_for('land_predict.result_manual_data', dataset=data_test) }}" method="post">
-                <button type="submit" class="px-8 py-3 rounded bg-primary-color font-medium text-slate-100">Convert</button>
+                <button type="submit"
+                    class="px-8 py-3 rounded bg-primary-color font-medium text-slate-100">Convert</button>
             </form>
         </div>
     </div>

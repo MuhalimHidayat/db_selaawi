@@ -48,7 +48,7 @@ def add_manual_data():
         
         
         # mengambil semua data yang ada pada database dengan id sama dengan session id
-        data_input = ManualData.query.filter_by(id=session['id']).all()
+        data_input = ManualData.query.filter_by(id=session['id']).order_by(desc(ManualData.id_m)).all()
         data_array = [{key: value for key, value in data.__dict__.items() if not key.startswith('_sa_')} for data in data_input]
         
         data_input_manual = []
@@ -58,9 +58,8 @@ def add_manual_data():
         data = data_input_manual
         columns = ['hum', 'soil_nitro1', 'soil_phos1', 'soil_pot1', 'soil_temp1', 'soil_ph1', 'temp', 'id_m']
         data_test = pd.DataFrame(data, columns=columns)
-        print(data_test)
-        data_test_json = data_test.to_json(orient='records')
-        return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), data_test_json = data_test_json)
+        # return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), data_test_json = data_test_json)
+        return redirect(url_for('land_predict.stage_manual_data'))
     return render_template('pre_content/add_manual_data.html', prediction="Belum Memasukkan Data")
 
 # debug untuk halaman add_manual_data
@@ -70,7 +69,9 @@ def stage_manual_data():
     if 'id' not in session:
         flash('You must be logged in to access this page', 'danger')
         return redirect(url_for('auth.sign_in'))
-    data_input = ManualData.query.filter_by(id=session['id']).all()
+    # data_input = ManualData.query.filter_by(id=session['id']).all() #also order by id_m desc
+    # data_input = db.select(ManualData).filter_by(id=session['id']).order_by(desc(ManualData.id_m))
+    data_input = ManualData.query.filter_by(id=session['id']).order_by(desc(ManualData.id_m)).all()
     data_array = [{key: value for key, value in data.__dict__.items() if not key.startswith('_sa_')} for data in data_input]
 
     data_input_manual = []
@@ -80,7 +81,6 @@ def stage_manual_data():
     data = data_input_manual
     columns = ['hum', 'soil_nitro1', 'soil_phos1', 'soil_pot1', 'soil_temp1', 'soil_ph1', 'temp', 'id_m']
     data_test = pd.DataFrame(data, columns=columns)
-    data_test_coba = pd.DataFrame(data, columns=columns)
     data_test_json = data_test.to_json(orient='records')
     return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), data_test_json=data_test_json)
 

@@ -13,6 +13,7 @@ from werkzeug.utils import secure_filename
 from app.blueprints.land_predict.models.ManualData import ManualData
 from app.blueprints.land_predict.models.Dataset import Dataset
 from app import model, app, db
+from sqlalchemy import desc
 
 
 # UPLOAD_FOLDER = 'app/blueprints/land_predict/static/datasets'
@@ -124,9 +125,8 @@ def stage_dataset():
         flash('You must be logged in to access this page', 'danger')
         return redirect(url_for('auth.sign_in'))
     
-    datasets = db.session.execute(db.select(Dataset).filter_by(id=session['id'])).scalars().all()
-    print(datasets)
-    
+    # datasets = db.session.execute(db.select(Dataset).filter_by(id=session['id'])).scalars().all()
+    datasets = Dataset.query.filter_by(id=session['id']).order_by(desc(Dataset.id_d)).all()
     return render_template('pre_content/stage/dataset.html', datasets=datasets)
 
 @lp.route('/stage-dataset/<int:id>/delete')

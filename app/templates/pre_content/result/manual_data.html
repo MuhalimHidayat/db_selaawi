@@ -1,18 +1,61 @@
 {% extends 'base.html' %}
 {% block css_url %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/pred/table_result.css') }}">
+
 {% endblock css_url %}
 
 {% block content %}
-<div class="p-8">
-    <h1 class="my-8 text-3xl font-bold">Hasil Prediksi Data Manual</h1>
-    <!-- 
-        description: 
-        id = prediction_results
-     -->
-    <div class="scroll-table scroll-smooth focus:scroll-auto">
-        {{ prediction_data }} 
+
+<div class="flex justify-center w-full">
+    <div class="w-4/5">
+        <div id="content-header" class="w-full bg-header-predictions-color rounded-md p-6 mb-8">
+            <h1 class="text-2xl font-semibold font-predictions-color-header">Hasil Prediksi Data Manual</h1>
+            <p class="text-slate-50 mt-3 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, nesciunt.
+            </p>
+        </div>
+        <div class="overflow-x-auto shadow-md sm:rounded-lg px-5 py-3">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                <thead
+                    class="text-xs text-center text-white uppercase bg-primary-color  dark:bg-gray-700 dark:text-gray-400">
+                    <tr id="tr-thead">
+                    </tr>
+                </thead>
+                <tbody class="text-center" id="tbody">
+
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
+<script>
+    var data_test = JSON.parse('{{ data_test | safe }}');
+    const tbody = document.getElementById('tbody');
+    const tr_thead = document.getElementById('tr-thead');
+    const columns = ['hum', 'soil_nitro1', 'soil_phos1', 'soil_pot1', 'soil_temp1', 'soil_ph1', 'temp',
+        'Nilai Prediksi']
+    
+    for(let i = 0; i < columns.length; i++) {
+        var th = document.createElement('th');
+        th.setAttribute('scope', 'col')
+        th.setAttribute('class', 'px-6 py-3');
+        th.innerHTML = columns[i];
+        tr_thead.appendChild(th);
+    }
+    
+    for (property in data_test) {
+        data = data_test[property]
+        const tr_body = document.createElement('tr');
+        tr_body.setAttribute('class', 'bg-white border-b');
+        for (item in data) {
+            tbody.appendChild(tr_body);
+            console.log(item,data[item])
+            if (item != 'id_m') {
+                const td = document.createElement('td');
+                td.setAttribute('class', 'px-6 py-4 whitespace-nowrap');
+                td.innerText = data[item];
+                tr_body.appendChild(td);
+            }
+        }
+    }
+</script>
 {% endblock content %}

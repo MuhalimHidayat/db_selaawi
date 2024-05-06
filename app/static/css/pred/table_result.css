@@ -1,7 +1,6 @@
 .scroll-table{
     /* overflow-x-auto */
-    width: 80%;
-    max-height: 300px;
+    max-height: 600px;
     overflow-x: auto;
 
 }

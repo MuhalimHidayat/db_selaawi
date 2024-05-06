@@ -14,6 +14,7 @@ from app.blueprints.land_predict.models.ManualData import ManualData
 from app.blueprints.land_predict.models.Dataset import Dataset
 from app import model, app, db
 from sqlalchemy import desc
+from datetime import datetime
 
 
 # UPLOAD_FOLDER = 'app/blueprints/land_predict/static/datasets'
@@ -37,14 +38,14 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-# hashing filename
-def hash_filename(dataset_name):
-    
-    dataset_hash = hashlib.md5((dataset_name + str(time.time())).encode('utf-8')).hexdigest()
+# latest
+def hash_filename(dataset_name, file_name):
+    name_inputed = file_name.replace(' ', '_')
     extension = dataset_name.rsplit('.', 1)[-1].lower()
-    dataset_hash += '.' + extension
-    return dataset_hash
-
+    differentiator_name = datetime.now().strftime("%Y-%m-%d-%H-%M-%S-%f")
+    name_inputed = name_inputed + '-' + differentiator_name
+    name_inputed += '.' + extension
+    return name_inputed
 
 @lp.route('/add-dataset', methods=('GET', 'POST'))
 def add_dataset():
@@ -61,8 +62,9 @@ def add_dataset():
             # back to this url again
             return redirect(request.url)
         if dataset and allowed_file(dataset.filename):
+            name = escape(request.form['name'])
             dataset_name = secure_filename(dataset.filename)
-            dataset_name_hashed = hash_filename(dataset_name)
+            dataset_name_hashed = hash_filename(dataset_name, name)
             # doing prediction here,
             df = pd.read_excel(dataset)
             X = df.iloc[:, :-1]
@@ -73,7 +75,6 @@ def add_dataset():
             # rows = len(df.axes[0])
             # cols = len(df.axes[1])
             # end of prediction
-            name = escape(request.form['name'])
             # save to database
             add_dataset = Dataset(file_name=name, file_hash=dataset_name_hashed, id=session['id'])
             db.session.add(add_dataset)
@@ -150,5 +151,5 @@ def predict_dataset(file_hash):
     prediction_data = df.to_html(index=False, classes='table-auto', table_id='prediction_results')
     rows = len(df.axes[0])
     cols = len(df.axes[1])
-    return render_template('pre_content/result/dataset.html', prediction_data=Markup(prediction_data), dimensions=[rows, cols])
+    return render_template('pre_content/result/dataset.html', prediction_data=Markup(prediction_data), dimensions=[rows, cols], data_test = df.to_json(orient='records'))
     

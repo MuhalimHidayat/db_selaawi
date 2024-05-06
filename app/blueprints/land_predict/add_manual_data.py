@@ -191,6 +191,6 @@ def result_manual_data(dataset):
     data_test_execute['prediction'] = prediction
     prediction_data = data_test_execute.to_html(index=False, classes='table-auto', table_id='prediction_results')
     flash("data berhasil di prediksi", "success")
-    return render_template('pre_content/result/manual_data.html', prediction_data=Markup(prediction_data), prediction = prediction)
+    return render_template('pre_content/result/manual_data.html', prediction_data=Markup(prediction_data), prediction = prediction, data_test = data_test_execute.to_json(orient='records'))
 
     

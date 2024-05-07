@@ -82,7 +82,7 @@ def add_dataset():
             # end of save to database
 
             flash('File berhasil di upload', "success")
-            return redirect(url_for('land_predict.stage_dataset'))
+            return redirect(url_for('land_predict.stage_dataset', page=1))
             # return render_template('pre_content/result/dataset.html', prediction_data=Markup(prediction_data), dimensions=[rows, cols])
         flash('File tidak di upload', "danger")
         return render_template('pre_content/add_dataset.html')
@@ -120,15 +120,22 @@ def add_dataset():
     # Return the hashed name with the original extension
     # return hashed_name + ext
 
-@lp.route('/stage-dataset')
-def stage_dataset():
+@lp.route('/stage-dataset/<int:page>')
+def stage_dataset(page=1):
     if 'id' not in session:
         flash('You must be logged in to access this page', 'danger')
         return redirect(url_for('auth.sign_in'))
     
     # datasets = db.session.execute(db.select(Dataset).filter_by(id=session['id'])).scalars().all()
-    datasets = Dataset.query.filter_by(id=session['id']).order_by(desc(Dataset.id_d)).all()
+    datasets = Dataset.query.filter_by(id=session['id']).order_by(desc(Dataset.id_d)).paginate(page=page, per_page=5, error_out=False)
     return render_template('pre_content/stage/dataset.html', datasets=datasets)
+
+@lp.route('/stage-dataset/<int:page>')
+def pagination(page=1):
+    datasets = Dataset.query.filter_by(id=session['id']).order_by(desc(Dataset.id_d)).paginate(page=page, per_page=5, error_out=False)
+    return render_template('pre_content/stage/dataset.html', datasets=datasets)
+    # print(datasets)
+    # return "Berhasil"
 
 @lp.route('/stage-dataset/<int:id>/delete')
 def delete_dataset(id):
@@ -152,4 +159,3 @@ def predict_dataset(file_hash):
     rows = len(df.axes[0])
     cols = len(df.axes[1])
     return render_template('pre_content/result/dataset.html', prediction_data=Markup(prediction_data), dimensions=[rows, cols], data_test = df.to_json(orient='records'))
-    

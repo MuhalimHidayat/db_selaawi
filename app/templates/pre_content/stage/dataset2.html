@@ -68,22 +68,14 @@
                             <div class="text-sm text-gray-500 dark:text-gray-400 flex">
                                 <a href="{{ url_for('land_predict.predict_dataset', file_hash=data.file_hash) }}"
                                     class="font-medium hover:underline">
-                                    <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                                         class="w-5 h-5">
                                         <path fill-rule="evenodd"
                                             d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z"
                                             clip-rule="evenodd" />
-                                    </svg> -->
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                        class="w-5 h-5">
-                                        <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
-                                        <path fill-rule="evenodd"
-                                            d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z"
-                                            clip-rule="evenodd" />
                                     </svg>
-
                                 </a>
+                                <br>
                                 <a href=" {{ url_for('land_predict.delete_dataset', id=data.id_d) }}"
                                     class="font-medium font-color-link"
                                     onclick="return confirm('Apakah yakin akan menghapus?')"><svg
@@ -94,6 +86,7 @@
                                             clip-rule="evenodd" />
                                     </svg>
                                 </a>
+                                <br>
                                 <a href="{{ url_for('land_predict.static', filename='datasets/' + data.file_hash) }}"
                                     class="font-medium font-color-highlight "><svg xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
@@ -102,6 +95,7 @@
                                         <path
                                             d="M3.5 12.75a.75.75 0 0 0-1.5 0v2.5A2.75 2.75 0 0 0 4.75 18h10.5A2.75 2.75 0 0 0 18 15.25v-2.5a.75.75 0 0 0-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5Z" />
                                     </svg>
+
                                 </a>
                             </div>
                         </td>
@@ -112,32 +106,10 @@
 
             <!-- pagination -->
             <div class="flex justify-center mx-5 mt-3">
-                {% if datasets.has_prev %}
                 <button id="prev"
-                    class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900"><a
-                        href="{{ url_for('land_predict.pagination', page=datasets.prev_num) }}">Prev</a></button>
-                {% else %}
-                <button id="prev"
-                    class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-400 rounded-s cursor-not-allowed">
-                    Prev</button>
-
-                {% endif %}
-
-
-                {% if datasets.has_next %}
+                    class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Prev</button>
                 <button id="next"
-                    class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900"><a
-                        href="{{ url_for('land_predict.pagination', page=datasets.next_num) }}">
-                        Next
-                    </a></button>
-                {% else %}
-                <button id="next"
-                    class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-400 border-0 border-s border-gray-700 rounded-e cursor-not-allowed">
-                    Next
-                </button>
-
-                {% endif %}
-
+                    class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</button>
             </div>
         </div>
     </div>

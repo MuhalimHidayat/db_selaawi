@@ -8,7 +8,7 @@
             <p class="text-slate-50 mt-3 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, nesciunt.
             </p>
         </div>
-        <div class="flex justify-start mx-5 my-2">
+        <div class="flex justify-between mx-5 my-2">
             <a href="{{ url_for('land_predict.add_dataset') }}"
                 class="flex text-white text-sm font-semibold justify-between items-center gap-x-2 ps-4 pe-5 py-1 bg-button-user-color rounded">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
@@ -17,6 +17,20 @@
                 </svg>
                 <span>ADD</span>
             </a>
+
+            <div class="search">
+                <form action="{{ url_for('land_predict.search_dataset') }}" method="post" class="flex items-center gap-2">
+                    <input type="text" name="keyword" id="search" placeholder="Search..."
+                        class="w-48 px-2 py-1 h-9 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-transparent">
+                    <button type="submit" class="bg-gray-800 text-white px-2 py-1 h-9 rounded-md"><svg
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                            <path fill-rule="evenodd"
+                                d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </form>
+            </div>
         </div>
         <!-- content -->
         <div class="overflow-x-auto shadow-md sm:rounded-lg px-5 py-3">
@@ -115,7 +129,7 @@
                 {% if datasets.has_prev %}
                 <button id="prev"
                     class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900"><a
-                        href="{{ url_for('land_predict.pagination', page=datasets.prev_num) }}">Prev</a></button>
+                        href="{{ url_for('land_predict.stage_dataset', page=datasets.prev_num) }}">Prev</a></button>
                 {% else %}
                 <button id="prev"
                     class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-400 rounded-s cursor-not-allowed">
@@ -127,7 +141,7 @@
                 {% if datasets.has_next %}
                 <button id="next"
                     class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900"><a
-                        href="{{ url_for('land_predict.pagination', page=datasets.next_num) }}">
+                        href="{{ url_for('land_predict.stage_dataset', page=datasets.next_num) }}">
                         Next
                     </a></button>
                 {% else %}

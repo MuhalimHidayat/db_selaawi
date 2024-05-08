@@ -88,39 +88,7 @@ def add_dataset():
         return render_template('pre_content/add_dataset.html')
     return render_template('pre_content/add_dataset.html')
 
-# download dataset
-
-
-
-# def hash_filename(dataset_name):
-    # Split the filename into the name and extension
-    # name, ext = os.path.splitext(filename)
-    
-    # dataset_hash = hashlib.md5((dataset_name + str(time.time())).encode('utf-8')).hexdigest()
-    # extension = dataset_name.rsplit('.', 1)[-1].lower()
-    # dataset_hash += '.' + extension
-    # return dataset_hash
-
-    """
-    a = a.split('.')  # Memisahkan string berdasarkan tanda titik (.)
-    a = ['.'.join(a[:-1]), a[-1]] 
-
-    ['nan.bilangan.xlsx.png', 'rpg']
-
-    filename_hash = hashlib.md5((filename + str(time.time())).encode('utf-8')).hexdigest()
-    extension = filename.rsplit('.', 1)[-1].lower()
-    filename_hash += '.' + extension
-
-    """
-    
-    
-    # Hash the name part of the filename
-    # hashed_name = hashlib.sha256(name.encode()).hexdigest()
-    
-    # Return the hashed name with the original extension
-    # return hashed_name + ext
-
-@lp.route('/stage-dataset/<int:page>')
+@lp.route('/stage-dataset/page=<int:page>')
 def stage_dataset(page=1):
     if 'id' not in session:
         flash('You must be logged in to access this page', 'danger')
@@ -130,12 +98,6 @@ def stage_dataset(page=1):
     datasets = Dataset.query.filter_by(id=session['id']).order_by(desc(Dataset.id_d)).paginate(page=page, per_page=5, error_out=False)
     return render_template('pre_content/stage/dataset.html', datasets=datasets)
 
-@lp.route('/stage-dataset/<int:page>')
-def pagination(page=1):
-    datasets = Dataset.query.filter_by(id=session['id']).order_by(desc(Dataset.id_d)).paginate(page=page, per_page=5, error_out=False)
-    return render_template('pre_content/stage/dataset.html', datasets=datasets)
-    # print(datasets)
-    # return "Berhasil"
 
 @lp.route('/stage-dataset/<int:id>/delete')
 def delete_dataset(id):
@@ -150,6 +112,17 @@ def delete_dataset(id):
 def download_dataset(file_hash):
     dataset = db.session.execute(db.select(Dataset).filter_by(file_hash=file_hash)).scalar()
     return send_from_directory('land_predict.static/datasets/', dataset.file_hash, as_attachment=True)
+
+# search 
+@lp.route('/stage-dataset/search', methods=['POST'])
+def search_dataset():
+    if 'id' not in session:
+        flash('You must be logged in to access this page', 'danger')
+        return redirect(url_for('auth.sign_in'))
+    page = request.args.get('page')
+    search = request.form['keyword']
+    datasets = Dataset.query.filter(Dataset.file_name.like('%'+search+'%')).paginate(page=page, per_page=5, error_out=False)
+    return render_template('pre_content/stage/dataset.html', datasets=datasets)
 
 @lp.route('/stage-dataset/<string:file_hash>/predict')
 def predict_dataset(file_hash):

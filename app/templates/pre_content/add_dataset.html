@@ -25,7 +25,7 @@
                     <form action="" method="post" enctype="multipart/form-data">
                         <div class="flex flex-col gap-y-6 p-10">
                             <div class="form-group">
-                                <label for="name">Name </label>
+                                <label for="name">Name File</label>
                                 <input type="text"
                                     class="shadow appearance-none border rounded w-2/4 py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     id="name" name="name" placeholder="Nama File">
@@ -35,6 +35,16 @@
                                 <input type="file" class="custom-file-upload" id="dataset" name="dataset" ,
                                     accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
                                 <!-- 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' -->
+                            </div>
+                            <div class="form-group">
+                                <label for="alghoritm">Algoritma: </label>
+                                <select name="alghoritm"
+                                    class="shadow appearance-none border rounded w-2/4 py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="alghrotim">
+                                    <option value="K-Nearest Neighbors">K-Nearest Neighbors</option>
+                                    <option value="Decision Tree">Decision Tree</option>
+                                    <option value="Random Forest">Random Forest</option>
+                                </select>
                             </div>
                         </div>
                         <div class="flex justify-end me-14 mb-5">

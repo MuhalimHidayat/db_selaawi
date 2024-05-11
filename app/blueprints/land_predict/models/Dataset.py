@@ -9,6 +9,7 @@ class Dataset(db.Model):
     id_d = db.Column(db.Integer, primary_key=True)
     file_name = db.Column(db.String(250), nullable=False)
     file_hash = db.Column(db.String(250), nullable=False)
+    prediction = db.Column(db.String(250), nullable=False, default='0')
     created_at = db.Column(db.String(250), nullable=False, default=func.now())
     updated_at = db.Column(db.String(250), nullable=False, default=func.now())
     id = db.Column(db.Integer, ForeignKey('admin.id'))

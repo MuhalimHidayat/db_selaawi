@@ -12,7 +12,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 from app.blueprints.land_predict.models.ManualData import ManualData
 from app.blueprints.land_predict.models.Dataset import Dataset
-from app import model, app, db
+from app import model, model_dt, model_rf, app, db
 from sqlalchemy import desc
 from datetime import datetime
 
@@ -68,15 +68,25 @@ def add_dataset():
             # doing prediction here,
             df = pd.read_excel(dataset)
             X = df.iloc[:, :-1]
-            prediction = model.predict(X)
-            df['prediction'] = prediction
+            # pilih algoritma yang akan digunakan
+            alghoritm = request.form['alghoritm']
+            if alghoritm == 'K-Nearest Neighbors':
+                prediction = model.predict(X)
+                df['prediction'] = prediction
+            elif alghoritm == 'Decision Tree':
+                prediction = model_dt.predict(X)
+                df['prediction'] = prediction
+            else: 
+                prediction = model_rf.predict(X)
+                df['prediction'] = prediction
+                
             df.to_excel('app/blueprints/land_predict/static/datasets/'+dataset_name_hashed, index=False)
             # prediction_data = df.to_html(index=False, classes='table-auto', table_id='prediction_results')
             # rows = len(df.axes[0])
             # cols = len(df.axes[1])
             # end of prediction
             # save to database
-            add_dataset = Dataset(file_name=name, file_hash=dataset_name_hashed, id=session['id'])
+            add_dataset = Dataset(file_name=name, file_hash=dataset_name_hashed, prediction=alghoritm ,id=session['id'])
             db.session.add(add_dataset)
             db.session.commit()
             # end of save to database

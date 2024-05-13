@@ -6,32 +6,44 @@
  
  {% block content %}
 
+ <div class="grid grid-cols-5 gap-36 mb-8 ml-24" id="scrolling-wrapper">
+   <div class="w-48 h-28 border border-dashboard rounded-lg place-content-center font-dashboard drop-shadow-md pl-2">
+    <h2 class="font-dashboard" id="tulisan-dashboard">24 &deg;</h2>
+    <img class="rounded-md" id="gambar1" src="{{ url_for('static', filename='img/Temperature.png') }}"
+            alt=""> Temperatur
+   </div>
+   <div class="w-48 h-28 border border-dashboard rounded-lg place-content-center font-dashboard drop-shadow-md pl-2">
+    <h2 class="font-dashboard" id="tulisan-dashboard">24 &#37;</h2>
+    <img class="rounded-md" id="gambar1" src="{{ url_for('static', filename='img/humidity.png') }}"
+            alt=""> Kelembapan
+   </div>
+   <div class="w-48 h-28 border border-dashboard rounded-lg place-content-center font-dashboard drop-shadow-md pl-2">
+    <h2 class="font-dashboard" id="tulisan-dashboard">24 mm</h2>
+    <img class="rounded-md" id="gambar1" src="{{ url_for('static', filename='img/rain.png') }}"
+    alt="">Curah Hujan</div>
+   <div class="w-48 h-28 border border-dashboard rounded-lg place-content-center font-dashboard drop-shadow-md pl-2">
+    <h2 class="font-dashboard" id="tulisan-dashboard">24 m/s</h2>
+    <img class="rounded-md" id="gambar1" src="{{ url_for('static', filename='img/wind.png') }}"
+    alt="">Kecepatan angin</div>
+ </div>  
  <!-- about dataset -->
- <div class="flex flex-col items-center">
+ <div class="flex flex-col items-center mb-8"> 
     <div class="w-5/6">
         <div id="content-header" class="w-full bg-header-predictions-color rounded-md p-3 mb-8">
-            <h1 class="text-2xl font-semibold font-predictions-color-header">About The Dataset</h1>
+            <h1 class="text-2xl font-bold font-predictions-color-header">Tentang Dataset</h1>
         </div>  
     </div>
-    <div class="flex w-full p-10" id="about-dataset">
-        <div class="w-1/2" id="content-left">
-            <p class="text-justify mt-5">The dataset used consists of 
-                7984 rows of data. The processed data is numeric and includes
-                 7 features and 1 label. The dataset consists of 2 classes, 
-                 namely "Cocok" and "Tidak". The data source comes from a
-                sensor placed in Selaawi, Garut Regency, right in front of 
-                the BPP Selaawi office. The focus of this research is on shallot plants. 
-                The time span of data collection involves August, September, October, and November 2023, 
-                starting from the planting phase, generative phase, vegetative phase, to harvest phase.
+    <div class="flex p-7 drop-shadow-md" id="about-dataset">
+            <p class="text-justify mt-5">Dataset yang digunakan terdiri dari <b>7984 baris data.</b> 
+                Data yang diolah bersifat numerik dan mencakup <b>7 fitur dan 1 label.</b>  Dataset terdiri dari <b>2 kelas yaitu “Cocok” dan “Tidak”.</b>
+                Sumber datanya berasal dari sensor yang ditempatkan <b>di Selaawi, Kecamatan Garut, tepat di depan kantor BPP Selaawi. </b> 
+                Fokus penelitian ini adalah pada tanaman bawang merah. 
+                Rentang waktu pengumpulan data meliputi bulan <b>Agustus, September, Oktober, dan November 2023,</b>  mulai dari fase tanam, fase generatif, fase vegetatif, hingga fase panen.
             </p>
-        </div>
-        <div class="w-1/2 flex justify-center" id="content-right">
-            <img class="rounded-md" id="dataset" src="{{ url_for('static', filename='img/user/Statistics-pana.png') }}"
+            <img class="rounded-md w-64" id="dataset" src="{{ url_for('static', filename='img/user/dataset.png') }}"
             alt="">
-        </div>
     </div>
 </div>
-
 
 
 

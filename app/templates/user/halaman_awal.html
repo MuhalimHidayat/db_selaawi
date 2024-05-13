@@ -8,14 +8,13 @@
 {% block content %}
 <div class="flex justify-around p-12" id="header">
     <div class="flex justify-around flex-col w-7/12" id="header-left-content">
-        <div class="w-9/12">
-            <h1 class="text-4xl font-bold">Land Suitability Classification System of Selaawi Sub-district</h1>
-            <h3 class="text-xl font-light mt-5">Predicting the suitability of shallot farming land in Selaawi
-                sub-district.</h3>
+        <div class="w-11/12">
+            <h1 class="text-4xl font-bold">Sistem Klasifikasi Kecocokan Lahan Kecamatan Selaawi</h1>
+            <h3 class="text-xl font-light mt-3">Memprediksi kesesuaian lahan tani bawang merah di Kecamatan Selaawi.</h3>
         </div>
         <div>
-            <button class="bg-button-user-color text-white font-bold py-2 px-6 rounded"><a
-                    href="{{ url_for('auth.sign_in') }}">Sign In</a></button>
+            <button class="bg-button-user-color text-white font-bold py-2 px-6 mb-8 rounded"><a
+                    href="{{ url_for('auth.sign_in') }}">Masuk</a></button>
         </div>
 
     </div>
@@ -27,7 +26,7 @@
 <!-- about-us -->
 <div id="about-us">
     <div class="flex justify-center" id="about-us-header">
-        <h1 class="text-3xl font-header-color my-10">About Us</h1>
+        <h1 class="text-3xl font-header-color my-10">Tentang Kami</h1>
     </div>
     <div class="flex p-7" id="about-us-content">
         <div class="basis-1/2 flex justify-center" id="about-us-content-left">
@@ -56,7 +55,7 @@
 <!-- education selaawi -->
 <div class="bg-quaternary-color pb-8" id="education-selaawi">
     <div class="flex justify-center" id="about-us-header">
-        <h1 class="text-3xl font-header-color my-10">Education Tanera</h1>
+        <h1 class="text-3xl font-header-color my-10">Edukasi Tanera</h1>
     </div>
     <div class="flex justify-center gap-x-16 p-9 pt-1">
         <div class="basis-1/4 flex flex-col items-center gap-y-4 bg-white drop-shadow-md p-8 rounded-md" id="edu-data">
@@ -66,8 +65,7 @@
             </div>
             <!-- end icon data sample -->
             <h1 class="font-bold text-2xl">Dataset</h1>
-            <p class="text-center font-light">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                the</p>
+            <p class="text-center font-light">Sekumpulan atau himpunan data yang disajikan dalam pola tabel. </p>
             <a href="{{ url_for('data_sample') }}">
                 <div class="read-more-button flex align-middle justify-center">
                     <button><a href="{{ url_for('data_sample') }}" class="font-semibold text-4xl text-white">Read More</a></button>
@@ -81,8 +79,7 @@
             </div>
             <!-- end icon data sample -->
             <h1 class="font-bold text-2xl">Machine Learning</h1>
-            <p class="text-center font-light">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                the</p>
+            <p class="text-center font-light">Telkonologi yang sangat banyak manfaat, namun penting untuk memahami cara kerjanya sebelum menggunakannya.</p>
             <a href="{{ url_for('data_sample') }}">
                 <div class="read-more-button flex align-middle justify-center">
                     <button><a href="{{ url_for('data_sample') }}" class="font-semibold text-4xl text-white">Read More</a></button>
@@ -96,7 +93,7 @@
 <!-- address -->
 <div id="address">
     <div class="flex justify-center" id="about-us-header">
-        <h1 class="text-3xl font-header-color my-10">WE ARE IN <SPAN class="font-color-E86A33">HERE</SPAN></h1>
+        <h1 class="text-3xl font-header-color my-10">KAMI BERADA <SPAN class="font-color-E86A33">DISINI</SPAN></h1>
     </div>
     <div>
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126723.15723662979!2d107.92684210944789!3d-6.997661284845236!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68cb7dab306ed5%3A0xc429b6e1e9ab7a9!2sSelaawi%2C%20Garut%20Regency%2C%20West%20Java!5e0!3m2!1sen!2sid!4v1707829394694!5m2!1sen!2sid" width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>

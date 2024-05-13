@@ -46,7 +46,7 @@ def sign_up():
         db.session.commit()
         return redirect(url_for('auth.sign_in'))
 
-    return render_template('authen/signup.html', title='Sign Up')
+    return render_template('authen/signup.html', title='Daftar')
 
 @auth_bp.route('/sign-in', methods=('GET', 'POST'))
 def sign_in():
@@ -71,7 +71,7 @@ def sign_in():
                 session['id'] = admin.id
                 session.permanent = True
                 return redirect(url_for('land_predict.dashboard'))
-    return render_template('authen/signin.html', title='Sign In')
+    return render_template('authen/signin.html', title='Masuk')
 
 @auth_bp.route('/all-user')
 def all_user():
@@ -90,7 +90,7 @@ def forgot_password():
         else: 
             return redirect(url_for('auth.reset_password', id=admin.id))
 
-    return render_template('authen/forgotpass.html', title="Forgot Password")
+    return render_template('authen/forgotpass.html', title="Lupa Password")
 
 @auth_bp.route('/reset-password/<int:id>', methods=['GET', 'POST'])
 def reset_password(id):

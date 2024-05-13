@@ -29,18 +29,18 @@
         <div class="bg-navbar-color flex justify-between items-center px-14 py-3" id="navbar">
             <div id="logo">
                 <a href="/">
-                    <img class="w-16 rounded-full" src="{{ url_for('static', filename='img/logotanera.png') }}" alt="">
+                    <img class="w-16" src="{{ url_for('static', filename='img/logotanera.png') }}" alt="">
                 </a>
             </div>
             <div class="flex items-center" id="navbar-content">
                 <ul class="flex justify-center gap-x-5">
-                    <li><a href="#about-us">About Us</a></li>
-                    <li><a href="#education-selaawi">Education Selaawi</a></li>
-                    <li><a href="{{ url_for('data_sample') }}">Contact Us</a></li>
+                    <li><a href="#about-us">Tentang Kami</a></li>
+                    <li><a href="#education-selaawi">Edukasi Tanera</a></li>
+                    <li><a href="{{ url_for('data_sample') }}">Hubungi Kami</a></li>
                 </ul>
                 <div class="ms-5">
                     <button class="bg-button-user-color hover:bg-orange-400 text-white font-bold py-2 px-6 rounded"><a
-                            href="{{ url_for('auth.sign_in') }}">Sign In</a></button>
+                            href="{{ url_for('auth.sign_in') }}">Masuk</a></button>
                 </div>
             </div>
             
@@ -57,13 +57,13 @@
             <div class="flex ">
                 <div class="basis-1/2 flex " id="footer-content">
                     <div class="basis-1/4" id="footer-content-left">
-                        <img class="w-28 rounded-full ml-3" src="{{ url_for('static', filename='img/logo_web.png') }}"
+                        <img class="w-28 ml-3" src="{{ url_for('static', filename='img/logotanera.png') }}"
                             alt="">
                     </div>
 
                     <div class="basis-8/12 pt-1 px-3 ">
-                        <h4 class="text-xl font-semibold mb-3 text-center">Website Selaawi</h4>
-                        <p class="text-xs text-center">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos
+                        <h4 class="text-xl font-semibold mb-3 text-center">Website Tanera</h4>
+                        <p class="text-xs text-left">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos
                             optio accusamus, vel eaque minus doloribus deleniti, dolore numquam quis delectus voluptatem
                             unde beatae atque aut voluptate excepturi aspernatur a nam! </p>
                         <div class="flex mt-4 gap-x-6">

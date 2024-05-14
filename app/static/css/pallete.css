@@ -4,7 +4,7 @@
 
 /* Color pallete */
 .bg-primary-color {
-  background-color: rgba(65, 100, 74, 0.7);
+  background-color: rgba(65, 100, 74, 1);
 }
 
 .bg-secondary-color {
@@ -82,5 +82,17 @@
 }
 
 .font-predictions-color-header {
+  color: #41644A;
+}
+
+.bg-dashboard-color {
+  background-color: #41644A;
+}
+
+.border-dashboard {
+  border-color: #416349;
+}
+
+.font-dashboard{
   color: #41644A;
 }

@@ -23,14 +23,14 @@
             </a>
 
             <!-- alghrotim choosing - dropdown button -->
-            <form action="" method="post">
+            <!-- <form action="" method="post">
                 <select name="alghrotim">
                     <option value="knn">K-Nearest Neighbors</option>
                     <option value="dt">Decision Tree</option>
                     <option value="rf">Random Forest</option>
                 </select>
                 <button>submit</button>
-            </form>
+            </form> -->
             
         </div>
 
@@ -55,7 +55,7 @@
         <div id="updLinkData" data-url="{{ url_for('land_predict.update_manual_data') }}" style="display: none;"></div>
         <div id="dltLinkData" data-url="{{ url_for('land_predict.delete_manual_data') }}" style="display: none;"></div>
         <div class="flex justify-end me-14 my-5">
-            <button type="submit" class="px-8 py-3 rounded bg-primary-color font-medium text-slate-100">Convert</button>
+            <button type="submit" class="px-8 py-3 rounded bg-button-user-color font-medium text-slate-100">Convert</button>
         </div>
         <!-- {{ url_for('land_predict.result_manual_data', dataset=data_test) }} -->
     </div>

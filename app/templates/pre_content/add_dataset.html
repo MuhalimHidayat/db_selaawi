@@ -10,11 +10,11 @@
     <div class="w-4/5">
 
         <div id="content-header" class="w-full bg-header-predictions-color rounded-md p-6 mb-8">
-            <h1 class="text-2xl font-semibold font-predictions-color-header">Upload File</h1>
-            <p class="text-slate-50 mt-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus assumenda inventore, accusantium
-                facere tenetur animi eligendi vel rem cum amet quidem eum ex ullam dignissimos molestias nisi quas
-                architecto at rerum. Tempore cupiditate eveniet veritatis neque molestiae, ullam minima eum sed iusto
-                obcaecati ab, nostrum incidunt, dignissimos cum animi? Doloribus?</p>
+            <h1 class="text-2xl font-bold font-predictions-color-header">Upload File</h1>
+            <p class="font-predictions-color-header mt-5">Upload data merupakan salah satu fitur dari menu prediksi
+                dimana fitur upload data adalah fitur perhitungan sistem klasifikasi dengan data yang di ambil secara
+                manual dengan meng-unggah file berbentuk csv/xlsx. Berikut merupakan langkah - langkah penggunaan fitur
+                Upload data. <a href="" class="font-bold">Unduh contoh file dataset</a></p>
         </div>
 
         <div class="flex justify-center ">
@@ -59,11 +59,11 @@
 
 
         {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    {{ message }}
-                {% endfor %}
-            {% endif %}
+        {% if messages %}
+        {% for message in messages %}
+        {{ message }}
+        {% endfor %}
+        {% endif %}
         {% endwith %}
         <!-- <a class="underline" href="{{ url_for('download_dataset', dataset_name='dataset_KNN.xlsx') }}">Unduh Dataset</a> -->
 

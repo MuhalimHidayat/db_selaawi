@@ -1,5 +1,5 @@
 * {
-  font-family: 'poppins', poppins;
+  /* font-family: 'poppins', poppins; */
 }
 
 /* Color pallete */
@@ -41,6 +41,11 @@
   font-weight: 700;
 }
 
+.font-base-color { 
+  color: rgba(0, 0, 0, 0.881);
+
+}
+
 .font-color-highlight {
   color: #18551E;
 }
@@ -68,13 +73,13 @@
 
 /* predictions page pallete */
 .bg-predictions-content-color {
-  background-color: rgba(226, 226, 226, 0.5);
+  background-color: #F5F5F5;
   /* drop shadow */
-  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.138);
 }
 
 .bg-header-predictions-color {
-  background-color: rgba(65, 100, 74, 0.335);
+  background-color: rgba(240, 240, 240, 1);
 }
 
 .bg-subheader-predictions-color {
@@ -82,7 +87,7 @@
 }
 
 .font-predictions-color-header {
-  color: #41644A;
+  color: rgba(0, 0, 0, 0.7);
 }
 
 .bg-dashboard-color {

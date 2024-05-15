@@ -1,4 +1,3 @@
-console.log("Hello World from script.js!");
 // sidebar dropdown menu
 const btn = document.getElementById("btn");
 const arrowIcon = document.getElementById("arrow")
@@ -11,7 +10,7 @@ const arrowIconNav = document.getElementById("arrow-nav");
 const dropdownNav = document.getElementById("dropdown-nav");
 
 
-
+// ini digunakan untuk menambahkan class fa-arrow-up atau fa-arrow-down
 const arrowToggle = (x) => {
     x.classList.toggle("fa-arrow-up");
 
@@ -43,7 +42,7 @@ btn.addEventListener("click", (e) => {
     if (dropdown.classList.contains("dropdown-content-show")) {
         document.getElementById("dropdown-menu").style.backgroundColor = "rgb(217 217 217 / 40%)";
     } else {
-        document.getElementById("dropdown-menu").style.backgroundColor = "#41644A";
+        document.getElementById("dropdown-menu").style.backgroundColor = "rgb(217 217 217 / 40%)";
     }
     console.log(arrowIcon)  
 

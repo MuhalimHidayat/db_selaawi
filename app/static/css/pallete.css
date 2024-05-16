@@ -93,6 +93,22 @@
   border-color: #416349;
 }
 
-.font-dashboard{
+.font-dashboard {
   color: #41644A;
+}
+
+.bg-button-settings {
+  background-color: #2D95F0;
+}
+
+.bg-button-reddd {
+  background-color: rgba(177, 64, 64, 0.2);
+}
+
+.font-button-redd {
+  color: #B14040;
+}
+
+.border-color-redd {
+  border-color: #B14040;
 }

@@ -6,70 +6,60 @@
 {% block content %}
 <div id="content">
     <div id="header" class="flex flex-col justify-center h-60">
-        <h1 class="text-center text-4xl font-extrabold">Predictions</h1>
+        <h1 class="text-center text-4xl font-extrabold">Dataset</h1>
     </div>
     <div id="content-data-sample">
         <div class="m-7 mx-12">
-            <p class="indent-8 text-wrap text-justify"> Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
-                into
-                electronic typesetting, remaining</p><br>
+            <p class="indent-8 text-wrap text-justify"> Dataset adalah sekumpulan data yang sistematis dan 
+                terstruktur yang disimpan secara elektronik. Dataset sendiri dapat berisi berbagai jenis data, 
+                seperti data angka, kata, gambar, video bahkan file. Apa kegunaan dari dataset? Dataset biasa 
+                digunakan untuk mengembankan model machine learning dan analisis data. Apa itu machine learning? 
+                Penjelasan tentang <a class="font-bold text-orange-600" href="{{ url_for('data_sample') }}">Machine Learning</a>. Dataset itu memungkinkan pengguna untuk mengakses, memanipulasi, 
+                dan menganalisis data dengan mudah. Dataset itu sangat penting dalam berbagai aplikasi salah satunya 
+                adalah aplikasi sistem klasifikasi.</p><br>
             <p class="ms-10 ps-5 indent-10 text-wrap text-justify border-s-4 border-orange-600">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
-                into
-                electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
-                release of
-                Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
-                Aldus PageMaker including versions of Lorem Ipsum.
+                Dalam penggunaan sehari - hari, dataset sangat membantu dalam mengelola informasi secara 
+                efisiensi atau menghemat waktu dan sumber daya dalam pengolahan informasi. Misalnya, dalam 
+                industri medis, dataset digunakan untuk mendiagnosis penyakit dengan lebih akurat, sementara 
+                dalam industri keuangan, dataset membantu dalam mengidentifikasi tren pasar dan mengambil keputusan 
+                investasi yang lebih baik. Dataset juga memberikan keunggulan kompetitif melalui analisis data yang 
+                lebih baik dan pengembangan dan manajemen dataset merupakan langkah yang kritis untuk kesuksesan jangka panjang dalam era digital ini.
             </p><br>
             <p class="indent-8 text-wrap text-justify">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
-                into
-                electronic typesetting, remaining
+                Pengembangan dan manajemen dataset merupakan langkah kritis untuk kesuksesan jangka panjang dalam 
+                era digital ini. Di aplikasi yang kami maksud, kami memiliki dataset yang kami kembangkan sendiri 
+                dari sensor yang ditanam di tanah kantor BPP Selaawi. Penjelasan lebih lanjut tentang bagaimana dataset 
+                tersebut diperoleh dan dikumpulkan dapat ditemukan di bawah ini.
             </p>
             <div class="flex justify-center">
-                <img class="" src="{{ url_for('static', filename='img/user/predictions_img.png') }}" alt="">
+                <img class="" src="{{ url_for('static', filename='img/user/data_sample_img.png') }}" alt="">
             </div>
 
-
-            <ol class="list-decimal">
-                <li class="font-bold text-lg">Lorem</li>
-                <p class="indent-8 text-justify">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur ullam suscipit expedita quo
-                    facere fugiat, cum esse consequuntur harum rem, dolorum reiciendis neque numquam temporibus repellat
-                    nesciunt possimus libero nemo voluptate voluptas dolores quaerat delectus! Esse modi necessitatibus
-                    saepe veritatis inventore nam nostrum atque sunt, exercitationem sequi! Earum, ab? Reiciendis
-                    nesciunt velit tenetur numquam libero esse omnis, blanditiis distinctio! Voluptate voluptatum
-                    numquam provident odio, placeat obcaecati assumenda sit repudiandae quibusdam tempore nihil quis,
-                    minus porro! Temporibus corporis neque aliquid, quia iste vel minus excepturi, ullam ratione aperiam
-                    inventore voluptas eius cum voluptatum. Mollitia, dolore esse possimus aliquid quo itaque
-                    asperiores!
-                </p><br>
-                <li class="font-bold text-lg">Lorem</li>
-                <p class="indent-8 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita pariatur
-                    consequatur corporis tempore, qui dolorem officia rerum vitae commodi at velit quidem alias! Odit,
-                    quae! Odit in earum modi aperiam sit enim eius. Ipsa sit nesciunt tenetur, laborum vero, harum dolor
-                    distinctio culpa quaerat quas soluta, incidunt voluptatem in cum atque explicabo blanditiis odit
-                    vitae enim voluptas deserunt! Reprehenderit eius sequi nemo distinctio maxime magni soluta, ad harum
-                    cumque eligendi sed temporibus, veniam nobis explicabo ipsum corporis aperiam. Nesciunt maiores iste
-                    asperiores, quo dolorum nobis, tenetur natus commodi nihil voluptatem quam! Nam fugiat ea voluptates
-                    omnis corporis, eligendi facere sint!</p><br>
-                <li class="font-bold text-lg">Lorem</li>
-                <p class="indent-8 text-justify">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor quibusdam earum
-                    pariatur eligendi debitis corrupti ad, sapiente repudiandae provident esse voluptatibus at facere
-                    omnis perferendis reiciendis optio quam! Nulla explicabo, neque corporis dignissimos aliquid ut
-                    provident repellat eum itaque amet praesentium repudiandae quisquam accusantium cupiditate omnis
-                    sint quas dolore. Repellat accusantium, saepe a sit quaerat necessitatibus dolore doloribus nostrum
-                    vel dolor esse deserunt illum, reiciendis rerum amet pariatur? Inventore quae autem fuga, quaerat
-                    totam omnis harum beatae nemo nobis debitis, animi quos? Natus corporis ipsum repellat inventore
-                    aperiam modi iusto, dolor, atque rerum voluptatum id veritatis soluta ducimus. Sunt, ullam.</p><br>
-            </ol>
+            <p class="indent-8 text-wrap text-justify">
+            Dataset dapat di ambil melalui beberapa cara seperti:
+            </p>
+            <ol class="list-decimal ml-4">
+                <li class="">Wawancara: Dataset dapat diambil melalui wawancara dengan subjek penelitian.
+                    Contoh, dalam penelitian tentang minat siswa terhadap perguruan tinggi, dataset diambil melalui 
+                    wawancara dengan siswa siswi sekolah menengah atas dan sekolah menengah kejuruan.</li>
+                <li class="">Sensor: Dataset juga dapat diambil melalui sensor yang mengumpulkan data 
+                    dari lingkungan. Contoh, dalam penelitian tentang kualitas tanah, dataset diambil melalui 
+                    sensor tanah yang mengumpulkan data tentang NPK (Nitrogen, Phosphorus, dan Potassium) dan hujan.</li>
+                <li class="">Database: Dataset dapat diambil dari database yang telah 
+                    disimpan secara elektronik. Contoh, dalam penelitian tentang analisis data, 
+                    dataset diambil dari database yang berisi data tentang transaksi penjualan.</li>
+                <li class="">Repository: Dataset dapat diambil dari repository yang disepakati 
+                    oleh para peneliti. Contoh, dalam penelitian tentang data mining, dataset diambil dari 
+                    repository yang berisi data tentang produk dan ulasan dari berbagai perusahaan.</li>     
+            </ol><br>
+            <p class=" text-wrap text-justify">
+                Dataset kemudian diolah menggunakan aplikasi seperti excel atau software
+                 machine learning untuk mengembangkan model yang dapat digunakan untuk analisis 
+                 data dan prediksi hasil. Dalam contoh dataset yang digunakan pada aplikasi ini 
+                 menggunakan dataset yang diambil dari sensor, dimana data yang digunakan diambil 
+                 selama 4 bulan mulai dari bulan agustus, september, oktober, dan november data tersebut 
+                 digunakan untuk mengembangkan model machine learning yang dapat digunakan untuk prediksi hasil.
+            </p>
         </div>
 
         <div class="banner h-64 flex flex-col justify-center items-center">

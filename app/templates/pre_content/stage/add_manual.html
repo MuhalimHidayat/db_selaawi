@@ -8,8 +8,8 @@
 <div class="flex justify-center w-full">
     <div class="w-4/5">
         <div id="content-header" class="w-full bg-header-predictions-color rounded-md p-6 mb-8">
-            <h1 class="text-2xl font-semibold font-predictions-color-header">Staging Area Input Data</h1>
-            <p class="text-slate-50 mt-3 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, nesciunt.
+            <h1 class="text-2xl font-bold font-predictions-color-header">Staging Area Input Data</h1>
+            <!-- <p class="text-slate-50 mt-3 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, nesciunt. -->
             </p>
         </div>
         <div class="flex justify-start mx-5 my-2">
@@ -70,7 +70,11 @@
     // console.log(typeof data_test); // object
 
     for (property in data_test) {
-        // console.log(`${property}: ${data_test[property]}`);
+        console.log(`${property}: ${data_test[property]}`);
+        console.log(data_test[property])
+        for (nilai in property){
+            // console.log(nilai)
+        }
     }
 
     const tbody = document.getElementById('tbody');
@@ -94,17 +98,6 @@
         trbody.setAttribute('class', 'bg-white border-b dark:bg-gray-800');
         // console.log(data_test[property]['id_m']);
         for (nilai in data_test[property]) {
-            // console.log(nilai);
-            // jika nilai sama dengan 'id_m' maka tidak di tampilkan
-            // if (nilai != 'id_m') {
-            //     var td = document.createElement('td');
-            //     td.innerText = `${data_test[property][nilai]}`;
-            //     trbody.appendChild(td);
-            // } else {
-            //     var id_m = data_test[property][nilai];
-            //     // trbody.setAttribute('id', id_m);
-            // }
-
             if (nilai == 'id_m') {
                 var id_m = data_test[property][nilai];
             } else {

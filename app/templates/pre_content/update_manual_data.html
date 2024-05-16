@@ -15,6 +15,11 @@
               <h1 class="text-center font-semibold text-xl bg-primary-color p-3 rounded-t-md text-slate-100">Form Upload</h1>
               <form action="" method="post">
                 <div class="flex flex-col gap-y-6 p-10">
+                  <!-- area -->
+                  <div class="form-group">
+                    <label for="area">Area</label>
+                    <input type="text" class="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="area" name="area" placeholder="Location" required>
+                  </div>
                   <!-- Humidity -->
                   <div class="form-group">
                     <label for="humidity">Humidity</label>
@@ -52,7 +57,7 @@
                   </div>
                 </div>
                 <div class="flex justify-end me-14 mb-5">
-                  <button type="submit" class="px-5 py-2 rounded bg-primary-color font-semibold text-slate-100">Save</button>
+                  <button type="submit" class="px-5 py-2 rounded bg-button-user-color font-semibold text-slate-100">Save</button>
                 </div>
               </form>
             </div>
@@ -68,7 +73,7 @@
 
     <script>
         var data_test = JSON.parse('{{ data_input | safe }}')[0];  
-        
+        document.getElementById('area').value = data_test['area'];
         document.getElementById('humidity').value = data_test['hum'];
         document.getElementById('nitro').value = data_test['soil_nitro1'];
         document.getElementById('phosphor').value = data_test['soil_phos1'];

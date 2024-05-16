@@ -8,6 +8,7 @@ class ManualData(db.Model):
     __tablename__ = 'manualdata'
 
     id_m = db.Column(db.Integer, primary_key=True)
+    area = db.Column(db.String(250))
     hum = db.Column(db.Float, nullable=False)
     soil_nitro1 = db.Column(db.Float, nullable=False)
     soil_phos1 = db.Column(db.Float, nullable=False)

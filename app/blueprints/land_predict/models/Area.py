@@ -14,4 +14,4 @@ class Area(db.Model):
     updated_at = db.Column(db.String(250), nullable=False, default=func.now())  
     id = db.Column(db.Integer, ForeignKey('manualdata.id_m'))
     
-    manualdata = relationship('ManualData', backref=backref('area', uselist=True))
+    manualdata = relationship('ManualData', backref=backref('area_backref', uselist=True))

@@ -3,48 +3,80 @@
  {% block css_url %}
  <link rel="stylesheet" href="{{ url_for('static', filename='css/pred/dashboard.css') }}">
  {% endblock css_url %}
- 
- {% block content %}
 
- <div class="grid grid-cols-5 gap-36 mb-8 ml-24" id="scrolling-wrapper">
-   <div class="w-48 h-28 border border-dashboard rounded-lg place-content-center font-dashboard drop-shadow-md pl-2">
-    <h2 class="font-dashboard" id="tulisan-dashboard">24 &deg;</h2>
-    <img class="rounded-md" id="gambar1" src="{{ url_for('static', filename='img/Temperature.png') }}"
-        alt="">
-     Temperatur
-   </div>
-   <div class="w-48 h-28 border border-dashboard rounded-lg place-content-center font-dashboard drop-shadow-md pl-2">
-    <h2 class="font-dashboard" id="tulisan-dashboard">24 &#37;</h2>
-    <img class="rounded-md" id="gambar1" src="{{ url_for('static', filename='img/humidity.png') }}"
-            alt=""> Kelembapan
-   </div>
-   <div class="w-48 h-28 border border-dashboard rounded-lg place-content-center font-dashboard drop-shadow-md pl-2">
-    <h2 class="font-dashboard" id="tulisan-dashboard">24 mm</h2>
-    <img class="rounded-md" id="gambar1" src="{{ url_for('static', filename='img/rain.png') }}"
-    alt="">Curah Hujan</div>
-   <div class="w-48 h-28 border border-dashboard rounded-lg place-content-center font-dashboard drop-shadow-md pl-2">
-    <h2 class="font-dashboard" id="tulisan-dashboard">24 m/s</h2>
-    <img class="rounded-md" id="gambar1" src="{{ url_for('static', filename='img/wind.png') }}"
-    alt="">Kecepatan angin</div>
- </div>  
+ {% block content %}
+ <div class="flex items-center flex-col w-full">
+     <div class="w-4/5 flex items-center">
+         <div class="w-full flex justify-between gap-3 mb-8" id="scrolling-wrapper">
+             <div
+                 class="flex flex-col justify-around w-52 h-32 border border-dashboard rounded-lg place-content-center font-dashboard px-5 py-2 ">
+                 <div class="flex justify-between">
+                     <h2 class="font-dashboard" id="tulisan-dashboard">24&deg;</h2>
+                     <img class="rounded-md" id="gambar1" src="{{ url_for('static', filename='img/Temperature.png') }}"
+                         alt="">
+                 </div>
+                 <p>Temperatur</p>
+             </div>
+             <div
+                 class="flex flex-col justify-around w-52 h-32 border border-dashboard rounded-lg place-content-center font-dashboard px-5 py-2 ">
+                 <div class="flex justify-between">
+                     <h2 class="font-dashboard" id="tulisan-dashboard">24&#37;</h2>
+                     <img class="rounded-md" id="gambar1" src="{{ url_for('static', filename='img/humidity.png') }}"
+                         alt="">
+                 </div>
+                 <p>Kelembapan</p>
+             </div>
+             <div
+                 class="flex flex-col justify-around w-52 h-32 border border-dashboard rounded-lg place-content-center font-dashboard px-5 py-2 ">
+                 <div class="flex justify-between">
+                     <h2 class="font-dashboard" id="tulisan-dashboard">24mm</h2>
+                     <img class="rounded-md" id="gambar1" src="{{ url_for('static', filename='img/rain.png') }}" alt="">
+                 </div>
+                 <p>Curah Hujan</p>
+             </div>
+             <div
+                 class="flex flex-col justify-around w-52 h-32 border border-dashboard rounded-lg place-content-center font-dashboard px-5 py-2 ">
+                 <div class="flex justify-between">
+                     <h2 class="font-dashboard" id="tulisan-dashboard">24m/s</h2>
+                     <img class="rounded-md" id="gambar1" src="{{ url_for('static', filename='img/wind.png') }}" alt="">
+                 </div>
+                 <p>Kecepatan Angin</p>
+             </div>
+         </div>
+     </div>
+     <div class="flex flex-col">
+         <div id="content-header" class="bg-header-predictions-color rounded-md p-3 mb-8">
+             <h1 class="text-2xl font-bold font-predictions-color-header">Tentang Dataset</h1>
+         </div>
+         <div class="flex p-7" id="about-dataset">
+             <p class="text-justify mt-5">Dataset yang digunakan terdiri dari <b>7984 baris data.</b>
+                 Data yang diolah bersifat numerik dan mencakup <b>7 fitur dan 1 label.</b> Dataset terdiri dari <b>2
+                     kelas
+                     yaitu “Cocok” dan “Tidak”.</b>
+                 Sumber datanya berasal dari sensor yang ditempatkan <b>di Selaawi, Kecamatan Garut, tepat di depan
+                     kantor
+                     BPP Selaawi. </b>
+                 Fokus penelitian ini adalah pada tanaman bawang merah.
+                 Rentang waktu pengumpulan data meliputi bulan <b>Agustus, September, Oktober, dan November 2023,</b>
+                 mulai
+                 dari fase tanam, fase generatif, fase vegetatif, hingga fase panen.
+             </p>
+             <img class="rounded-md w-64" id="dataset" src="{{ url_for('static', filename='img/user/dataset.png') }}"
+                 alt="">
+         </div>
+     </div>
+ </div>
+ </div>
+
  <!-- about dataset -->
- <div class="flex flex-col items-center mb-8"> 
-    <div class="w-5/6">
-        <div id="content-header" class="w-full bg-header-predictions-color rounded-md p-3 mb-8">
-            <h1 class="text-2xl font-bold font-predictions-color-header">Tentang Dataset</h1>
-        </div>  
-    </div>
-    <div class="flex p-7 drop-shadow-md" id="about-dataset">
-            <p class="text-justify mt-5">Dataset yang digunakan terdiri dari <b>7984 baris data.</b> 
-                Data yang diolah bersifat numerik dan mencakup <b>7 fitur dan 1 label.</b>  Dataset terdiri dari <b>2 kelas yaitu “Cocok” dan “Tidak”.</b>
-                Sumber datanya berasal dari sensor yang ditempatkan <b>di Selaawi, Kecamatan Garut, tepat di depan kantor BPP Selaawi. </b> 
-                Fokus penelitian ini adalah pada tanaman bawang merah. 
-                Rentang waktu pengumpulan data meliputi bulan <b>Agustus, September, Oktober, dan November 2023,</b>  mulai dari fase tanam, fase generatif, fase vegetatif, hingga fase panen.
-            </p>
-            <img class="rounded-md w-64" id="dataset" src="{{ url_for('static', filename='img/user/dataset.png') }}"
-            alt="">
-    </div>
-</div>
+
+
+ <div class="flex flex-col items-center mb-8">
+
+
+
+
+ </div>
 
 
 

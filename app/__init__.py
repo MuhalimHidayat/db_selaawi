@@ -14,7 +14,7 @@ migrate = Migrate(app, db)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 model = joblib.load('app/blueprints/land_predict/static/ml_model/KNN_model.sav')
 model_rf = joblib.load('app/blueprints/land_predict/static/ml_model/KNN_model.sav')
-model_dt = joblib.load('app/blueprints/land_predict/static/ml_model/KNN_model.sav')
+model_dt = joblib.load('app/blueprints/land_predict/static/ml_model/model_dt.sav')
 
 from app.blueprints.land_predict.land_predict import lp
 app.register_blueprint(lp)

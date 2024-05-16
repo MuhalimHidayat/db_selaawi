@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/output.css') }}">
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 
+    <!-- leaflet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='dist/leaflet/leaflet.css') }}">
+    <script src="{{ url_for('static', filename='dist/leaflet/leaflet.js') }}"></script>
+
     <!-- link font awesome -->
     <script src="https://kit.fontawesome.com/f740e7af0d.js" crossorigin="anonymous"></script>
 
@@ -36,9 +40,9 @@
             <!-- <div class="nav-content"> -->
             <ul class="nav-content mb-2">
 
-                <li class="px-4 py-1"><i class="fa-solid fa-cube me-2 py-4"></i> <a href="/land_predict/dashboard">Dashboard</a></li>
+                <li class="px-4 py-1"><i class="fa-solid fa-cube me-2 mx-3 py-4"></i> <a href="/land_predict/dashboard">Dashboard</a></li>
                 <!-- dropdown -->
-                <div id="dropdown-menu" class="">
+                <div id="dropdown-menu" class="mx-3 py-1 rounded" style="background-color: rgb(217 217 217 / 40%);">
                     <button class="btn px-4 py-3" id="btn">
                         <i class="fa-solid fa-align-justify me-3" id="arrow"></i>
                         Prediksi

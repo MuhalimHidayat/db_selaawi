@@ -12,6 +12,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 from app.blueprints.land_predict.models.ManualData import ManualData
 from app.blueprints.land_predict.models.Dataset import Dataset
+from app.blueprints.land_predict.models.Area import Area
 from app import model, model_dt, model_rf, app, db
 from sqlalchemy import desc
 from datetime import datetime

@@ -9,11 +9,10 @@
 <div class="flex justify-center w-full">
   <div class="w-4/5">
     <div id="content-header" class="w-full bg-header-predictions-color rounded-md p-6 mb-8">
-      <h1 class="text-2xl font-semibold font-predictions-color-header">Add Manual Data</h1>
-      <p class="text-slate-50 mt-5">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda ipsa quas quae debitis, consequuntur beatae
-        laborum, suscipit exercitationem voluptatum distinctio vel cum odio unde. Amet omnis id ea in modi molestiae
-        odio quasi quam dolor quidem! Minus, dolores provident ipsum sapiente, harum deserunt sed beatae mollitia quos
-        corporis, ut quod.</p>
+      <h1 class="text-2xl font-bold font-predictions-color-header">Data Input</h1>
+      <p class="font-predictions-color-header mt-5">Input data merupakan salah satu fitur dari menu prediksi dimana fitur input data
+        adalah fitur perhitungan sistem klasifikasi dengan data yang di ambil secara manual satu per satu. Berikut
+        merupakan langkah - langkah penggunaan fitur input data. <a class="font-bold" href="{{ url_for('land_predict.stage_manual_data') }}">Staging area</a></p>
     </div>
     <!-- flash message -->
     <div class="flex justify-center mb-5">
@@ -21,62 +20,88 @@
         <h1 class="text-center font-semibold text-xl bg-primary-color py-5 rounded-t-md text-slate-100">Form Upload</h1>
         <form action="" method="post">
           <div class="flex flex-col gap-y-6 p-10">
+            <!-- area -->
+            <div class="form-group">
+              <label for="area">Area</label>
+              <input type="text"
+                class="shadow appearance-none border rounded w-2/4 py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="area" name="area" placeholder="Lokasi Pengambilan Nilai Parameter" required>
+            </div>
             <!-- Humidity -->
             <div class="form-group">
               <label for="humidity">hum (%)</label>
               <input type="number" step="any"
                 class="shadow appearance-none border rounded w-2/4 py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="humidity" name="humidity" placeholder="Soil Humidity" required>
+                id="humidity" name="humidity" placeholder="50 RH - 70 RH" required>
             </div>
             <!-- Nitrogen -->
             <div class="form-group">
               <label for="nitro">soil_nitro (kg/ha)</label>
               <input type="number" step="any"
                 class="shadow appearance-none border rounded w-2/4 py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="nitro" name="nitro" placeholder="Values Natrium" required>
+                id="nitro" name="nitro" placeholder="0 - 248 kg/ha" required>
             </div>
             <!-- Phosphor -->
             <div class="form-group">
               <label for="phosphor">soil_phos (g/m)</label>
               <input type="number" step="any"
                 class="shadow appearance-none border rounded w-2/4 py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="phosphor" name="phosphor" placeholder="Values Phosphor" required>
+                id="phosphor" name="phosphor" placeholder="0 - 98 kg/ha" required>
             </div>
             <!-- Pottasium -->
             <div class="form-group">
               <label for="pottalium">soil_pot (g/m)</label>
               <input type="number" step="any"
                 class="shadow appearance-none border rounded w-2/4 py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="pottalium" name="pottalium" placeholder="Values Kalium" required>
+                id="pottalium" name="pottalium" placeholder="0 - 103 kg/ha" required>
             </div>
             <!-- Soil Type -->
             <div class="form-group">
               <label for="soil">soil temp (<span>&#176;</span> C)</label>
               <input type="number" step="any"
                 class="shadow appearance-none border rounded w-2/4 py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="soil" name="soil" placeholder="Soil Temperature" required>
+                id="soil" name="soil" placeholder="25 - 32" required>
             </div>
             <!-- PH -->
             <div class="form-group">
               <label for="ph">soil_ph</label>
               <input type="number" step="any"
                 class="shadow appearance-none border rounded w-2/4 py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="ph" name="ph" placeholder="pH" required>
+                id="ph" name="ph" placeholder="5.6 - 6.5" required>
             </div>
             <!-- Temperature -->
             <div class="form-group">
               <label for="temperature">temp (<span>&#176;</span> C)</label>
               <input type="number" step="any"
                 class="shadow appearance-none border rounded w-2/4 py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="temperature" name="temperature" placeholder="Environment Temperature" required>
+                id="temperature" name="temperature" placeholder="25 - 32" required>
             </div>
           </div>
           <div class="flex justify-end me-14 mb-5">
             <button type="submit"
-              class="px-8 py-3 rounded bg-primary-color font-medium text-slate-100">Save</button>
+              class="px-8 py-3 rounded bg-button-user-color font-medium text-slate-100">Save</button>
           </div>
         </form>
       </div>
+    </div>
+
+    <div class="my-10 font-base-color" id="informations">
+      <div class="flex gap-x-2 items-center mb-3">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+        </svg>
+        <h3 class="text-xl font-semibold">Informasi</h3>
+      </div>
+      
+      <ul class="list-disc ms-8">
+        <li>hum = humidty (kelembaban tanah)</li>
+        <li>soil_nitro = soil nitrogen (nitrogen)</li>
+        <li>soil_phos =  soil phospor (fosfor)</li>
+        <li>soil_pot = soil potassium (kalium)</li>
+        <li>soil_temp = soil temperature (temperatur tanah)</li>
+        <li>soil_ph = Ph</li>
+        <li>temp = temperature (temperatur)</li>
+      </ul>
     </div>
 
   </div>

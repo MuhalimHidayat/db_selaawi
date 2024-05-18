@@ -46,7 +46,7 @@ def add_manual_data():
             db.session.commit()
         except:
             # flash("Data gagal di input", "danger")
-            print("data gagal di masukan")
+            # print("data gagal di masukan")
             return redirect(url_for('land_predict.add_manual_data'))
         
         
@@ -180,7 +180,7 @@ def delete_manual_data():
     
     data_input = ManualData.query.filter_by(id=session['id']).all()
     data_array = [{key: value for key, value in data.__dict__.items() if not key.startswith('_sa_')} for data in data_input]
-    print(data_array)
+    # print(data_array)
     data_input_manual = []
     for data in data_array:
         data_input_manual.append([data['area'], data['hum'], data['soil_nitro1'], data['soil_phos1'], data['soil_pot1'], data['soil_temp1'], data['soil_ph1'], data['temp'], data['id_m']])

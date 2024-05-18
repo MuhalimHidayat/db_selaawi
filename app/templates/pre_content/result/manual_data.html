@@ -37,6 +37,7 @@
 
 <script>
     var data_test = JSON.parse('{{ data_test | safe }}');
+    var data_send = JSON.stringify(data_test);
     const tbody = document.getElementById('tbody');
     const tr_thead = document.getElementById('tr-thead');
     const columns = ['area','hum', 'soil_nitro1', 'soil_phos1', 'soil_pot1', 'soil_temp1', 'soil_ph1', 'temp',
@@ -54,6 +55,8 @@
         data = data_test[property]
         const tr_body = document.createElement('tr');
         tr_body.setAttribute('class', 'bg-white border-b');
+        id_m = data['id_m'];
+        console.log(`Ini adalah ${id_m}`)
         for (item in data) {
             tbody.appendChild(tr_body);
             if (item != 'id_m') {
@@ -61,7 +64,7 @@
                     const td = document.createElement('td');
                     const a = document.createElement('a');
                     td.setAttribute('class', 'px-6 py-4 whitespace-nowrap');
-                    a.setAttribute('href', '{{ url_for("land_predict.update_manual_data") }}');
+                    a.setAttribute('href', `/land_predict/add-manual-data/add-area/${id_m}`);
                     a.setAttribute('class', 'font-bold hover:text-primary-color-dark');
                     a.innerText = data[item];
                     td.appendChild(a);

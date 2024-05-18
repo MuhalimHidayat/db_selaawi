@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block css_url %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pallete.css') }}">
+{% endblock css_url %}
+
+{% block content %}
+    <!-- ini area exist -->
+    
+
+    <form action="" method="post">
+        <!-- 2 form untuk latitude dan longtitdude -->
+        <div class="form-group">
+            <label for="longitude">Longitude</label>
+            <input type="text" class="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="longitude" name="longitude" placeholder="Longitude" value="{{area_exist.area_longitude}}" required>
+        </div>
+        <div class="form-group">
+            <label for="latitude">Latitude</label>
+            <input type="text" class="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="latitude" name="latitude" placeholder="Latitude" value="{{area_exist.area_latitude}}" required>
+        </div>
+        <!-- tombol simpan lokasi area -->
+        <div class="flex justify-end me-14 mb-5">
+            <button type="submit" class="px-5 py-2 rounded bg-button-user-color font-semibold text-slate-100">Save</button>
+        </div>
+    </form>
+{% endblock  content%}

@@ -11,6 +11,8 @@ from werkzeug.utils import secure_filename
 from sqlalchemy import desc
 import json
 from app.blueprints.land_predict.models.ManualData import ManualData
+from app.blueprints.land_predict.models.Area import Area
+from app.blueprints.auth.models.Admin import Admin
 from app import model, app, db
 
 # mengambil blueprint dari file land_predict.py
@@ -203,6 +205,15 @@ def result_manual_data(dataset):
     prediction_data = data_test_execute.to_html(index=False, classes='table-auto', table_id='prediction_results')
     flash("data berhasil di prediksi", "success")
     # return  "coba"
-    return render_template('pre_content/result/manual_data.html', prediction_data=Markup(prediction_data), prediction = prediction, data_test = data_test_execute.to_json(orient='records'))
+    # SELECT area.area_longitude, area.area_latitude FROM area join manualdata on area.id = manualdata.id_m
+    # fungsi filter by id_m = session['id'] maksudnya adalah mengambil data yang memiliki id_m sama dengan session['id']
+    statement = db.select(Area).join(ManualData, ManualData.id_m == Area.id).filter(ManualData.id == session['id'])
+    area = db.session.execute(statement).scalars()
+    # mengambil data dari area kemudian merubah data tersebut supaya bisa menjadi json
+    area = [{key: value for key, value in data.__dict__.items() if not key.startswith('_sa_')} for data in area]
+    area = pd.DataFrame(area)
+    area = area.to_json(orient='records')
+    
+    return render_template('pre_content/result/manual_data.html', prediction_data=Markup(prediction_data), prediction = prediction, data_test = data_test_execute.to_json(orient='records'), area=area)
 
     

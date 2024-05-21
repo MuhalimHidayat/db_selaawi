@@ -121,7 +121,7 @@ def delete_dataset(id):
     dataset = db.get_or_404(Dataset, id)
     db.session.delete(dataset)
     db.session.commit()
-    return redirect(url_for('land_predict.stage_dataset'))
+    return redirect(url_for('land_predict.stage_dataset', page=1))
 
 
 @lp.route('/stage-dataset/<string:file_hash>/download')

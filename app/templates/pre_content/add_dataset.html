@@ -13,7 +13,7 @@
             <h1 class="text-2xl font-bold font-predictions-color-header">Upload File</h1>
             <p class="font-predictions-color-header mt-5">Upload data merupakan salah satu fitur dari menu prediksi
                 dimana fitur upload data adalah fitur perhitungan sistem klasifikasi dengan data yang di ambil secara
-                manual dengan meng-unggah file berbentuk csv/xlsx. Berikut merupakan langkah - langkah penggunaan fitur
+                manual dengan meng-unggah file berbentuk csv/xlsx. <a href="{{ url_for('land_predict.stage_dataset', page=1) }}" class="font-bold">Stage Dataset</a> Berikut merupakan langkah - langkah penggunaan fitur
                 Upload data. <a href="" class="font-bold">Unduh contoh file dataset</a></p>
         </div>
 
@@ -58,13 +58,13 @@
         </div>
 
 
-        {% with messages = get_flashed_messages() %}
+        <!-- {% with messages = get_flashed_messages() %}
         {% if messages %}
         {% for message in messages %}
         {{ message }}
         {% endfor %}
         {% endif %}
-        {% endwith %}
+        {% endwith %} -->
         <!-- <a class="underline" href="{{ url_for('download_dataset', dataset_name='dataset_KNN.xlsx') }}">Unduh Dataset</a> -->
 
     </div>

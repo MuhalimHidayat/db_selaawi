@@ -27,6 +27,8 @@ lp = Blueprint('land_predict', __name__, url_prefix='/land_predict', static_fold
 # mengambil seluruh yang ada pada file add_manual_data
 from app.blueprints.land_predict import add_manual_data, real_time_data, area
 
+
+
 @lp.route('/dashboard')
 def dashboard():
     if 'id' not in session:

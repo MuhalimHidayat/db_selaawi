@@ -65,7 +65,10 @@
             <div id="navbar" class="flex justify-end ">
                 <div class="flex items-center">
                     <button class="btn" id="btn-nav">
-                        Admin
+                        {% block admin %}
+                        
+                        {% endblock admin %}
+        
                         <i class="fa-solid fa-arrow-down ms-2" id="arrow-nav"></i>
                     </button>
                 </div>

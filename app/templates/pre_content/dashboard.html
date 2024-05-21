@@ -4,6 +4,10 @@
  <link rel="stylesheet" href="{{ url_for('static', filename='css/pred/dashboard.css') }}">
  {% endblock css_url %}
 
+ {% block admin %}
+    {{admin_name}}
+ {% endblock admin %}
+
  {% block content %}
  <div class="flex items-center flex-col w-full">
      <div class="w-4/5 flex items-center">

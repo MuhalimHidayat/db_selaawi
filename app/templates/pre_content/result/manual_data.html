@@ -29,10 +29,27 @@
                 </tbody>
             </table>
         </div>
+        <!-- bar chart -->
+        <div class="flex items-center">
+            <div class="w-4/5">
+                <img src="data:image/png;base64,{{img}}" alt="">
+            </div>
+            <div class="flex flex-col justify-center">
+                <div class="flex flex-col items-center">
+                    <h3>Total Label <span class="font-bold">"Cocok"</span></h3>
+                    <h1 class="font-bold text-lg">{{nilai_cocok}}</h1>
+                </div>
+
+                <div class="flex flex-col items-center">
+                    <h3>Total Label <span class="font-bold">"Tidak Cocok"</span></h3>
+                    <h1 class="font-bold text-lg">{{nilai_tidak}}</h1>
+                </div>
+            </div>
+        </div>
 
         <!-- peta sebaran -->
         <div class="flex justify-center mt-10">
-            <h1 class="text-2xl font-semibold font-predictions-color-header">Peta Sebaran Prediksi</h1>
+            <h1 class="text-2xl font-semibold font-predictions-color-header">Peta Sebaran Bawang Merah</h1>
         </div>
         <div id="map" class="w-72 h-72">
 
@@ -102,6 +119,8 @@
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
     
+    // console.log(area[0].area_latitude, area[0].area_longitude)
+    console.log(area)
     
     for (let i = 0; i < area.length; i++) {
         // var marker = L.marker([area[i].area_latitude, area[i].area_longitude]).addTo(map);

@@ -2,6 +2,7 @@ from app.blueprints.land_predict.land_predict import lp
 from flask import session, flash, redirect, url_for, request, render_template
 from markupsafe import escape
 from app.blueprints.land_predict.models.Area import Area
+from app.blueprints.land_predict.models.ManualData import ManualData
 from sqlalchemy.orm.exc import NoResultFound
 import pandas as pd
 from app import model, app, db
@@ -17,8 +18,10 @@ def add_area(id_m):
     if request.method == 'POST':
         latitude = escape(request.form['latitude'])
         longitude = escape(request.form['longitude'])
+        # area_name didapatkan dari tabel manual data kolom area
+        area_name = ManualData.query.filter_by(id_m=id_m).first().area
         
-        add_area = Area(area_name=" ",area_longitude=longitude,area_latitude=latitude,id=id_m)
+        add_area = Area(area_name=area_name,area_longitude=longitude,area_latitude=latitude,id=id_m)
         try:
             area_exist = db.session.execute(db.select(Area).filter_by(id=id_m)).scalar_one()
             area_exist.area_longitude = longitude

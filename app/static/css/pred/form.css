@@ -25,4 +25,24 @@ input::placeholder{
     flex-basis: 60%;
 }
 
-/*  */
+/* form manual data */
+
+table thead th{
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: rgba(65, 100, 74, 1);
+}
+
+table thead th:first-child{
+    position: sticky;
+    left: 0;
+    z-index: 2;
+}
+
+table tbody td:first-child{
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background-color: white;
+}

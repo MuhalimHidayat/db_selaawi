@@ -14,6 +14,9 @@ from app.blueprints.land_predict.models.ManualData import ManualData
 from app.blueprints.land_predict.models.Area import Area
 from app.blueprints.auth.models.Admin import Admin
 from app import model, app, db
+from matplotlib.figure import Figure
+import base64
+from io import BytesIO
 
 # mengambil blueprint dari file land_predict.py
 from app.blueprints.land_predict.land_predict import lp
@@ -91,8 +94,15 @@ def stage_manual_data():
     data = data_input_manual
     columns = ['area','hum', 'soil_nitro1', 'soil_phos1', 'soil_pot1', 'soil_temp1', 'soil_ph1', 'temp', 'id_m']
     data_test = pd.DataFrame(data, columns=columns)
-    data_test_json = data_test.to_json(orient='records')
-    return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), data_test_json=data_test_json)
+    
+    # fetching area
+    statement = db.select(Area).join(ManualData, ManualData.id_m == Area.id).filter(ManualData.id == session['id'])
+    area = db.session.execute(statement).scalars()
+    area = [{key: value for key, value in data.__dict__.items() if not key.startswith('_sa_')} for data in area]
+    area = pd.DataFrame(area)
+    area = area.to_json(orient='records')
+    
+    return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), area=area)
 
 
 @lp.route('/update-manual-data/', methods=['GET', 'POST'])
@@ -126,6 +136,9 @@ def update_manual_data():
         update_manual_data.soil_temp1 = soil
         update_manual_data.soil_ph1 = ph
         update_manual_data.temp = temperature
+        # melakukan update data nama area pada tabel Area
+        update_area = Area.query.filter_by(id=id_m).first()
+        update_area.area_name = area
         db.session.commit()
         flash("Data berhasil di update", "success")
 
@@ -154,7 +167,6 @@ def update_manual_data2(dataset):
     data_test_coba = pd.read_json(dataset, orient='records')
 
     if request.method == 'POST':
-        
         humidity = float(escape(request.form['humidity']))
         nitro = float(escape(request.form['nitro']))
         phosphor = float(escape(request.form['phosphor']))
@@ -176,8 +188,10 @@ def update_manual_data2(dataset):
 def delete_manual_data():
     id_m = request.args.get('id_m')
 
+    Area.query.filter_by(id=id_m).delete()
     delete_data = db.get_or_404(ManualData, id_m, description="Data not found")
     db.session.delete(delete_data)
+    
     db.session.commit()
     
     data_input = ManualData.query.filter_by(id=session['id']).all()
@@ -214,6 +228,37 @@ def result_manual_data(dataset):
     area = pd.DataFrame(area)
     area = area.to_json(orient='records')
     
-    return render_template('pre_content/result/manual_data.html', prediction_data=Markup(prediction_data), prediction = prediction, data_test = data_test_execute.to_json(orient='records'), area=area)
-
+    x = data_test_execute['prediction'].value_counts()
+    print(x)
+    nilai_tidak = data_test_execute['prediction'].value_counts()['Tidak']
+    nilai_cocok = data_test_execute['prediction'].value_counts()['Cocok']
+    fig = Figure()
+    ax = fig.subplots()
+    color = (232/255, 106/255, 51/255, 1)
+    ax.bar(x.index, x.values, color=color)
     
+    buf = BytesIO()
+    fig.savefig(buf, format="png")
+    # Embed the result in the html output
+    data = base64.b64encode(buf.getbuffer()).decode("ascii")
+    
+    return render_template('pre_content/result/manual_data.html', prediction_data=Markup(prediction_data), prediction = prediction, data_test = data_test_execute.to_json(orient='records'), area=area, img=data, nilai_tidak=nilai_tidak, nilai_cocok=nilai_cocok)
+
+@lp.route('/imagesmatplotlib')
+def imagesmatplotlib():
+    df = pd.read_excel('app/blueprints/land_predict/static/datasets/data_training-2024-05-13-23-08-27-788316.xlsx')
+    x = df['prediction'].value_counts()
+    print(x)
+    fig = Figure()
+    ax = fig.subplots()
+    nilai_tidak = df['prediction'].value_counts()['Tidak']
+    print(nilai_tidak)
+    ax.bar(x.index, x.values, color='red')
+
+    buf = BytesIO()
+    fig.savefig(buf, format="png")
+    # Embed the result in the html output
+    data = base64.b64encode(buf.getbuffer()).decode("ascii")
+    return f"<img src='data:image/png;base64,{data}'/>"
+    
+    # return render_template('pre_content/imagesmatplotlib.html')

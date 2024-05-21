@@ -94,8 +94,15 @@ def stage_manual_data():
     data = data_input_manual
     columns = ['area','hum', 'soil_nitro1', 'soil_phos1', 'soil_pot1', 'soil_temp1', 'soil_ph1', 'temp', 'id_m']
     data_test = pd.DataFrame(data, columns=columns)
-    data_test_json = data_test.to_json(orient='records')
-    return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), data_test_json=data_test_json)
+    
+    # fetching area
+    statement = db.select(Area).join(ManualData, ManualData.id_m == Area.id).filter(ManualData.id == session['id'])
+    area = db.session.execute(statement).scalars()
+    area = [{key: value for key, value in data.__dict__.items() if not key.startswith('_sa_')} for data in area]
+    area = pd.DataFrame(area)
+    area = area.to_json(orient='records')
+    
+    return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), area=area)
 
 
 @lp.route('/update-manual-data/', methods=['GET', 'POST'])
@@ -129,6 +136,9 @@ def update_manual_data():
         update_manual_data.soil_temp1 = soil
         update_manual_data.soil_ph1 = ph
         update_manual_data.temp = temperature
+        # melakukan update data nama area pada tabel Area
+        update_area = Area.query.filter_by(id=id_m).first()
+        update_area.area_name = area
         db.session.commit()
         flash("Data berhasil di update", "success")
 
@@ -157,7 +167,6 @@ def update_manual_data2(dataset):
     data_test_coba = pd.read_json(dataset, orient='records')
 
     if request.method == 'POST':
-        
         humidity = float(escape(request.form['humidity']))
         nitro = float(escape(request.form['nitro']))
         phosphor = float(escape(request.form['phosphor']))
@@ -179,8 +188,10 @@ def update_manual_data2(dataset):
 def delete_manual_data():
     id_m = request.args.get('id_m')
 
+    Area.query.filter_by(id=id_m).delete()
     delete_data = db.get_or_404(ManualData, id_m, description="Data not found")
     db.session.delete(delete_data)
+    
     db.session.commit()
     
     data_input = ManualData.query.filter_by(id=session['id']).all()

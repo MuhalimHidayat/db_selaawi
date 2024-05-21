@@ -2,6 +2,7 @@
 {% block css_url %}
 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/pallete.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pred/form.css') }}">
 {% endblock css_url %}
 
 {% block content %}
@@ -31,13 +32,12 @@
                 </select>
                 <button>submit</button>
             </form> -->
-            
+
         </div>
 
         <div class="overflow-x-auto shadow-md sm:rounded-lg px-5 py-3">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead
-                    class="text-xs text-center text-white uppercase bg-primary-color  dark:bg-gray-700 dark:text-gray-400">
+                <thead class="text-xs text-center text-white uppercase  dark:bg-gray-700 dark:text-gray-400">
                     <tr id="tr-thead">
 
                     </tr>
@@ -46,8 +46,6 @@
 
                 </tbody>
             </table>
-
-
         </div>
 
         <!-- Menyimpan URL dalam atribut data -->
@@ -55,9 +53,44 @@
         <div id="updLinkData" data-url="{{ url_for('land_predict.update_manual_data') }}" style="display: none;"></div>
         <div id="dltLinkData" data-url="{{ url_for('land_predict.delete_manual_data') }}" style="display: none;"></div>
         <div class="flex justify-end me-14 my-5">
-            <button type="submit" class="px-8 py-3 rounded bg-button-user-color font-medium text-slate-100"><a href="{{ url_for('land_predict.result_manual_data', dataset=data_test) }}">Convert</a></button>
+            <button type="submit" class="px-8 py-3 rounded bg-button-user-color font-medium text-slate-100"><a
+                    href="{{ url_for('land_predict.result_manual_data', dataset=data_test) }}">Convert</a></button>
         </div>
         <!-- {{ url_for('land_predict.result_manual_data', dataset=data_test) }} -->
+
+
+        <div class="flex flex-row items-start justify-around my-10 font-base-color" id="informations">
+            <div id="param-info">
+                <div class="flex gap-x-2 items-center mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                    </svg>
+                    <h3 class="text-xl font-semibold">Informasi</h3>
+                </div>
+
+                <ul class="list-disc ms-8">
+                    <li>hum = humidty (kelembaban tanah)</li>
+                    <li>soil_nitro = soil nitrogen (nitrogen)</li>
+                    <li>soil_phos = soil phospor (fosfor)</li>
+                    <li>soil_pot = soil potassium (kalium)</li>
+                    <li>soil_temp = soil temperature (temperatur tanah)</li>
+                    <li>soil_ph = Ph</li>
+                    <li>temp = temperature (temperatur)</li>
+                </ul>
+            </div>
+
+            <div id="map-info">
+                <div class="flex justify-center">
+                    <h1 class="text-2xl font-semibold font-predictions-color-header">Peta Sebaran Bawang Merah</h1>
+                </div>
+                <div id="map" class="w-96 h-72">
+
+                </div>
+            </div>
+
+        </div>
     </div>
 
 
@@ -67,31 +100,11 @@
 
 <script>
     var data_test = JSON.parse('{{ data_test | safe }}');
-    // console.log(typeof data_test); // object
-
-    for (property in data_test) {
-        // console.log(`${property}: ${data_test[property]}`);
-        // console.log(data_test[property])
-        for (nilai in property){
-            // console.log(nilai)
-        }
-    }
 
     const tbody = document.getElementById('tbody');
     const thead = document.getElementById('tr-thead');
-    
+
     var columns = ['area', 'hum', 'soil_nitro1', 'soil_phos1', 'soil_pot1', 'soil_temp1', 'soil_ph1', 'temp', 'action']
-    // ini untuk head
-    // for (property in data_test[0]) {
-    //     // jika th sama dengan 'id_m' maka tidak di tampilkan
-    //     if (property != 'id_m') {
-    //         var th = document.createElement('th');
-    //         th.setAttribute('scope', 'col')
-    //         th.setAttribute('class', 'px-6 py-3')
-    //         th.innerText = `${property}`;
-    //         thead.appendChild(th);
-    //     }
-    // }
 
     for (let i = 0; i < columns.length; i++) {
         var th = document.createElement('th');
@@ -102,23 +115,30 @@
     }
 
     // ini untuk body
+
     for (property in data_test) {
-        // membuatnya dari tr
         var trbody = document.createElement('tr');
         trbody.setAttribute('class', 'bg-white border-b dark:bg-gray-800');
         // console.log(data_test[property]['id_m']);
         for (nilai in data_test[property]) {
-            
             if (nilai == 'id_m') {
-                var id_m = data_test[property][nilai];
-            } else {
-                var td = document.createElement('td');
-                td.setAttribute('class', 'px-6 py-4 whitespace-nowrap ')
-                td.innerText = `${data_test[property][nilai]}`;
-                trbody.appendChild(td);
+                continue;
             }
-
-            // console.log(data_test[property][nilai]);
+            var id_m = data_test[property]['id_m'];
+            var td = document.createElement('td');
+            td.setAttribute('class', 'px-6 py-4 whitespace-nowrap')
+            // td.innerText = `${data_test[property][nilai]}`;
+            trbody.appendChild(td);
+            if (nilai == 'area') {
+                var a = document.createElement('a');
+                // console.log(a);
+                a.setAttribute('href', `/land_predict/add-manual-data/add-area/${id_m}`);
+                a.setAttribute('class', 'font-bold hover:text-primary-color-dark');
+                a.innerText = data_test[property][nilai];
+                td.appendChild(a);
+            } else {
+                td.innerText = `${data_test[property][nilai]}`;
+            }
         }
 
         // ini untuk icon trash dan update
@@ -146,11 +166,35 @@
         actionTd.appendChild(buttonDlt);
         trbody.appendChild(actionTd);
 
-
-
         // delete button
         tbody.appendChild(trbody);
     }
+    // map
+    var area = JSON.parse('{{ area | safe }}');
+    console.log(area);
+    var map = L.map('map').setView([area[0].area_latitude, area[0].area_longitude], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+    }).addTo(map);
+
+   
+    console.log();
+    for (let i = 0; i < area.length; i++) {
+        var marker = L.marker([area[i].area_latitude, area[i].area_longitude]).addTo(map);
+        marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+        marker.bindPopup(`<b>${area[i].area_name}</b><br>Ini Akan jadi alamat`).closePopup();
+    }
+    var popup = L.popup();
+
+    function onMapClick(e) {
+        popup
+            .setLatLng(e.latlng)
+            .setContent("Lokasi: " + e.latlng.toString())
+            .openOn(map);
+    }
+
+    map.on('click', onMapClick);
+
 </script>
 
 {% endblock content %}

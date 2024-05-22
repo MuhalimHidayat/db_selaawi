@@ -230,16 +230,30 @@ def result_manual_data(dataset):
     
     x = data_test_execute['prediction'].value_counts()
     print(x)
-    nilai_tidak = data_test_execute['prediction'].value_counts()['Tidak']
-    nilai_cocok = data_test_execute['prediction'].value_counts()['Cocok']
+    
+    nilai_tidak = 0 if 'Tidak' not in x.index else data_test_execute['prediction'].value_counts()['Tidak']
+    nilai_cocok = 0 if 'Cocok' not in x.index else data_test_execute['prediction'].value_counts()['Cocok']
+    
     fig = Figure()
     ax = fig.subplots()
     color = (232/255, 106/255, 51/255, 1)
-    ax.bar(x.index, x.values, color=color)
+    
+    if len(x.index) > 1:
+        color = ((232/255, 106/255, 51/255, 1), (51/255, 106/255, 232/255, 1))
+    ax.bar(x.index, x.values, color=color, label=['Tidak  Cocok', 'Cocok'])
+    
+    ax.set_ylabel("Jumlah Data")
+    ax.set_xlabel("Label Prediksi")
+    # ax.set_title("Persebaran Bawang Merah Berdasarkan Prediksi")
+    ax.set_axisbelow(True)
+    ax.yaxis.grid(True, color='#EEEEEE')
+    ax.xaxis.grid(False)
+    ax.legend(title='Index Prediksi', loc='upper right')
+    
     
     buf = BytesIO()
     fig.savefig(buf, format="png")
-    # Embed the result in the html output
+    # Embed the result in the htl output
     data = base64.b64encode(buf.getbuffer()).decode("ascii")
     
     return render_template('pre_content/result/manual_data.html', prediction_data=Markup(prediction_data), prediction = prediction, data_test = data_test_execute.to_json(orient='records'), area=area, img=data, nilai_tidak=nilai_tidak, nilai_cocok=nilai_cocok)

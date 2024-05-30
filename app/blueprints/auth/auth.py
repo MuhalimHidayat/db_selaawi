@@ -122,35 +122,59 @@ def settings():
         return redirect(url_for('auth.sign_in'))
     admin = db.get_or_404(Admin, session['id'])
     if request.method == 'POST':
-        username = escape(request.form['username'])
-        email = escape(request.form['email'])
-        if db.session.query(Admin).filter(Admin.username == username).first() is not None or db.session.query(Admin).filter(Admin.email == email).first() is not None:
-            if (username == admin.username or email == admin.email):
-                flash('Username or email has not been changed.')
-                admin.username = username
-                admin.email = email
-                admin.image_file = upload_photo(request.files['image_file'])
-                admin.verified = True
-                db.session.commit()
-                flash('Berhasil Mengubah database')
-                return redirect(url_for('auth.settings'))
-                # berhasil
-            else: 
-                flash('Username or email has been used')
-                return redirect(url_for('auth.settings'))
+        action = request.form.get('action')
+        if action == 'delete':
+            return redirect(url_for('auth.delete'))
+        elif action == 'cancel':
+            return redirect(url_for('land_predict.dashboard'))
+        else: 
+            # username = escape(request.form['username'])
+            email = escape(request.form['email'])
+            first_name = escape(request.form['first_name'])
+            last_name = escape(request.form['last_name'])
+            phone_num = escape(request.form['phone_num'])
+            address = escape(request.form['address'])
+            # if username or password is same as the previous one
+            # if db.session.query(Admin).filter(Admin.username == username).first() is not None or db.session.query(Admin).filter(Admin.email == email).first() is not None:
+            if db.session.query(Admin).filter(Admin.email == email).first() is not None:
+                # if (username == admin.username or email == admin.email):
+                if (email == admin.email):
+                    flash('Username or email has not been changed.')
+                    # admin.username = username
+                    admin.email = email
+                    admin.first_name = first_name
+                    admin.last_name = last_name
+                    admin.phone_number = phone_num
+                    admin.address = address
+                    admin.image_file = upload_photo(request.files['image_file'])
+                    admin.verified = True
+                    db.session.commit()
+                    flash('Berhasil Mengubah database')
+                    return redirect(url_for('auth.settings'))
+                    # berhasil
+                else: 
+                    flash('email has been used')
+                    return redirect(url_for('auth.settings'))
 
-        # berhasil 
-        admin.username = username
-        admin.email = email
-        admin.image_file = upload_photo(request.files['image_file'])
-        admin.verified = True
-        db.session.commit()
-        # print(username)
-        # print(email)
-        # print(upload_photo(request.files['image_file']))
-        # flash messege
-        flash('Berhasil Mengubah database')
-        return redirect(url_for('auth.settings'))
+            # berhasil 
+            # admin.username = username
+            admin.email = email
+            admin.first_name = first_name
+            admin.last_name = last_name
+            admin.phone_number = phone_num
+            admin.address = address
+            admin.image_file = upload_photo(request.files['image_file'])
+            admin.verified = True
+            db.session.commit()
+            # print(username)
+            # print(email)
+            # print(upload_photo(request.files['image_file']))
+            # flash messege
+            flash('Berhasil Mengubah database')
+            
+            
+            
+            return redirect(url_for('auth.settings'))
     return render_template('authen/settings.html', title="Settings", admin=admin)
         # upload photo
 

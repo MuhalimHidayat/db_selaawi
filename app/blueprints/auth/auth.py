@@ -166,10 +166,6 @@ def settings():
             admin.image_file = upload_photo(request.files['image_file'])
             admin.verified = True
             db.session.commit()
-            # print(username)
-            # print(email)
-            # print(upload_photo(request.files['image_file']))
-            # flash messege
             flash('Berhasil Mengubah database')
             
             

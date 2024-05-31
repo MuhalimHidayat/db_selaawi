@@ -4,9 +4,17 @@ from markupsafe import escape
 from app.blueprints.land_predict.land_predict import lp
 from flask_restful import Api, Resource
 import pandas as pd
-from app import model
-
+from app import model, db
+from flask import session
+from app.blueprints.auth.models.Admin import Admin
 api = Api(lp)
+
+def admin_name():
+    if 'id' not in session: 
+        return None
+    
+    admin_name = db.session.execute(db.select(Admin).filter_by(id=session['id'])).scalar_one().username
+    return admin_name
 
 @lp.route('/real-time-data', methods=['GET', 'POST'])
 def real_time_data():
@@ -35,13 +43,13 @@ def real_time_data():
                     'area001': data_area001,
                     f'area00{slaveData}': data_area002_003
                 }
-                return render_template('pre_content/result/real_time.html', data=data, slave_data = slave)
+                return render_template('pre_content/result/real_time.html', data=data, slave_data = slave, admin_name=admin_name())
                 # return jsonify(data)
             else:
                 return jsonify({'error': 'Gagal mengambil data'}), 500
         except Exception as e:
             return jsonify({'error': str(e)}), 500
-    return render_template('pre_content/real_time_data.html', data={})
+    return render_template('pre_content/real_time_data.html', data={}, admin_name=admin_name())
 
 @lp.route('/real-time-data/predicted', methods=['GET', 'POST'])
 def real_time_data_predict():
@@ -55,7 +63,7 @@ def real_time_data_predict():
     data_test = pd.DataFrame(parameters, index=[0])
     prediction = model.predict(data_test)
     data_test['Nilai Prediksi'] = prediction
-    return render_template('pre_content/result/result_real_time.html', data=data_test.to_json(orient='records'))
+    return render_template('pre_content/result/result_real_time.html', data=data_test.to_json(orient='records'), admin_name=admin_name())
     
     
 

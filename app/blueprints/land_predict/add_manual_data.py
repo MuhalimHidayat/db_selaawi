@@ -21,10 +21,12 @@ from io import BytesIO
 # mengambil blueprint dari file land_predict.py
 from app.blueprints.land_predict.land_predict import lp
 
-@lp.route('/ini-coba-ajah')
-def ini_coba_ajah():
-    return "ini coba ajah"
-
+def admin_name():
+    if 'id' not in session: 
+        return None
+    
+    admin_name = db.session.execute(db.select(Admin).filter_by(id=session['id'])).scalar_one().username
+    return admin_name
 
 @lp.route('/add-manual-data', methods=('GET', 'POST'))
 def add_manual_data():
@@ -68,7 +70,7 @@ def add_manual_data():
         data_test = pd.DataFrame(data, columns=columns)
         # return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), data_test_json = data_test_json)
         return redirect(url_for('land_predict.stage_manual_data'))
-    return render_template('pre_content/add_manual_data.html', prediction="Belum Memasukkan Data")
+    return render_template('pre_content/add_manual_data.html', prediction="Belum Memasukkan Data", admin_name=admin_name())
 
 # debug untuk halaman add_manual_data
 # mencoba memodelkan data
@@ -102,7 +104,7 @@ def stage_manual_data():
     area = pd.DataFrame(area)
     area = area.to_json(orient='records')
     
-    return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), area=area)
+    return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), area=area, admin_name=admin_name())
 
 
 @lp.route('/update-manual-data/', methods=['GET', 'POST'])
@@ -153,9 +155,9 @@ def update_manual_data():
         columns = ['area','hum', 'soil_nitro1', 'soil_phos1', 'soil_pot1', 'soil_temp1', 'soil_ph1', 'temp', 'id_m']
         data_test = pd.DataFrame(data, columns=columns)
         data_test_json = pd.DataFrame(data, columns=columns)
-        return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), data_test_json = data_test_json.to_json(orient='records'))
+        return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), data_test_json = data_test_json.to_json(orient='records'), admin_name=admin_name())
     
-    return render_template('pre_content/update_manual_data.html', data_input=data_test.to_json(orient='records'))
+    return render_template('pre_content/update_manual_data.html', data_input=data_test.to_json(orient='records'), admin_name=admin_name())
 
 
 @lp.route('/update-manual-data/<dataset>', methods=['GET', 'POST'])
@@ -163,8 +165,6 @@ def update_manual_data2(dataset):
     if 'id' not in session:
         flash('You must be logged in to access this page', 'danger')
         return redirect(url_for('auth.sign_in'))
-    
-    data_test_coba = pd.read_json(dataset, orient='records')
 
     if request.method == 'POST':
         humidity = float(escape(request.form['humidity']))
@@ -181,8 +181,8 @@ def update_manual_data2(dataset):
         data_test_json = data_test.to_json(orient='records')
         # data_test_dataframe = data_test.to_html(index=False, classes='table-auto', table_id='prediction_results')
         # return render_template('pre_content/stage/add_manual.html', data_test2=Markup(data_test_dataframe), data_test=data_test.to_json(orient='records'), data_test_coba=data_test_coba)
-        return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), data_test_json = data_test_json)
-    return render_template('pre_content/update_manual_data.html', dataset=dataset)
+        return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), data_test_json = data_test_json, admin_name=admin_name())
+    return render_template('pre_content/update_manual_data.html', dataset=dataset, admin_name=admin_name())
 
 @lp.route('/delete-manual-data/')
 def delete_manual_data():
@@ -206,7 +206,7 @@ def delete_manual_data():
     data_test = pd.DataFrame(data, columns=columns)
     data_test_coba = pd.DataFrame(data, columns=columns)
     data_test_json = data_test.to_json(orient='records')
-    return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), data_test_json = data_test_json)
+    return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), data_test_json = data_test_json, admin_name=admin_name())
 
 @lp.route('/result-manual-data/<dataset>', methods=('GET', 'POST'))
 def result_manual_data(dataset):
@@ -256,7 +256,7 @@ def result_manual_data(dataset):
     # Embed the result in the htl output
     data = base64.b64encode(buf.getbuffer()).decode("ascii")
     
-    return render_template('pre_content/result/manual_data.html', prediction_data=Markup(prediction_data), prediction = prediction, data_test = data_test_execute.to_json(orient='records'), area=area, img=data, nilai_tidak=nilai_tidak, nilai_cocok=nilai_cocok)
+    return render_template('pre_content/result/manual_data.html', prediction_data=Markup(prediction_data), prediction = prediction, data_test = data_test_execute.to_json(orient='records'), area=area, img=data, nilai_tidak=nilai_tidak, nilai_cocok=nilai_cocok, admin_name=admin_name())
 
 @lp.route('/imagesmatplotlib')
 def imagesmatplotlib():

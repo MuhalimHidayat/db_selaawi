@@ -28,16 +28,20 @@ lp = Blueprint('land_predict', __name__, url_prefix='/land_predict', static_fold
 from app.blueprints.land_predict import add_manual_data, real_time_data, area
 from app.blueprints.auth.models.Admin import Admin
 
-
+def admin_name():
+    if 'id' not in session: 
+        return None
+    
+    admin_name = db.session.execute(db.select(Admin).filter_by(id=session['id'])).scalar_one().username
+    return admin_name
 
 @lp.route('/dashboard')
 def dashboard():
     if 'id' not in session:
         flash('You must be logged in to access this page','danger')
         return redirect(url_for('auth.sign_in'))
-    admin_name = db.session.execute(db.select(Admin).filter_by(id=session['id'])).scalar_one().username
     
-    return render_template('pre_content/dashboard.html',admin_name=admin_name)
+    return render_template('pre_content/dashboard.html',admin_name=admin_name())
 
 # dataset upload
 def allowed_file(filename):
@@ -101,8 +105,8 @@ def add_dataset():
             return redirect(url_for('land_predict.stage_dataset', page=1))
             # return render_template('pre_content/result/dataset.html', prediction_data=Markup(prediction_data), dimensions=[rows, cols])
         flash('File tidak di upload', "danger")
-        return render_template('pre_content/add_dataset.html')
-    return render_template('pre_content/add_dataset.html')
+        return render_template('pre_content/add_dataset.html', admin_name=admin_name())
+    return render_template('pre_content/add_dataset.html', admin_name=admin_name())
 
 @lp.route('/stage-dataset/page=<int:page>')
 def stage_dataset(page=1):
@@ -112,7 +116,7 @@ def stage_dataset(page=1):
     
     # datasets = db.session.execute(db.select(Dataset).filter_by(id=session['id'])).scalars().all()
     datasets = Dataset.query.filter_by(id=session['id']).order_by(desc(Dataset.id_d)).paginate(page=page, per_page=5, error_out=False)
-    return render_template('pre_content/stage/dataset.html', datasets=datasets)
+    return render_template('pre_content/stage/dataset.html', datasets=datasets, admin_name=admin_name())
 
 
 @lp.route('/stage-dataset/<int:id>/delete')
@@ -138,7 +142,7 @@ def search_dataset():
     page = request.args.get('page')
     search = request.form['keyword']
     datasets = Dataset.query.filter(Dataset.file_name.like('%'+search+'%')).paginate(page=page, per_page=5, error_out=False)
-    return render_template('pre_content/stage/dataset.html', datasets=datasets)
+    return render_template('pre_content/stage/dataset.html', datasets=datasets, admin_name=admin_name())
 
 @lp.route('/stage-dataset/<string:file_hash>/predict')
 def predict_dataset(file_hash):
@@ -147,4 +151,4 @@ def predict_dataset(file_hash):
     prediction_data = df.to_html(index=False, classes='table-auto', table_id='prediction_results')
     rows = len(df.axes[0])
     cols = len(df.axes[1])
-    return render_template('pre_content/result/dataset.html', prediction_data=Markup(prediction_data), dimensions=[rows, cols], data_test = df.to_json(orient='records'))
+    return render_template('pre_content/result/dataset.html', prediction_data=Markup(prediction_data), dimensions=[rows, cols], data_test = df.to_json(orient='records'), admin_name=admin_name())

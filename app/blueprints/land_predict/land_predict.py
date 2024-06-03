@@ -114,9 +114,11 @@ def stage_dataset(page=1):
         flash('You must be logged in to access this page', 'danger')
         return redirect(url_for('auth.sign_in'))
     
+    start_number = (int(page) - 1) * 5
+    
     # datasets = db.session.execute(db.select(Dataset).filter_by(id=session['id'])).scalars().all()
     datasets = Dataset.query.filter_by(id=session['id']).order_by(desc(Dataset.id_d)).paginate(page=page, per_page=5, error_out=False)
-    return render_template('pre_content/stage/dataset.html', datasets=datasets, admin_name=admin_name())
+    return render_template('pre_content/stage/dataset.html', datasets=datasets, admin_name=admin_name(), start_number=start_number)
 
 
 @lp.route('/stage-dataset/<int:id>/delete')

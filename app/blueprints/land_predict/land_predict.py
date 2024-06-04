@@ -86,9 +86,11 @@ def add_dataset():
             elif alghoritm == 'Decision Tree':
                 prediction = model_dt.predict(X)
                 df['prediction'] = prediction
+                df['prediction'] = df['prediction'].apply(lambda x: 'Tidak' if x == 1 else 'Cocok')
             else: 
                 prediction = model_rf.predict(X)
                 df['prediction'] = prediction
+                df['prediction'] = df['prediction'].apply(lambda x: 'Tidak' if x == 1 else 'Cocok')
                 
             df.to_excel('app/blueprints/land_predict/static/datasets/'+dataset_name_hashed, index=False)
             # prediction_data = df.to_html(index=False, classes='table-auto', table_id='prediction_results')
@@ -150,6 +152,9 @@ def search_dataset():
 def predict_dataset(file_hash):
     dataset = db.session.execute(db.select(Dataset).filter_by(file_hash=file_hash)).scalar()
     df = pd.read_excel('app/blueprints/land_predict/static/datasets/'+dataset.file_hash)
+    # melihat kolom apa saja pada dataset df
+    print(df['prediction'])
+    # print(df.columns())
     prediction_data = df.to_html(index=False, classes='table-auto', table_id='prediction_results')
     rows = len(df.axes[0])
     cols = len(df.axes[1])

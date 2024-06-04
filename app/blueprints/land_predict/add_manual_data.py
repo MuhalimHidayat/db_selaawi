@@ -13,7 +13,7 @@ import json
 from app.blueprints.land_predict.models.ManualData import ManualData
 from app.blueprints.land_predict.models.Area import Area
 from app.blueprints.auth.models.Admin import Admin
-from app import model, app, db
+from app import model, model_rf, model_dt, app, db
 from matplotlib.figure import Figure
 import base64
 from io import BytesIO
@@ -76,16 +76,13 @@ def add_manual_data():
 # mencoba memodelkan data
 @lp.route('/stage-manual-data', methods=['GET', 'POST'])
 def stage_manual_data():
+    # return "Nilai"
     if 'id' not in session:
         flash('You must be logged in to access this page', 'danger')
         return redirect(url_for('auth.sign_in'))
     # data_input = ManualData.query.filter_by(id=session['id']).all() #also order by id_m desc
     # data_input = db.select(ManualData).filter_by(id=session['id']).order_by(desc(ManualData.id_m))
-    
-    if request.method == 'POST':
-        alghoritm = request.form['alghrotim']
-        return alghoritm
-    
+
     data_input = ManualData.query.filter_by(id=session['id']).order_by(desc(ManualData.id_m)).all()
     data_array = [{key: value for key, value in data.__dict__.items() if not key.startswith('_sa_')} for data in data_input]
     print(data_array)
@@ -104,6 +101,9 @@ def stage_manual_data():
     area = pd.DataFrame(area)
     area = area.to_json(orient='records')
     
+    if request.method == 'POST':
+        alghoritm = request.form['alghrotim']
+        return redirect(url_for('land_predict.result_manual_data', alghoritm=alghoritm ,dataset=data_test.to_json(orient='records') ))
     return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), area=area, admin_name=admin_name())
 
 
@@ -208,15 +208,27 @@ def delete_manual_data():
     data_test_json = data_test.to_json(orient='records')
     return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), data_test_json = data_test_json, admin_name=admin_name())
 
-@lp.route('/result-manual-data/<dataset>', methods=('GET', 'POST'))
-def result_manual_data(dataset):
+@lp.route('/result-manual-data/<alghoritm>/<dataset>', methods=('GET', 'POST'))
+def result_manual_data(alghoritm, dataset):
+    print("ALGORITM", alghoritm)
     data_test_execute = pd.read_json(dataset, orient='records')
     # print(data_test_execute.dtypes)
     # print(data_test_execute.iloc[:, 1:-1])
-    
-    prediction = model.predict(data_test_execute.iloc[:, 1:-1])
-    data_test_execute['prediction'] = prediction
-    prediction_data = data_test_execute.to_html(index=False, classes='table-auto', table_id='prediction_results')
+    if alghoritm == 'rf':
+        prediction = model_rf.predict(data_test_execute.iloc[:, 1:-1])
+        data_test_execute['prediction'] = prediction
+        data_test_execute['prediction'] = data_test_execute['prediction'].apply(lambda x: 'Tidak' if x == 1 else 'Cocok')
+        prediction_data = data_test_execute.to_html(index=False, classes='table-auto', table_id='prediction_results')
+    elif alghoritm == 'dt':
+        prediction = model_dt.predict(data_test_execute.iloc[:, 1:-1])
+        # df['prediction'] = df['prediction'].apply(lambda x: 'Tidak' if x == 1 else 'Cocok')
+        data_test_execute['prediction'] = prediction
+        data_test_execute['prediction'] = data_test_execute['prediction'].apply(lambda x: 'Tidak' if x == 1 else 'Cocok')
+        prediction_data = data_test_execute.to_html(index=False, classes='table-auto', table_id='prediction_results')
+    else:    
+        prediction = model.predict(data_test_execute.iloc[:, 1:-1])
+        data_test_execute['prediction'] = prediction
+        prediction_data = data_test_execute.to_html(index=False, classes='table-auto', table_id='prediction_results')
     flash("data berhasil di prediksi", "success")
     # return  "coba"
     # SELECT area.area_longitude, area.area_latitude FROM area join manualdata on area.id = manualdata.id_m
@@ -238,9 +250,12 @@ def result_manual_data(dataset):
     ax = fig.subplots()
     color = (232/255, 106/255, 51/255, 1)
     
+    labels = x.index.tolist()
+    values = [x[val] for val in labels]
+    
     if len(x.index) > 1:
         color = ((232/255, 106/255, 51/255, 1), (51/255, 106/255, 232/255, 1))
-    ax.bar(x.index, x.values, color=color, label=['Tidak  Cocok', 'Cocok'])
+    ax.bar(labels, values, color=color, label=labels)
     
     ax.set_ylabel("Jumlah Data")
     ax.set_xlabel("Label Prediksi")

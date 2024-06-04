@@ -13,51 +13,49 @@
             <!-- <p class="text-slate-50 mt-3 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, nesciunt. -->
             </p>
         </div>
-        <div class="flex justify-start mx-5 my-2">
-            <a href="{{ url_for('land_predict.add_manual_data') }}"
-                class="flex text-white text-sm font-semibold justify-between items-center gap-x-2 ps-4 pe-5 py-1 bg-button-user-color rounded">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                    <path
-                        d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
-                </svg>
-                <span>ADD</span>
-            </a>
+        <form action="" method="post">
+            <div class="flex justify-start mx-5 my-2">
+                <a href="{{ url_for('land_predict.add_manual_data') }}"
+                    class="flex text-white text-sm font-semibold justify-between items-center gap-x-2 ps-4 pe-5 py-1 bg-button-user-color rounded">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                        <path
+                            d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+                    </svg>
+                    <span>ADD</span>
+                </a>
 
-            <!-- alghrotim choosing - dropdown button -->
-            <!-- <form action="" method="post">
-                <select name="alghrotim">
-                    <option value="knn">K-Nearest Neighbors</option>
-                    <option value="dt">Decision Tree</option>
-                    <option value="rf">Random Forest</option>
-                </select>
-                <button>submit</button>
-            </form> -->
+                
+                    <select name="alghrotim">
+                        <option value="knn">K-Nearest Neighbors</option>
+                        <option value="dt">Decision Tree</option>
+                        <option value="rf">Random Forest</option>
+                    </select>
+                    
 
-        </div>
+            </div>
 
-        <div class="overflow-x-auto shadow-md sm:rounded-lg px-5 py-3">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-center text-white uppercase  dark:bg-gray-700 dark:text-gray-400">
-                    <tr id="tr-thead">
+            <div class="overflow-x-auto shadow-md sm:rounded-lg px-5 py-3">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-center text-white uppercase  dark:bg-gray-700 dark:text-gray-400">
+                        <tr id="tr-thead">
 
-                    </tr>
-                </thead>
-                <tbody class="text-center" id="tbody">
+                        </tr>
+                    </thead>
+                    <tbody class="text-center" id="tbody">
 
-                </tbody>
-            </table>
-        </div>
+                    </tbody>
+                </table>
+            </div>
 
-        <!-- Menyimpan URL dalam atribut data -->
-        <!-- <div id="updLinkData" data-url="{{ url_for('land_predict.update_manual_data', dataset=data_test_json) }}" style="display: none;"></div> -->
-        <div id="updLinkData" data-url="{{ url_for('land_predict.update_manual_data') }}" style="display: none;"></div>
-        <div id="dltLinkData" data-url="{{ url_for('land_predict.delete_manual_data') }}" style="display: none;"></div>
-        <div class="flex justify-end me-14 my-5">
-            <button type="submit" class="px-8 py-3 rounded bg-button-user-color font-medium text-slate-100"><a
-                    href="{{ url_for('land_predict.result_manual_data', dataset=data_test) }}">Convert</a></button>
-        </div>
-        <!-- {{ url_for('land_predict.result_manual_data', dataset=data_test) }} -->
-
+            <!-- Menyimpan URL dalam atribut data -->
+            <!-- <div id="updLinkData" data-url="{{ url_for('land_predict.update_manual_data', dataset=data_test_json) }}" style="display: none;"></div> -->
+            <div id="updLinkData" data-url="{{ url_for('land_predict.update_manual_data') }}" style="display: none;"></div>
+            <div id="dltLinkData" data-url="{{ url_for('land_predict.delete_manual_data') }}" style="display: none;"></div>
+            <div class="flex justify-end me-14 my-5">
+                <button type="submit" class="px-8 py-3 rounded bg-button-user-color font-medium text-slate-100">Convert</button>
+            </div>
+           
+        </form>
 
         <div class="flex flex-row items-start justify-around my-10 font-base-color" id="informations">
             <div id="param-info">

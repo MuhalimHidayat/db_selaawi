@@ -23,111 +23,125 @@
 </head>
 
 <body>
+
     <div>
         <!-- content -->
         <div class="py-8 px-14">
             <h1 class="font-bold text-xl">Profil</h1><br><br>
-         
-            <div class="flex justify-center items-center h-24 ">
-                <!-- <div class="flex flex-row gap-x-10 ms-5"> -->
-                <div class="flex flex-wrap">
-                    <img class="rounded-full w-24 h-24 border-2 mb-24 -ml-72 mt-4" src="{{ url_for('static', filename='img/uploads/' + admin.image_file) }}" alt="" id="gam_settings">
-                    <label for="avatar" class="w-64 h-10 bg-button-settings text-white rounded-lg px-14 pt-2 cursor-pointer ml-7 mt-11">Unggah Gambar</label>
-                    <input class="ml-10 hidden" type="file" id="avatar" name="image_file" accept="image/png, image/jpeg">
-                </div>
-            </div>
-            <div class="flex flex-wrap ">
-                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label class="text-sm font-bold mb-2" for="firstName">
-                      Nama Depan
-                    </label>
-                    <input
-                      class="appearance-none block w-full border-2 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline outline-2 focus:bg-white"
-                      id="firstName"
-                      type="text"
-                      placeholder="Nama Depan"
-                      required
-                    />
+            <form action="" method="post" enctype="multipart/form-data">
+                
+                <div class="flex justify-center items-center h-24">
+                  <!-- <div class="flex flex-row gap-x-10 ms-5"> -->
+                  <div class="flex flex-wrap">
+                      <img class="rounded-full w-24 h-24 border-2 mb-24 -ml-72 mt-4" src="{{ url_for('static', filename='img/uploads/' + admin.image_file) }}" alt="" id="gam_settings">
+                      <label for="avatar" class="w-64 h-10 bg-button-settings text-white rounded-lg px-14 pt-2 cursor-pointer ml-7 mt-11">Unggah Gambar</label>
+                      <input class="ml-10 hidden" type="file" id="avatar" name="image_file" accept="image/png, image/jpeg">
+                      <input type="hidden" name="last_image" value="{{admin.image_file}}">
                   </div>
-                  <div class="w-full md:w-1/2 px-3">
-                    <label class="text-sm font-bold mb-2" for="lastName">
-                      Nama Belakang
-                    </label>
-                    <input
-                      class="appearance-none block w-full border-2 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline outline-2 focus:bg-white"
-                      id="lastName"
-                      type="text"
-                      placeholder="Nama Belakang"
-                      required
-                    />
-                  </div>
+              </div>
+              <div class="flex flex-wrap ">
                   <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label class="text-sm font-bold mb-2" for="location">
-                      Alamat
-                    </label>
-                    <input
-                      class="appearance-none block w-full border-2 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline outline-2 focus:bg-white"
-                      id="location"
-                      type="text"
-                      placeholder="Alamat"
-                      required
-                    />
-                  </div>
-                  <div class="w-full md:w-1/2 px-3">
-                    <label class="text-sm font-bold mb-2" for="noTelepon">
-                      No.Telepon
-                    </label>
-                    <input
-                      class="appearance-none block w-full border-2 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline outline-2 focus:bg-white"
-    
-                      id="noTelepon"
-                      type="tel"
-                      placeholder="081-45678"
-                      required
-                    />
-
-                  </div>
-            </div>
-            <div class="w-full px-3">
-                <h2 class="text-lg font-bold mb-6">Detail Akun</h2>
-            </div>
-            <div class="flex flex-wrap -mx-3 mb-6">
-                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label class="text-sm font-bold mb-2 ml-4" for="Email">
-                        Email
+                      <label class="text-sm font-bold mb-2" for="firstName">
+                        Nama Depan
                       </label>
                       <input
-                        class="appearance-none block w-full ml-4 border-2 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline outline-2 focus:bg-white"
-                        id="e-mail"
-                        type="email"
-                        placeholder="contoh@gmail.com"
+                        class="appearance-none block w-full border-2 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline outline-2 focus:bg-white"
+                        id="firstName"
+                        type="text"
+                        placeholder="Nama Depan"
+                        value="{{ admin.first_name|default('Nama Depan') }}"
+                        name="first_name"
                         required
                       />
                     </div>
                     <div class="w-full md:w-1/2 px-3">
                       <label class="text-sm font-bold mb-2" for="lastName">
-                        Password
+                        Nama Belakang
                       </label>
                       <input
                         class="appearance-none block w-full border-2 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline outline-2 focus:bg-white"
-                        id="password"
-                        type="password"
-
+                        id="lastName"
+                        type="text"
+                        placeholder="Nama Belakang"
+                        name="last_name"
+                        value="{{ admin.last_name|default('Nama Belakang') }}"
                         required
                       />
-                    </div>  
-            </div>   
-            <div class="w-full px-3">
-                <h2 class="text-lg font-bold mb-6">Hapus Akun Anda?</h2>
-                <h1 class="text-sm font-reguler -mt-4 mb-6">Hapus akun Anda akan menghapus semua akses Anda. Tindakan ini tidak bisa dibatalkan.</h1>
-                <button class="bg-button-reddd border-2 border-color-redd font-button-redd rounded-lg h-10 w-48 -mt-6">Hapus Akun Anda</button>
-            </div> 
-            <div class="flex flex-wrap mt-8 flex-row">
-                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-                  <button class="border border-gray-700 text-gray-700 rounded-lg w-full h-10">Batal</button>
-                  <button class="bg-button-settings text-white rounded-lg w-full h-10">Simpan</button>
-                </div>
-            </div>
+                    </div>
+                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                      <label class="text-sm font-bold mb-2" for="location">
+                        Alamat
+                      </label>
+                      <input
+                        class="appearance-none block w-full border-2 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline outline-2 focus:bg-white"
+                        id="location"
+                        type="text"
+                        placeholder="Alamat"
+                        name="address"
+                        value="{{ admin.address|default('Alamat') }}"
+                        required
+                      />
+                    </div>
+                    <div class="w-full md:w-1/2 px-3">
+                      <label class="text-sm font-bold mb-2" for="noTelepon">
+                        No.Telepon
+                      </label>
+                      <input
+                        class="appearance-none block w-full border-2 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline outline-2 focus:bg-white"
+      
+                        id="noTelepon"
+                        type="tel"
+                        placeholder="08xx-xxxx-xxxx"
+                        name="phone_num"
+                        value="{{admin.phone_number|default('08xx-xxxx-xxxx')}}"
+                        required
+                      />
+  
+                    </div>
+              </div>
+              <div class="w-full px-3">
+                  <h2 class="text-lg font-bold mb-6">Detail Akun</h2>
+              </div>
+              <div class="flex flex-wrap -mx-3 mb-6">
+                      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                      <label class="text-sm font-bold mb-2 ml-4" for="Email">
+                          Email
+                        </label>
+                        <input
+                          class="appearance-none block w-full ml-4 border-2 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline outline-2 focus:bg-white"
+                          id="e-mail"
+                          type="email"
+                          name="email"
+                          placeholder="contoh1234@gmail.com"
+                          value="{{ admin.email|default('contoh1234@gmail.com')}}"
+                          required
+                        />
+                      </div>
+                      <div class="w-full md:w-1/2 px-3">
+                        <label class="text-sm font-bold mb-2" for="lastName">
+                          Password
+                        </label>
+                        <input
+                          class="appearance-none block w-full border-2 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline outline-2 focus:bg-white"
+                          id="password"
+                          type="password"
+                          
+                        />
+                      </div>  
+              </div>   
+              <div class="w-full px-3">
+                  <h2 class="text-lg font-bold mb-6">Hapus Akun Anda?</h2>
+                  <h1 class="text-sm font-reguler -mt-4 mb-6">Hapus akun Anda akan menghapus semua akses Anda. Tindakan ini tidak bisa dibatalkan.</h1>
+                  <button name="action" value="delete" class="bg-button-reddd border-2 border-color-redd font-button-redd rounded-lg h-10 w-48 -mt-6" onclick="return confirm('Apakah anda yakin ingin menghapus?')">Hapus Akun Anda</button>
+              </div> 
+              <div class="flex flex-wrap mt-8 flex-row">
+                  <div class="flex gap-x-5 md:w-full px-3 mb-6 md:mb-0">
+                    <button name="action" value="cancel" class="border border-gray-700 text-gray-700 rounded-lg w-full h-10">Batal</button>
+                    <button class="bg-button-settings text-white rounded-lg w-full h-10">Simpan</button>
+                  </div>
+              </div>
+            </form>
+            
         </div>
     </div>
 

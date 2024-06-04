@@ -32,31 +32,34 @@
     <div class="flex">
         <!-- side navbar  -->
         <div id="sidebar" class="pt-5 drop-shadow-lg ">
-            <!-- logo -->
-            <div class="logo flex items-center px-4  border-b-zinc-200 py-7 -mt-4">
-                <img class="w-24 me-3" src="{{ url_for('static', filename='img/logotanera.png') }}" alt="">  
-            </div>
-            <!-- nav-content -->
-            <!-- <div class="nav-content"> -->
-            <ul class="nav-content mb-2">
-
-                <li class="px-4 py-1"><i class="fa-solid fa-cube me-2 mx-3 py-4"></i> <a href="/land_predict/dashboard">Dashboard</a></li>
-                <!-- dropdown -->
-                <div id="dropdown-menu" class="mx-3 py-1 rounded" style="background-color: rgb(217 217 217 / 40%);">
-                    <button class="btn px-4 py-3" id="btn">
-                        <i class="fa-solid fa-align-justify me-3" id="arrow"></i>
-                        Prediksi
-                    </button>
-                    <ul class="dropdown-content-show" id="dropdown">
-                        <li class="ps-11 py-1 hover:text-gray-500"><a href="/land_predict/real-time-data">Real Time</a></li>
-                        <li class="ps-11 py-1 hover:text-gray-500"><a href="/land_predict/add-manual-data">Data Input</a></li>
-                        <li class="ps-11 py-1 hover:text-gray-500"><a href="/land_predict/add-dataset">File Upload</a></li>
-                    </ul>
+            <div style="position: sticky; top: 0;">
+                <!-- logo -->
+                <div class="logo flex items-center px-4  border-b-zinc-200 py-7 -mt-4">
+                    <img class="w-24 me-3" src="{{ url_for('static', filename='img/logotanera.png') }}" alt="">  
                 </div>
+                <!-- nav-content -->
+                <!-- <div class="nav-content"> -->
+                <ul class="nav-content mb-2">
 
-                <!-- <li><a href="datamanual.html">Add Manual Data</a></li>
-                        <li><a href="uploaddata.html">Upload Data</a></li> -->
-            </ul>
+                    <li class="px-4 py-1"><i class="fa-solid fa-cube me-2 mx-3 py-4"></i> <a href="/land_predict/dashboard">Dashboard</a></li>
+                    <!-- dropdown -->
+                    <div id="dropdown-menu" class="mx-3 py-1 rounded" style="background-color: rgb(217 217 217 / 40%);">
+                        <button class="btn px-4 py-3" id="btn">
+                            <i class="fa-solid fa-align-justify me-3" id="arrow"></i>
+                            Prediksi
+                        </button>
+                        <ul class="dropdown-content-show" id="dropdown">
+                            <li class="ps-11 py-1 hover:text-gray-500"><a href="/land_predict/real-time-data">Real Time</a></li>
+                            <li class="ps-11 py-1 hover:text-gray-500"><a href="/land_predict/add-manual-data">Data Input</a></li>
+                            <li class="ps-11 py-1 hover:text-gray-500"><a href="/land_predict/add-dataset">File Upload</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- <li><a href="datamanual.html">Add Manual Data</a></li>
+                            <li><a href="uploaddata.html">Upload Data</a></li> -->
+                </ul>
+            </div>
+                
         </div>
         <!-- end sidenavbar -->
 
@@ -65,6 +68,7 @@
             <div id="navbar" class="flex justify-end ">
                 <div class="flex items-center">
                     <button class="btn" id="btn-nav">
+                        {{ admin_name }}
                         {% block admin %}
                             
                         {% endblock admin %}

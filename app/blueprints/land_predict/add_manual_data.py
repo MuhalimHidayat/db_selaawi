@@ -13,7 +13,7 @@ import json
 from app.blueprints.land_predict.models.ManualData import ManualData
 from app.blueprints.land_predict.models.Area import Area
 from app.blueprints.auth.models.Admin import Admin
-from app import model, app, db
+from app import model, model_rf, model_dt, app, db
 from matplotlib.figure import Figure
 import base64
 from io import BytesIO
@@ -21,10 +21,12 @@ from io import BytesIO
 # mengambil blueprint dari file land_predict.py
 from app.blueprints.land_predict.land_predict import lp
 
-@lp.route('/ini-coba-ajah')
-def ini_coba_ajah():
-    return "ini coba ajah"
-
+def admin_name():
+    if 'id' not in session: 
+        return None
+    
+    admin_name = db.session.execute(db.select(Admin).filter_by(id=session['id'])).scalar_one().username
+    return admin_name
 
 @lp.route('/add-manual-data', methods=('GET', 'POST'))
 def add_manual_data():
@@ -68,22 +70,19 @@ def add_manual_data():
         data_test = pd.DataFrame(data, columns=columns)
         # return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), data_test_json = data_test_json)
         return redirect(url_for('land_predict.stage_manual_data'))
-    return render_template('pre_content/add_manual_data.html', prediction="Belum Memasukkan Data")
+    return render_template('pre_content/add_manual_data.html', prediction="Belum Memasukkan Data", admin_name=admin_name())
 
 # debug untuk halaman add_manual_data
 # mencoba memodelkan data
 @lp.route('/stage-manual-data', methods=['GET', 'POST'])
 def stage_manual_data():
+    # return "Nilai"
     if 'id' not in session:
         flash('You must be logged in to access this page', 'danger')
         return redirect(url_for('auth.sign_in'))
     # data_input = ManualData.query.filter_by(id=session['id']).all() #also order by id_m desc
     # data_input = db.select(ManualData).filter_by(id=session['id']).order_by(desc(ManualData.id_m))
-    
-    if request.method == 'POST':
-        alghoritm = request.form['alghrotim']
-        return alghoritm
-    
+
     data_input = ManualData.query.filter_by(id=session['id']).order_by(desc(ManualData.id_m)).all()
     data_array = [{key: value for key, value in data.__dict__.items() if not key.startswith('_sa_')} for data in data_input]
     print(data_array)
@@ -102,7 +101,10 @@ def stage_manual_data():
     area = pd.DataFrame(area)
     area = area.to_json(orient='records')
     
-    return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), area=area)
+    if request.method == 'POST':
+        alghoritm = request.form['alghrotim']
+        return redirect(url_for('land_predict.result_manual_data', alghoritm=alghoritm ,dataset=data_test.to_json(orient='records') ))
+    return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), area=area, admin_name=admin_name())
 
 
 @lp.route('/update-manual-data/', methods=['GET', 'POST'])
@@ -153,9 +155,9 @@ def update_manual_data():
         columns = ['area','hum', 'soil_nitro1', 'soil_phos1', 'soil_pot1', 'soil_temp1', 'soil_ph1', 'temp', 'id_m']
         data_test = pd.DataFrame(data, columns=columns)
         data_test_json = pd.DataFrame(data, columns=columns)
-        return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), data_test_json = data_test_json.to_json(orient='records'))
+        return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), data_test_json = data_test_json.to_json(orient='records'), admin_name=admin_name())
     
-    return render_template('pre_content/update_manual_data.html', data_input=data_test.to_json(orient='records'))
+    return render_template('pre_content/update_manual_data.html', data_input=data_test.to_json(orient='records'), admin_name=admin_name())
 
 
 @lp.route('/update-manual-data/<dataset>', methods=['GET', 'POST'])
@@ -163,8 +165,6 @@ def update_manual_data2(dataset):
     if 'id' not in session:
         flash('You must be logged in to access this page', 'danger')
         return redirect(url_for('auth.sign_in'))
-    
-    data_test_coba = pd.read_json(dataset, orient='records')
 
     if request.method == 'POST':
         humidity = float(escape(request.form['humidity']))
@@ -181,8 +181,8 @@ def update_manual_data2(dataset):
         data_test_json = data_test.to_json(orient='records')
         # data_test_dataframe = data_test.to_html(index=False, classes='table-auto', table_id='prediction_results')
         # return render_template('pre_content/stage/add_manual.html', data_test2=Markup(data_test_dataframe), data_test=data_test.to_json(orient='records'), data_test_coba=data_test_coba)
-        return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), data_test_json = data_test_json)
-    return render_template('pre_content/update_manual_data.html', dataset=dataset)
+        return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), data_test_json = data_test_json, admin_name=admin_name())
+    return render_template('pre_content/update_manual_data.html', dataset=dataset, admin_name=admin_name())
 
 @lp.route('/delete-manual-data/')
 def delete_manual_data():
@@ -206,17 +206,29 @@ def delete_manual_data():
     data_test = pd.DataFrame(data, columns=columns)
     data_test_coba = pd.DataFrame(data, columns=columns)
     data_test_json = data_test.to_json(orient='records')
-    return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), data_test_json = data_test_json)
+    return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), data_test_json = data_test_json, admin_name=admin_name())
 
-@lp.route('/result-manual-data/<dataset>', methods=('GET', 'POST'))
-def result_manual_data(dataset):
+@lp.route('/result-manual-data/<alghoritm>/<dataset>', methods=('GET', 'POST'))
+def result_manual_data(alghoritm, dataset):
+    print("ALGORITM", alghoritm)
     data_test_execute = pd.read_json(dataset, orient='records')
     # print(data_test_execute.dtypes)
     # print(data_test_execute.iloc[:, 1:-1])
-    
-    prediction = model.predict(data_test_execute.iloc[:, 1:-1])
-    data_test_execute['prediction'] = prediction
-    prediction_data = data_test_execute.to_html(index=False, classes='table-auto', table_id='prediction_results')
+    if alghoritm == 'rf':
+        prediction = model_rf.predict(data_test_execute.iloc[:, 1:-1])
+        data_test_execute['prediction'] = prediction
+        data_test_execute['prediction'] = data_test_execute['prediction'].apply(lambda x: 'Tidak' if x == 1 else 'Cocok')
+        prediction_data = data_test_execute.to_html(index=False, classes='table-auto', table_id='prediction_results')
+    elif alghoritm == 'dt':
+        prediction = model_dt.predict(data_test_execute.iloc[:, 1:-1])
+        # df['prediction'] = df['prediction'].apply(lambda x: 'Tidak' if x == 1 else 'Cocok')
+        data_test_execute['prediction'] = prediction
+        data_test_execute['prediction'] = data_test_execute['prediction'].apply(lambda x: 'Tidak' if x == 1 else 'Cocok')
+        prediction_data = data_test_execute.to_html(index=False, classes='table-auto', table_id='prediction_results')
+    else:    
+        prediction = model.predict(data_test_execute.iloc[:, 1:-1])
+        data_test_execute['prediction'] = prediction
+        prediction_data = data_test_execute.to_html(index=False, classes='table-auto', table_id='prediction_results')
     flash("data berhasil di prediksi", "success")
     # return  "coba"
     # SELECT area.area_longitude, area.area_latitude FROM area join manualdata on area.id = manualdata.id_m
@@ -230,19 +242,36 @@ def result_manual_data(dataset):
     
     x = data_test_execute['prediction'].value_counts()
     print(x)
-    nilai_tidak = data_test_execute['prediction'].value_counts()['Tidak']
-    nilai_cocok = data_test_execute['prediction'].value_counts()['Cocok']
+    
+    nilai_tidak = 0 if 'Tidak' not in x.index else data_test_execute['prediction'].value_counts()['Tidak']
+    nilai_cocok = 0 if 'Cocok' not in x.index else data_test_execute['prediction'].value_counts()['Cocok']
+    
     fig = Figure()
     ax = fig.subplots()
     color = (232/255, 106/255, 51/255, 1)
-    ax.bar(x.index, x.values, color=color)
+    
+    labels = x.index.tolist()
+    values = [x[val] for val in labels]
+    
+    if len(x.index) > 1:
+        color = ((232/255, 106/255, 51/255, 1), (51/255, 106/255, 232/255, 1))
+    ax.bar(labels, values, color=color, label=labels)
+    
+    ax.set_ylabel("Jumlah Data")
+    ax.set_xlabel("Label Prediksi")
+    # ax.set_title("Persebaran Bawang Merah Berdasarkan Prediksi")
+    ax.set_axisbelow(True)
+    ax.yaxis.grid(True, color='#EEEEEE')
+    ax.xaxis.grid(False)
+    ax.legend(title='Index Prediksi', loc='upper right')
+    
     
     buf = BytesIO()
     fig.savefig(buf, format="png")
-    # Embed the result in the html output
+    # Embed the result in the htl output
     data = base64.b64encode(buf.getbuffer()).decode("ascii")
     
-    return render_template('pre_content/result/manual_data.html', prediction_data=Markup(prediction_data), prediction = prediction, data_test = data_test_execute.to_json(orient='records'), area=area, img=data, nilai_tidak=nilai_tidak, nilai_cocok=nilai_cocok)
+    return render_template('pre_content/result/manual_data.html', prediction_data=Markup(prediction_data), prediction = prediction, data_test = data_test_execute.to_json(orient='records'), area=area, img=data, nilai_tidak=nilai_tidak, nilai_cocok=nilai_cocok, admin_name=admin_name())
 
 @lp.route('/imagesmatplotlib')
 def imagesmatplotlib():

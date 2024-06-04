@@ -11,6 +11,10 @@ class Admin(db.Model):
     username = db.Column(db.String(64), nullable=False ,index=True, unique=True)
     email = db.Column(db.String(120), nullable=False , unique=True)
     password_hash = db.Column(db.String(250), nullable=False)
+    first_name = db.Column(db.String(64), default='Nama Depan')
+    last_name = db.Column(db.String(64), default='Nama Belakang')
+    phone_number = db.Column(db.String(20), default='08xx-xxxx-xxxx')
+    address = db.Column(db.String(120), default='Alamat')
 
     # id: Mapped[int] = mapped_column(Integer, primary_key=True)
     # image_file: Mapped[str] = mapped_column(String(20), nullable=False, default='default.jpg')

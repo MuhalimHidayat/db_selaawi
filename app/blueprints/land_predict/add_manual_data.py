@@ -2,7 +2,7 @@ import functools
 import html
 
 from flask import (
-    flash, g, redirect, render_template, request, session, url_for, send_from_directory
+    flash, g, redirect, render_template, request, session, url_for, send_from_directory, send_file
 )
 from markupsafe import escape, Markup
 import pandas as pd
@@ -291,3 +291,18 @@ def imagesmatplotlib():
     return f"<img src='data:image/png;base64,{data}'/>"
     
     # return render_template('pre_content/imagesmatplotlib.html')
+    
+@lp.route('/download-manual-data/<dataset>')
+def download_manual_data(dataset):
+    output = BytesIO()
+    writer = pd.ExcelWriter(output, engine='xlsxwriter')
+    df = pd.read_json(dataset, orient='records')
+    # remove id_m column
+    df = df.drop(columns=['id_m'])
+    df.to_excel(writer, index=False)
+    writer.close()  # Use close instead of save
+    
+    output.seek(0)
+    
+    return send_file(output, mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', download_name='data_training.xlsx', as_attachment=True)
+    

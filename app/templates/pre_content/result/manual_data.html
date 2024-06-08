@@ -18,6 +18,12 @@
             </p> -->
         </div>
         <div class="overflow-x-auto shadow-md sm:rounded-lg px-5 py-3">
+            <!-- download -->
+            <div class="flex justify-end">
+                <a href="{{ url_for('land_predict.download_manual_data', dataset=data_test) }}"
+                    class="bg-primary-color text-white px-3 py-2 rounded-md hover:bg-primary-color-dark">Download
+                    Data</a>
+            </div>
             <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                 <thead
                     class="text-xs text-center text-white uppercase bg-primary-color dark:bg-gray-700 dark:text-gray-400">

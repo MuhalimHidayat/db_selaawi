@@ -1,6 +1,6 @@
-* {
+/* * { */
   /* font-family: 'poppins', poppins; */
-}
+/* } */
 
 /* Color pallete */
 .bg-primary-color {
@@ -128,4 +128,11 @@
 
 .border-color-redd {
   border-color: #B14040;
+}
+
+.tdkCocok{
+  color: rgb(232 106 51);
+}
+.cocok{
+ color: rgb(51 106 232); 
 }

@@ -16,6 +16,9 @@ from app.blueprints.land_predict.models.Area import Area
 from app import model, model_dt, model_rf, app, db
 from sqlalchemy import desc
 from datetime import datetime
+from matplotlib.figure import Figure
+import base64
+from io import BytesIO
 
 
 # UPLOAD_FOLDER = 'app/blueprints/land_predict/static/datasets'
@@ -93,15 +96,11 @@ def add_dataset():
                 df['prediction'] = df['prediction'].apply(lambda x: 'Tidak' if x == 1 else 'Cocok')
                 
             df.to_excel('app/blueprints/land_predict/static/datasets/'+dataset_name_hashed, index=False)
-            # prediction_data = df.to_html(index=False, classes='table-auto', table_id='prediction_results')
-            # rows = len(df.axes[0])
-            # cols = len(df.axes[1])
-            # end of prediction
-            # save to database
+            
             add_dataset = Dataset(file_name=name, file_hash=dataset_name_hashed, prediction=alghoritm ,id=session['id'])
             db.session.add(add_dataset)
             db.session.commit()
-            # end of save to database
+            
 
             flash('File berhasil di upload', "success")
             return redirect(url_for('land_predict.stage_dataset', page=1))
@@ -153,9 +152,35 @@ def predict_dataset(file_hash):
     dataset = db.session.execute(db.select(Dataset).filter_by(file_hash=file_hash)).scalar()
     df = pd.read_excel('app/blueprints/land_predict/static/datasets/'+dataset.file_hash)
     # melihat kolom apa saja pada dataset df
-    print(df['prediction'])
+    x = df['prediction'].value_counts()
+    # print(x)
+    nilai_tidak = 0 if 'Tidak' not in x.index else df['prediction'].value_counts()['Tidak']
+    nilai_cocok = 0 if 'Cocok' not in x.index else df['prediction'].value_counts()['Cocok']
+    
+    fig = Figure()
+    ax = fig.subplots()
+    color = (232/255, 106/255, 51/255, 1)
+    
+    labels = x.index.tolist()
+    values = [x[val] for val in labels]
+    
+    if len(x.index) > 1:
+        color = ((232/255, 106/255, 51/255, 1), (51/255, 106/255, 232/255, 1))
+    ax.bar(labels, values, color=color, label=labels)
+    
+    ax.set_ylabel("Jumlah Data")
+    ax.set_xlabel("Label Prediksi")
+    ax.yaxis.grid(True, color='#EEEEEE')
+    ax.xaxis.grid(False)
+    ax.legend(title='Index Prediksi', loc='upper right')
     # print(df.columns())
     prediction_data = df.to_html(index=False, classes='table-auto', table_id='prediction_results')
     rows = len(df.axes[0])
     cols = len(df.axes[1])
-    return render_template('pre_content/result/dataset.html', prediction_data=Markup(prediction_data), dimensions=[rows, cols], data_test = df.to_json(orient='records'), admin_name=admin_name())
+    
+    buf = BytesIO()
+    fig.savefig(buf, format="png")
+    # Embed the result in the htl output
+    data = base64.b64encode(buf.getbuffer()).decode("ascii")
+    
+    return render_template('pre_content/result/dataset.html', prediction_data=Markup(prediction_data), dimensions=[rows, cols], data_test = df.to_json(orient='records'), img=data, nilai_tidak=nilai_tidak, nilai_cocok=nilai_cocok, admin_name=admin_name())

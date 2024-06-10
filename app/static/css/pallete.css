@@ -41,7 +41,7 @@
   font-weight: 700;
 }
 
-.font-base-color { 
+.font-base-color {
   color: rgba(0, 0, 0, 0.881);
 
 }
@@ -71,6 +71,10 @@
   border-color: #CD5C08B2;
 }
 
+.border-oren {
+  border: 2px solid #CD5C08;
+}
+
 /* predictions page pallete */
 .bg-predictions-content-color {
   background-color: #F5F5F5;
@@ -98,7 +102,7 @@
   border-color: #416349;
 }
 
-.font-dashboard{
+.font-dashboard {
   color: #41644A;
 }
 

@@ -254,7 +254,7 @@ def result_manual_data(alghoritm, dataset):
     values = [x[val] for val in labels]
     
     if len(x.index) > 1:
-        color = ((232/255, 106/255, 51/255, 1), (51/255, 106/255, 232/255, 1))
+        color = ((65/255, 100/255, 74/255, 1),(232/255, 106/255, 51/255, 1))
     ax.bar(labels, values, color=color, label=labels)
     
     ax.set_ylabel("Jumlah Data")

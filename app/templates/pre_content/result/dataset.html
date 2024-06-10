@@ -89,6 +89,14 @@
                 td.setAttribute('class', 'px-4 py-4 whitespace-nowrap');
                 td.innerText = data[item];
                 tr_body.appendChild(td);
+
+                if (item == 'prediction' || item == 'output'){
+                    if (data[item] == 'Cocok') {
+                        td.setAttribute('class', 'px-4 py-4 whitespace-nowrap text-green-500');
+                    } else {
+                        td.setAttribute('class', 'px-4 py-4 whitespace-nowrap text-red-500');
+                    }
+                }
             }
         }
     }

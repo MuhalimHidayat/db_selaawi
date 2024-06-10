@@ -1,0 +1,30 @@
+.action-icon {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+
+}
+.action-icon .desc-icon{
+    /* display: none; */
+    visibility: hidden;
+    position: absolute;
+    /* margin: -5px; */
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    /* z-index: 100; */
+}
+.action-icon:hover .desc-icon{
+    /* display: block; */
+    visibility: visible;
+    position: absolute;
+    margin: -30px -20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    /* z-index: 100; */
+    top: 0;
+    left: 0;
+}

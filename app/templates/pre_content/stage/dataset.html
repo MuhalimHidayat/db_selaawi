@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+{% block css_url %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pred/stage_dataset.css') }}">
+{% endblock css_url %}
 {% block content %}
 <div class="flex justify-center w-full">
     <div class="w-4/5">
@@ -78,15 +81,10 @@
                             </div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-500 dark:text-gray-400 flex">
+                            <div id="action-icon" class="text-sm text-gray-500 dark:text-gray-400 flex">
                                 <a href="{{ url_for('land_predict.predict_dataset', file_hash=data.file_hash) }}"
-                                    class="font-medium hover:underline">
-                                    <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                                        class="w-5 h-5">
-                                        <path fill-rule="evenodd"
-                                            d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z"
-                                            clip-rule="evenodd" />
-                                    </svg> -->
+                                    class="action-icon font-medium">
+                                    <div class="desc-icon"><p>Lihat</p></div>
 
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                         class="w-5 h-5">
@@ -98,8 +96,10 @@
 
                                 </a>
                                 <a href=" {{ url_for('land_predict.delete_dataset', id=data.id_d) }}"
-                                    class="font-medium font-color-link"
-                                    onclick="return confirm('Apakah yakin akan menghapus?')"><svg
+                                    class="action-icon font-medium font-color-link"
+                                    onclick="return confirm('Apakah yakin akan menghapus?')">
+                                    <div class="desc-icon"><p>Hapus</p></div>
+                                    <svg
                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                                         class="w-5 h-5">
                                         <path fill-rule="evenodd"
@@ -108,7 +108,9 @@
                                     </svg>
                                 </a>
                                 <a href="{{ url_for('land_predict.static', filename='datasets/' + data.file_hash) }}"
-                                    class="font-medium font-color-highlight "><svg xmlns="http://www.w3.org/2000/svg"
+                                    class="action-icon font-medium font-color-highlight ">
+                                    <div class="desc-icon"><p>Download</p></div>
+                                    <svg xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                                         <path
                                             d="M10.75 2.75a.75.75 0 0 0-1.5 0v8.614L6.295 8.235a.75.75 0 1 0-1.09 1.03l4.25 4.5a.75.75 0 0 0 1.09 0l4.25-4.5a.75.75 0 0 0-1.09-1.03l-2.955 3.129V2.75Z" />

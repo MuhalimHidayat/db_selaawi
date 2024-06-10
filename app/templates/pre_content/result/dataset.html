@@ -28,7 +28,36 @@
         <div>
             <p class="font-semibold text-sm">{{ dimensions[0] }} rows X {{ dimensions[1] }} columns</p>
         </div>
+
+        <div class="flex flex-col my-10 w-full">
+            <div class="flex justify-center mt-10">
+                <h1 class="text-2xl font-semibold font-predictions-color-header -mb-10" style="z-index: 2;">Visualisasi
+                    Prediksi Bawang Merah</h1>
+            </div>
+            <div class="flex">
+                <div class="w-4/6 ">
+                    <img src="data:image/png;base64,{{img}}" alt="" style="z-index: 1;">
+                </div>
+                <div class="w-2/6 flex flex-col gap-y-5 justify-center" id="bar-chart-description">
+                    <div
+                        class="description shadow-md rounded-md font-predictions-color-header flex flex-col gap-y-3 items-center justify-center">
+                        <h3 class="text-xl">Total Label <span class="font-bold">"Cocok"</span></h3>
+                        <h1 class="font-bold text-6xl">{{nilai_cocok}}</h1>
+                    </div>
+                    <div
+                        class="description shadow-md rounded-md font-predictions-color-header flex flex-col gap-y-3 items-center justify-center">
+                        <h3 class="text-xl">Total Label <span class="font-bold">"Tidak Cocok"</span></h3>
+                        <h1 class="font-bold text-6xl">{{nilai_tidak}}</h1>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
     </div>
+
+    <!-- bar chart -->
+    
+
 </div>
 
 

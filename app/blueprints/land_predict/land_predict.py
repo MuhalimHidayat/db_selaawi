@@ -38,6 +38,8 @@ def admin_name():
     admin_name = db.session.execute(db.select(Admin).filter_by(id=session['id'])).scalar_one().username
     return admin_name
 
+
+
 @lp.route('/dashboard')
 def dashboard():
     if 'id' not in session:

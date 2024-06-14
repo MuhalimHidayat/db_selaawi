@@ -8,8 +8,7 @@
  <div class="flex items-center flex-col w-full">
      <div class="w-4/5 flex items-center">
          <div class="w-full flex justify-between gap-3 mb-8" id="scrolling-wrapper">
-             <div
-                 class="flex flex-col justify-around w-52 h-32 border border-dashboard rounded-lg place-content-center font-dashboard px-5 py-2 ">
+             <div class="flex flex-col justify-around w-52 h-32 border-2 border-dashboard rounded-lg place-content-center font-dashboard px-5 py-2 ">
                  <div class="flex justify-between">
                      <h2 class="font-dashboard" id="tulisan-dashboard">24&deg;</h2>
                      <img class="rounded-md" id="gambar1" src="{{ url_for('static', filename='img/Temperature.png') }}"
@@ -17,8 +16,7 @@
                  </div>
                  <p>Temperatur</p>
              </div>
-             <div
-                 class="flex flex-col justify-around w-52 h-32 border border-dashboard rounded-lg place-content-center font-dashboard px-5 py-2 ">
+             <div class="flex flex-col justify-around w-52 h-32 border-2 border-dashboard rounded-lg place-content-center font-dashboard px-5 py-2 ">
                  <div class="flex justify-between">
                      <h2 class="font-dashboard" id="tulisan-dashboard">24&#37;</h2>
                      <img class="rounded-md" id="gambar1" src="{{ url_for('static', filename='img/humidity.png') }}"
@@ -26,16 +24,14 @@
                  </div>
                  <p>Kelembapan</p>
              </div>
-             <div
-                 class="flex flex-col justify-around w-52 h-32 border border-dashboard rounded-lg place-content-center font-dashboard px-5 py-2 ">
+             <div class="flex flex-col justify-around w-52 h-32 border-2 border-dashboard rounded-lg place-content-center font-dashboard px-5 py-2 ">
                  <div class="flex justify-between">
                      <h2 class="font-dashboard" id="tulisan-dashboard">24mm</h2>
                      <img class="rounded-md" id="gambar1" src="{{ url_for('static', filename='img/rain.png') }}" alt="">
                  </div>
                  <p>Curah Hujan</p>
              </div>
-             <div
-                 class="flex flex-col justify-around w-52 h-32 border border-dashboard rounded-lg place-content-center font-dashboard px-5 py-2 ">
+             <div class="flex flex-col justify-around w-52 h-32 border-2 border-dashboard rounded-lg place-content-center font-dashboard px-5 py-2 ">
                  <div class="flex justify-between">
                      <h2 class="font-dashboard" id="tulisan-dashboard">24m/s</h2>
                      <img class="rounded-md" id="gambar1" src="{{ url_for('static', filename='img/wind.png') }}" alt="">
@@ -45,23 +41,23 @@
          </div>
      </div>
      <div class="flex flex-col">
-         <div id="content-header" class="bg-header-predictions-color rounded-md p-3 mb-8">
-             <h1 class="text-2xl font-bold font-predictions-color-header">Tentang Dataset</h1>
+         <div id="content-header" class="bg-subheader-aboutdataset rounded-md p-3 mb-8 drop-shadow-xl">
+             <h1 class="text-2xl font-bold font-color-highlight">Tentang Dataset</h1>
          </div>
-         <div class="flex p-7" id="about-dataset">
-             <p class="text-justify mt-5">Dataset yang digunakan terdiri dari <b>7984 baris data.</b>
-                 Data yang diolah bersifat numerik dan mencakup <b>7 fitur dan 1 label.</b> Dataset terdiri dari <b>2
+         <div class="flex p-7 drop-shadow-xl bg-quaternary-color" id="about-dataset">
+             <p class="text-justify mt-5">Dataset yang digunakan terdiri dari <b class="font-color-highlight">7984 baris data.</b>
+                 Data yang diolah bersifat numerik dan mencakup <b class="font-color-highlight">7 fitur dan 1 label.</b> Dataset terdiri dari <b class="font-color-highlight">2
                      kelas
                      yaitu “Cocok” dan “Tidak”.</b>
-                 Sumber datanya berasal dari sensor yang ditempatkan <b>di Selaawi, Kecamatan Garut, tepat di depan
+                 Sumber datanya berasal dari sensor yang ditempatkan <b class="font-color-highlight">di Selaawi, Kecamatan Garut, tepat di depan
                      kantor
                      BPP Selaawi. </b>
                  Fokus penelitian ini adalah pada tanaman bawang merah.
-                 Rentang waktu pengumpulan data meliputi bulan <b>Agustus, September, Oktober, dan November 2023,</b>
+                 Rentang waktu pengumpulan data meliputi bulan <b class="font-color-highlight">Agustus, September, Oktober, dan November 2023,</b>
                  mulai
                  dari fase tanam, fase generatif, fase vegetatif, hingga fase panen.
              </p>
-             <img class="rounded-md w-64" id="dataset" src="{{ url_for('static', filename='img/user/dataset.png') }}"
+             <img class="rounded-md w-80 h-44" id="dataset" src="{{ url_for('static', filename='img/user/dataset.png') }}"
                  alt="">
          </div>
      </div>

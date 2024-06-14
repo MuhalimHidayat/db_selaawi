@@ -1,4 +1,4 @@
-* {
+/* {
     font-family: 'Inter var', sans;
 }
 
@@ -8,7 +8,7 @@
     color: #41644A;
     width: 25%;
     min-height: 100vh;
-    
+
 }
 
 .dropdown-content {
@@ -34,9 +34,10 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-.mark{
-    background-color: #41644A;
-    color: white;
+.mark {
+    background-color: rgb(217 217 217 / 42%);
+    /* drop shadow */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 
 }
 

@@ -1,46 +1,47 @@
-.form-group{
+.form-group {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
 }
 
-.form-group label{
+.form-group label {
     margin-right: 10px;
     flex-basis: 25%;
     font-weight: 600;
     color: #2f2e2e;
 }
-.form-group input{
+
+.form-group input {
     flex-basis: 60%;
 }
 
-input::placeholder{
+input::placeholder {
     font-size: 11pt;
 }
 
 /* SELECT FOR real_time_data.html "slave feature" */
 /* Path: app/static/css/pred/real_time_data.css */
-.form-group select{
+.form-group select {
     flex-basis: 60%;
 }
 
 /* form manual data */
 
-table thead th{
+table thead th {
     position: sticky;
     top: 0;
     z-index: 1;
     background-color: rgba(65, 100, 74, 1);
 }
 
-table thead th:first-child{
+table thead th:first-child {
     position: sticky;
     left: 0;
     z-index: 2;
 }
 
-table tbody td:first-child{
+table tbody td:first-child {
     position: sticky;
     left: 0;
     z-index: 1;

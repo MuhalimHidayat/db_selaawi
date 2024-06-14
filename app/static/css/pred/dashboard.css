@@ -1,12 +1,10 @@
-#content-header,#about-dataset {
+#content-header,
+#about-dataset {
     margin-left: 90px;
-    background-color: #F5F5F5;
     margin-right: 90px;
 }
 
-#dataset {
-    padding-left: 50px;
-}
+#dataset {}
 
 #gambar1 {
     width: 50px;

@@ -11,6 +11,10 @@
   background-color: #41644AB2;
 }
 
+.bg-subheader-aboutdataset{
+  background-color:rgba(65, 99, 71, 0.4);
+}
+
 .bg-tertiary-color {
   background-color: #D9D9D9;
 }

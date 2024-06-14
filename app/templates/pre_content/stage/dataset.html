@@ -7,9 +7,8 @@
     <div class="w-4/5">
         <!-- header -->
         <div id="content-header" class="w-full bg-header-predictions-color rounded-md p-6 mb-8">
-            <h1 class="text-2xl font-semibold font-predictions-color-header">Real Time Data</h1>
-            <p class="text-slate-50 mt-3 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, nesciunt.
-            </p>
+            <h1 class="text-2xl font-semibold font-predictions-color-header">Staging Area File Upload</h1>
+            
         </div>
         <div class="flex justify-between mx-5 my-2">
             <a href="{{ url_for('land_predict.add_dataset') }}"
@@ -36,9 +35,9 @@
             </div>
         </div>
         <!-- content -->
-        <div class="overflow-x-auto shadow-md sm:rounded-lg px-5 py-3">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <div class="overflow-x-auto shadow-md sm:rounded-lg px-5 py-3 scrollbar-hide md:scrollbar-default">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                <thead class="text-xs text-white bg-dashboard-color uppercase ">
                     <tr>
                         <th scope="col" class="px-6 py-3">
                             No
@@ -59,9 +58,9 @@
                 </thead>
                 <tbody>
                     {% for data in datasets %}
-                    <tr class="bg-white border-b dark:bg-gray-800">
+                    <tr class="bg-white border-b ">
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900 dark:text-gray-400">
+                            <div class="text-sm dark:text-gray-400">
                                 {{start_number + loop.index}}
                             </div>
                         </td>
@@ -71,12 +70,12 @@
                             </div>
                         </th>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-500 dark:text-gray-400">
+                            <div class="text-sm dark:text-gray-400">
                                 {{data.prediction}}
                             </div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-500 dark:text-gray-400">
+                            <div class="text-sm dark:text-gray-400">
                                 {{data.created_at}}
                             </div>
                         </td>

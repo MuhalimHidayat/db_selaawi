@@ -51,7 +51,7 @@
                         <ul class="dropdown-content-show" id="dropdown">
                             <li id="real-time" class="ps-11 py-1 hover:text-gray-500"><a href="/land_predict/real-time-data">Real Time</a></li>
                             <li id="manual-data" class="ps-11 py-1 hover:text-gray-500"><a href="/land_predict/add-manual-data">Data Input</a></li>
-                            <li id="dataset" class="ps-11 py-1 hover:text-gray-500"><a href="/land_predict/add-dataset">File Upload</a></li>
+                            <li id="dataset" class="ps-11 py-1 hover:text-gray-500"><a href="/land_predict/add-dataset">Unggah File</a></li>
                         </ul>
                     </div>
 
@@ -67,12 +67,12 @@
         <div id="right-content">
             <div id="navbar" class="flex justify-end ">
                 <div class="flex items-center">
-                    <button class="btn" id="btn-nav">
+                    <button class="btn grid grid-cols-2 " id="btn-nav">
                         {{ admin_name }}
                         {% block admin %}
                             
                         {% endblock admin %}
-                        <i class="fa-solid fa-arrow-down ms-2" id="arrow-nav"></i>
+                        <img class="h-9 w-9" src="{{ url_for('static', filename='img/user/icon_user.png') }}" alt="image description" id="arrow-nav">
                     </button>
                 </div>
                 

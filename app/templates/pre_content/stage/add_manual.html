@@ -35,7 +35,7 @@
 
             </div>
 
-            <div class="overflow-x-auto shadow-md sm:rounded-lg px-5 py-3">
+            <div class="overflow-x-auto shadow-md sm:rounded-lg px-5 py-3 scrollbar-hide md:scrollbar-default">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-center text-white uppercase  dark:bg-gray-700 dark:text-gray-400">
                         <tr id="tr-thead">
@@ -52,13 +52,23 @@
             <!-- <div id="updLinkData" data-url="{{ url_for('land_predict.update_manual_data', dataset=data_test_json) }}" style="display: none;"></div> -->
             <div id="updLinkData" data-url="{{ url_for('land_predict.update_manual_data') }}" style="display: none;"></div>
             <div id="dltLinkData" data-url="{{ url_for('land_predict.delete_manual_data') }}" style="display: none;"></div>
-            <div class="flex justify-end me-14 my-5">
+            <div class="flex justify-end me-14 my-5 -mr-0.5">
                 <button type="submit" class="px-8 py-3 rounded bg-button-user-color font-medium text-slate-100">Convert</button>
             </div>
            
         </form>
 
-        <div class="flex flex-row items-start justify-around my-10 font-base-color" id="informations">
+        <div id="map-info">
+            <div class="flex mt-10">
+                <h1 class="text-lg font-bold font-predictions-color-header">Peta Sebaran Bawang Merah</h1>
+            </div>
+            <div class="flex justify-center">
+                <div id="map" class="w-11/12 m-3 my-7 shadow-md rounded-md flex items-center" style="min-height: 380px;">
+
+                </div>
+            </div>
+        </div>
+        <div class="" id="informations">
             <div id="param-info">
                 <div class="flex gap-x-2 items-center mb-3">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -79,18 +89,11 @@
                     <li>temp = temperature (temperatur)</li>
                 </ul>
             </div>
-
-            <div id="map-info">
-                <div class="flex justify-center">
-                    <h1 class="text-2xl font-semibold font-predictions-color-header">Peta Sebaran Bawang Merah</h1>
-                </div>
-                <div id="map" class="w-96 h-72">
-
-                </div>
-            </div>
-
         </div>
     </div>
+      
+
+      
 
 
 

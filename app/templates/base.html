@@ -40,11 +40,11 @@
                 </div>
                 <!-- nav-content -->
                 <!-- <div class="nav-content"> -->
-                <ul class="nav-content mb-2">
+                <ul class="nav-content mb-2 mx-3">
 
-                    <li id="dashboard" class="px-4 py-1"><i class="fa-solid fa-cube me-2 mx-3 py-4"></i> <a href="/land_predict/dashboard">Dashboard</a></li>
+                    <li id="dashboard" class="px-4 py-1"><i class="fa-solid fa-cube me-2 py-4"></i> <a href="/land_predict/dashboard">Dashboard</a></li>
                     <!-- dropdown -->
-                    <div id="dropdown-menu" class="mx-3 py-1 rounded" style="background-color: rgb(217 217 217 / 40%);">
+                    <div id="dropdown-menu" class="py-1 rounded" style="background-color: rgb(217 217 217 / 40%);">
                         <button class="btn px-4 py-3" id="btn">
                             <i class="fa-solid fa-align-justify me-3" id="arrow"></i>
                             Prediksi
@@ -69,11 +69,11 @@
             <div id="navbar" class="flex justify-end ">
                 <div class="flex items-center">
                     <button class="btn grid grid-cols-2 " id="btn-nav">
-                        {{ admin_name }}
+                        {{ admin_name.username }}
                         {% block admin %}
                             
                         {% endblock admin %}
-                        <img class="h-9 w-9" src="{{ url_for('static', filename='img/user/icon_user.png') }}" alt="image description" id="arrow-nav">
+                        <img class="h-9 w-9" src="{{ url_for('static', filename='img/uploads/' + admin_name.image_file) }}" alt="image description" id="arrow-nav">
                     </button>
                 </div>
                 

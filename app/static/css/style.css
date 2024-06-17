@@ -1,6 +1,9 @@
-/* {
+/* body{
     font-family: 'Inter var', sans;
-}
+} */
+
+/* add image background texture */
+
 
 /* sidebar navbar dropdown */
 #sidebar {
@@ -31,14 +34,12 @@
 #dropdown-menu>.dropdown-content-show>li:hover {
     background-color: rgb(217 217 217 / 42%);
     /* drop shadow */
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.2);
 }
 
 .mark {
     background-color: rgb(217 217 217 / 42%);
-    /* drop shadow */
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-
+    box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.2);
 }
 
 #dropdown-menu>.dropdown-content-show>li {

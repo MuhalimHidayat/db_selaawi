@@ -25,7 +25,7 @@ def admin_name():
     if 'id' not in session: 
         return None
     
-    admin_name = db.session.execute(db.select(Admin).filter_by(id=session['id'])).scalar_one().username
+    admin_name = db.session.execute(db.select(Admin).filter_by(id=session['id'])).scalar_one()
     return admin_name
 
 @lp.route('/add-manual-data', methods=('GET', 'POST'))

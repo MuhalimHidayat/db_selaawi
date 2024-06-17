@@ -35,10 +35,9 @@ def admin_name():
     if 'id' not in session: 
         return None
     
-    admin_name = db.session.execute(db.select(Admin).filter_by(id=session['id'])).scalar_one().username
+    admin_name = db.session.execute(db.select(Admin).filter_by(id=session['id'])).scalar_one()
+    
     return admin_name
-
-
 
 @lp.route('/dashboard')
 def dashboard():
@@ -146,6 +145,11 @@ def search_dataset():
         return redirect(url_for('auth.sign_in'))
     page = request.args.get('page')
     search = request.form['keyword']
+    
+    # jika nilai search kosong
+    if search == '' or search == ' ':
+        return redirect(url_for('land_predict.stage_dataset', page=1))
+    
     datasets = Dataset.query.filter(Dataset.file_name.like('%'+search+'%')).paginate(page=page, per_page=5, error_out=False)
     return render_template('pre_content/stage/dataset.html', datasets=datasets, admin_name=admin_name())
 

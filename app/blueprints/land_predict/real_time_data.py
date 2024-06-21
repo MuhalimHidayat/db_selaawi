@@ -5,15 +5,16 @@ from app.blueprints.land_predict.land_predict import lp
 from flask_restful import Api, Resource
 import pandas as pd
 from app import model, db
-from flask import session
+from flask import session, flash, url_for
 from app.blueprints.auth.models.Admin import Admin
 api = Api(lp)
 
 def admin_name():
-    if 'id' not in session: 
-        return None
+    if 'id' not in session:
+        flash('You must be logged in to access this page', 'danger')
+        return redirect(url_for('auth.sign_in'))
     
-    admin_name = db.session.execute(db.select(Admin).filter_by(id=session['id'])).scalar_one().username
+    admin_name = db.session.execute(db.select(Admin).filter_by(id=session['id'])).scalar_one()
     return admin_name
 
 @lp.route('/real-time-data', methods=['GET', 'POST'])

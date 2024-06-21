@@ -21,6 +21,13 @@ auth_bp = Blueprint('auth', __name__, url_prefix='/user-auth')
 app.config['UPLOAD_FOLDER'] = 'app/static/img/uploads'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
 
+def admin_name():
+    if 'id' not in session: 
+        return None
+    
+    admin_name = db.session.execute(db.select(Admin).filter_by(id=session['id'])).scalar_one()
+    return admin_name
+
 @auth_bp.route('/')
 def authen():
     return render_template('auth.html')
@@ -171,7 +178,7 @@ def settings():
             
             
             return redirect(url_for('auth.settings'))
-    return render_template('authen/settings.html', title="Settings", admin=admin)
+    return render_template('authen/settings.html', title="Settings", admin=admin, admin_name=admin_name())
         # upload photo
 
 # upload file

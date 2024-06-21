@@ -66,7 +66,9 @@
                         </td>
                         <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             <div class="text-sm text-gray-900 dark:text-gray-400">
-                                {{data.file_name}}
+                                <a href="{{ url_for('land_predict.add_area_dataset', id_d=data.id_d) }}">
+                                    {{data.file_name}}
+                                </a>
                             </div>
                         </th>
                         <td class="px-6 py-4 whitespace-nowrap">
@@ -154,10 +156,49 @@
 
             </div>
         </div>
+
+        <!-- map content -->
+        <div id="map-info">
+            <div class="flex mt-10">
+                <h1 class="text-lg font-bold font-predictions-color-header">Peta Sebaran Bawang Merah</h1>
+            </div>
+            <div class="flex justify-center">
+                <div id="map" class="w-11/12 m-3 my-7 shadow-md rounded-md flex items-center"
+                    style="min-height: 380px;">
+
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>
 
 <br><br>
 
+<script>
+    var area = JSON.parse('{{ area | safe }}');
+    var map = L.map('map').setView([area[0].area_latitude, area[0].area_longitude], 13);
+    
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    for (let i = 0; i < area.length; i++) {
+        var marker = L.marker([area[i].area_latitude, area[i].area_longitude]).addTo(map);
+        marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+        marker.bindPopup(`<b>${area[i].area_name}</b><br>Ini Akan jadi alamat`).closePopup();
+    }
+    var popup = L.popup();
+
+    function onMapClick(e) {
+        popup
+            .setLatLng(e.latlng)
+            .setContent("Lokasi: " + e.latlng.toString())
+            .openOn(map);
+    }
+
+    map.on('click', onMapClick);
+</script>
 
 {% endblock content %}

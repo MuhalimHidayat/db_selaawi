@@ -22,8 +22,9 @@ from io import BytesIO
 from app.blueprints.land_predict.land_predict import lp
 
 def admin_name():
-    if 'id' not in session: 
-        return None
+    if 'id' not in session:
+        flash('You must be logged in to access this page', 'danger')
+        return redirect(url_for('auth.sign_in'))
     
     admin_name = db.session.execute(db.select(Admin).filter_by(id=session['id'])).scalar_one()
     return admin_name

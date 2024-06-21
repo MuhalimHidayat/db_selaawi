@@ -120,7 +120,15 @@ def stage_dataset(page=1):
     
     # datasets = db.session.execute(db.select(Dataset).filter_by(id=session['id'])).scalars().all()
     datasets = Dataset.query.filter_by(id=session['id']).order_by(desc(Dataset.id_d)).paginate(page=page, per_page=5, error_out=False)
-    return render_template('pre_content/stage/dataset.html', datasets=datasets, admin_name=admin_name(), start_number=start_number)
+    
+    # fetching area
+    statement = db.select(Area).join(Dataset, Dataset.id_d == Area.id_d).filter(Dataset.id == session['id'])
+    area = db.session.execute(statement).scalars()
+    area = [{key: value for key, value in data.__dict__.items() if not key.startswith('_sa_')} for data in area]
+    area = pd.DataFrame(area)
+    area = area.to_json(orient='records')
+    
+    return render_template('pre_content/stage/dataset.html', datasets=datasets, admin_name=admin_name(), start_number=start_number, area=area)
 
 
 @lp.route('/stage-dataset/<int:id>/delete')

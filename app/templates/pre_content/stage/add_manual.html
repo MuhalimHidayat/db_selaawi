@@ -9,7 +9,7 @@
 <div class="flex justify-center w-full">
     <div class="w-4/5">
         <div id="content-header" class="w-full bg-header-predictions-color rounded-md p-6 mb-8">
-            <h1 class="text-2xl font-bold font-predictions-color-header">Staging Area Input Data</h1>
+            <h1 class="text-2xl font-bold font-predictions-color-header">Stagingg Area Input Data</h1>
             <!-- <p class="text-slate-50 mt-3 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, nesciunt. -->
             </p>
         </div>
@@ -39,7 +39,7 @@
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-center text-white uppercase  dark:bg-gray-700 dark:text-gray-400">
                         <tr id="tr-thead">
-
+                            
                         </tr>
                     </thead>
                     <tbody class="text-center" id="tbody">
@@ -57,7 +57,7 @@
             </div>
            
         </form>
-
+        <!-- map content -->
         <div id="map-info">
             <div class="flex mt-10">
                 <h1 class="text-lg font-bold font-predictions-color-header">Peta Sebaran Bawang Merah</h1>
@@ -68,6 +68,7 @@
                 </div>
             </div>
         </div>
+        <!-- informations content -->
         <div class="" id="informations">
             <div id="param-info">
                 <div class="flex gap-x-2 items-center mb-3">
@@ -138,18 +139,19 @@
 
         // ini untuk icon trash dan update
         // update button
-        var url = updLinkData.getAttribute('data-url');
+        var urlUpd = updLinkData.getAttribute('data-url');
         var urlDlt = dltLinkData.getAttribute('data-url');
 
         var actionTd = document.createElement('td');
         var updLink = document.createElement('a')
-        updLink.setAttribute('href', url + '?id_m=' + id_m);
+        updLink.setAttribute('href', urlUpd + '?id_m=' + id_m);
         var buttonUpd = document.createElement('button');
         var updIcon = document.createElement('i');
         updIcon.classList.add('fa-regular', 'fa-pen-to-square');
         buttonUpd.appendChild(updLink);
         updLink.appendChild(updIcon);
-        actionTd.appendChild(buttonUpd);
+        // actionTd.appendChild(buttonUpd);
+        actionTd.appendChild(updLink);
         // delete button
         var dltLink = document.createElement('a');
         dltLink.setAttribute('href', urlDlt + '?id_m=' + id_m);
@@ -158,7 +160,8 @@
         dltIcon.classList.add('fa-solid', 'fa-trash');
         buttonDlt.appendChild(dltLink);
         dltLink.appendChild(dltIcon);
-        actionTd.appendChild(buttonDlt);
+        // actionTd.appendChild(buttonDlt);
+        actionTd.appendChild(dltLink);
         trbody.appendChild(actionTd);
 
         // delete button
@@ -193,3 +196,4 @@
 </script>
 
 {% endblock content %}
+

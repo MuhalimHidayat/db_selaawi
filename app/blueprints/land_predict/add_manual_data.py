@@ -207,7 +207,8 @@ def delete_manual_data():
     data_test = pd.DataFrame(data, columns=columns)
     data_test_coba = pd.DataFrame(data, columns=columns)
     data_test_json = data_test.to_json(orient='records')
-    return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), data_test_json = data_test_json, admin_name=admin_name())
+    # return render_template('pre_content/stage/add_manual.html', data_test=data_test.to_json(orient='records'), data_test_json = data_test_json, admin_name=admin_name())
+    return redirect(url_for('land_predict.stage_manual_data'))
 
 @lp.route('/result-manual-data/<alghoritm>/<dataset>', methods=('GET', 'POST'))
 def result_manual_data(alghoritm, dataset):

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block css_url %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/pred/table_result.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/pred/form.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pred/table_result.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pred/form.css') }}">
 {% endblock css_url %}
 
 {% block content %}
@@ -10,10 +10,11 @@
     <div class="w-4/5">
         <div id="content-header" class="w-full bg-header-predictions-color rounded-md p-6 mb-8">
             <h1 class="text-2xl font-semibold font-predictions-color-header">Hasil Prediksi Data Manual</h1>
-           <!-- <p class="text-slate-50 mt-3 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, nesciunt.
+            <!-- <p class="text-slate-50 mt-3 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, nesciunt.
             </p> -->
         </div>
-        <div class="scroll-table scroll-smooth focus:scroll-auto overflow-x-auto shadow-md sm:rounded-lg px-5 py-3 scrollbar-hide md:scrollbar-default">
+        <div
+            class="scroll-table scroll-smooth focus:scroll-auto overflow-x-auto shadow-md sm:rounded-lg px-5 py-3 scrollbar-hide md:scrollbar-default">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                 <thead
                     class="text-xs text-center text-white uppercase bg-primary-color  dark:bg-gray-700 dark:text-gray-400">
@@ -28,7 +29,7 @@
         <div>
             <p class="font-semibold text-sm">{{ dimensions[0] }} rows X {{ dimensions[1] }} columns</p>
         </div>
-
+        <!-- graph content -->
         <div class="flex flex-col my-10 w-full">
             <div class="flex justify-center mt-10">
                 <h1 class="text-2xl font-semibold font-predictions-color-header -mb-10" style="z-index: 2;">Visualisasi
@@ -52,9 +53,27 @@
                 </div>
             </div>
         </div>
+
+        <!-- location content -->
+
+        <div id="map-info">
+            <div class="flex mt-10">
+                <h1 class="text-lg font-semibold font-predictions-color-header">Peta Sebaran Bawang Merah</h1>
+            </div>
+            <div class="flex justify-center">
+                <div class="w-4/6">
+                    <div id="map" class="w-11/12 m-3 my-7 shadow-md rounded-md flex items-center"
+                        style="min-height: 380px;">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- informations content -->
+
     </div>
 
-    <!-- bar chart -->
+
 
 
 </div>
@@ -66,30 +85,31 @@
     const tbody = document.getElementById('tbody');
     const tr_thead = document.getElementById('tr-thead');
     const columns = ['hum', 'soil_nitro1', 'soil_phos1', 'soil_pot1', 'soil_temp1', 'soil_ph1', 'temp', 'Nilai Asli',
-        'Nilai Prediksi']
-    
-    for(let i = 0; i < columns.length; i++) {
+        'Nilai Prediksi'
+    ]
+
+    for (let i = 0; i < columns.length; i++) {
         var th = document.createElement('th');
         th.setAttribute('scope', 'col')
         th.setAttribute('class', 'px-4 py-2');
         th.innerHTML = columns[i];
         tr_thead.appendChild(th);
     }
-    
+
     for (property in data_test) {
         data = data_test[property]
         const tr_body = document.createElement('tr');
         tr_body.setAttribute('class', 'bg-white border-b');
         for (item in data) {
             tbody.appendChild(tr_body);
-            console.log(item,data[item])
+            console.log(item, data[item])
             if (item != 'id_m') {
                 const td = document.createElement('td');
                 td.setAttribute('class', 'px-4 py-4 whitespace-nowrap');
                 td.innerText = data[item];
                 tr_body.appendChild(td);
 
-                if (item == 'prediction' || item == 'output'){
+                if (item == 'prediction' || item == 'output') {
                     if (data[item] == 'Cocok') {
                         td.setAttribute('class', 'px-4 py-4 whitespace-nowrap text-green-500');
                     } else {
@@ -99,6 +119,15 @@
             }
         }
     }
+    var area = JSON.parse('{{ area | safe }}')[0];
+    var map = L.map('map').setView([area.area_latitude, area.area_longitude], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+    }).addTo(map);
+
+    L.marker([area.area_latitude, area.area_longitude]).addTo(map)
+        .bindPopup(`<b>${area.area_name}</b>.<br> Easily customizable.`)
+        .openPopup();
 </script>
-    
+
 {% endblock content %}

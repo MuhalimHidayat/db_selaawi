@@ -134,6 +134,8 @@ def stage_dataset(page=1):
 @lp.route('/stage-dataset/<int:id>/delete')
 def delete_dataset(id):
     # dataset = db.session.execute(db.select(Dataset).filter_by(id=id)).scalar()
+    # delete area first before delete dataset based on dataset.id_d == area.id_d
+    Area.query.filter_by(id_d=id).delete()
     dataset = db.get_or_404(Dataset, id)
     db.session.delete(dataset)
     db.session.commit()
@@ -163,6 +165,10 @@ def search_dataset():
 
 @lp.route('/stage-dataset/<string:file_hash>/predict')
 def predict_dataset(file_hash):
+    if 'id' not in session:
+        flash('You must be logged in to access this page', 'danger')
+        return redirect(url_for('auth.sign_in'))
+
     dataset = db.session.execute(db.select(Dataset).filter_by(file_hash=file_hash)).scalar()
     df = pd.read_excel('app/blueprints/land_predict/static/datasets/'+dataset.file_hash)
     # melihat kolom apa saja pada dataset df
@@ -196,5 +202,13 @@ def predict_dataset(file_hash):
     fig.savefig(buf, format="png")
     # Embed the result in the htl output
     data = base64.b64encode(buf.getbuffer()).decode("ascii")
+
+    # area
     
-    return render_template('pre_content/result/dataset.html', prediction_data=Markup(prediction_data), dimensions=[rows, cols], data_test = df.to_json(orient='records'), img=data, nilai_tidak=nilai_tidak, nilai_cocok=nilai_cocok, admin_name=admin_name())
+    area = db.session.execute(db.select(Area).filter_by(id_d=dataset.id_d)).scalar_one()
+    area = {key: value for key, value in area.__dict__.items() if not key.startswith('_sa_')}
+    # area to json
+    area = pd.DataFrame([area]).to_json(orient='records')
+    
+    
+    return render_template('pre_content/result/dataset.html', prediction_data=Markup(prediction_data), dimensions=[rows, cols], data_test = df.to_json(orient='records'), img=data, nilai_tidak=nilai_tidak, nilai_cocok=nilai_cocok, admin_name=admin_name(), area=area)

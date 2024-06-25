@@ -34,3 +34,17 @@
     cursor: pointer;
     padding: 10px;
 }
+
+.text-move2 {
+    font-size: 30px;
+    /* Contoh ukuran font untuk teks */
+    line-height: 1.2;
+    /* Contoh line-height untuk teks */
+}
+
+.typed-cursor {
+    font-size: 30px;
+    /* Sesuaikan ukuran kursor agar sesuai dengan teks */
+    vertical-align: bottom;
+    /* Contoh align kursor */
+}

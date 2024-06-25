@@ -29,14 +29,15 @@
         <div class="bg-navbar-color flex justify-between items-center px-14 py-3" id="navbar">
             <div id="logo">
                 <a href="/">
-                    <img class="w-16" src="{{ url_for('static', filename='img/logotanera.png') }}" alt="">
+                    <img class="w-24" src="{{ url_for('static', filename='img/logotanera.png') }}" alt="">
                 </a>
             </div>
             <div class="flex items-center" id="navbar-content">
                 <ul class="flex justify-center gap-x-5">
                     <li><a href="#about-us">Tentang Kami</a></li>
                     <li><a href="#education-selaawi">Edukasi Tanera</a></li>
-                    <li><a href="{{ url_for('data_sample') }}">Hubungi Kami</a></li>
+                    <li><a href="#address">Lokasi</a></li>
+                    <li><a href="mailto:irbahluthfifah@gmail.com?subject=Halo%20saya%20saya%20mau%20bertanya">Hubungi Kami</a></li>
                 </ul>
                 <div class="ms-5">
                     <button class="bg-button-user-color hover:bg-orange-400 text-white font-bold py-2 px-6 rounded"><a
@@ -61,11 +62,11 @@
                             alt="">
                     </div>
 
-                    <div class="basis-8/12 pt-1 px-3 ">
+                    <div class="basis-9/12 pt-1 px-3">
                         <h4 class="text-xl font-semibold mb-3 text-center">Website Tanera</h4>
-                        <p class="text-xs text-left">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos
-                            optio accusamus, vel eaque minus doloribus deleniti, dolore numquam quis delectus voluptatem
-                            unde beatae atque aut voluptate excepturi aspernatur a nam! </p>
+                        <p class="text-xs text-left">Aplikasi tanera merupakan aplikasi berbasis website yang dapat membantu para penyuluh dan petani dengan
+                            memberikan informasi seputar data klasifiakasi, melakukan sistem klasifikasi kecocokan tanah menggunakan 7
+                            parameter.</p>
                         <div class="flex mt-4 gap-x-6">
                             <div class="flex gap-x-3">
                                 <i class="fa-regular fa-map fa-lg pt-4"></i>
@@ -78,7 +79,7 @@
                                 <i class="fa-regular fa-clock fa-lg pt-4"></i>
                                 <div>
                                     <p class="font-bold text-gray-500">Jam Operasional : </p>
-                                    <p class="font-bold">Sen - Jum 8.00 - 17.00</p>
+                                    <p class="font-bold">Sen - Jum / 8.00 - 17.00</p>
                                 </div>
                             </div>
                         </div>
@@ -103,8 +104,8 @@
 
             </div>
 
-            <div class="flex justify-center mt-6 mb-3">
-                <p>copyright 2018 Selaawi Website </p>
+            <div class="flex justify-center mt-16 mb-3">
+                <p>copyright 2024 Selaawi Website </p>
             </div>
         </div>
         <!-- end-footer -->
@@ -116,3 +117,15 @@
 </body>
 
 </html>
+<script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+<script>
+    var typed2 = new Typed('.text-move2', {
+            strings: ['Sistem klasifikasi kecocokan Lahan Kecamatan Selaawi'],
+            typeSpeed: 100,
+            backSpeed: 0,
+            fadeOut: true,
+            loop: true
+        });
+
+</script>

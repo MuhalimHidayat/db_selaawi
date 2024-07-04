@@ -163,6 +163,7 @@ def update_manual_data():
 
 @lp.route('/update-manual-data/<dataset>', methods=['GET', 'POST'])
 def update_manual_data2(dataset):
+    print(dataset)
     if 'id' not in session:
         flash('You must be logged in to access this page', 'danger')
         return redirect(url_for('auth.sign_in'))

@@ -4,8 +4,9 @@ import hashlib
 import time
 import os
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for, send_from_directory
+    Blueprint, flash, g, redirect, render_template, request, session, url_for, send_from_directory, jsonify
 )
+import requests
 from markupsafe import escape, Markup
 import pandas as pd
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -45,7 +46,16 @@ def dashboard():
         flash('You must be logged in to access this page','danger')
         return redirect(url_for('auth.sign_in'))
     
-    return render_template('pre_content/dashboard.html',admin_name=admin_name())
+    dashboard_api_data = "https://alimhidayat.pythonanywhere.com/dashboard/dataApi1"
+    headers = {'Accept': 'application/json'}  # mengatur header request
+    response = requests.get(dashboard_api_data, headers=headers)
+    if response.status_code == 200:
+        data = response.json()
+        return render_template('pre_content/dashboard.html', data=data, admin_name=admin_name())
+    else:
+        return jsonify({'error': 'Gagal mengambil data'}), 500
+            
+    # return render_template('pre_content/dashboard.html',admin_name=admin_name())
 
 # dataset upload
 def allowed_file(filename):

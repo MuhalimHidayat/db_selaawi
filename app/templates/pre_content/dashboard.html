@@ -10,7 +10,7 @@
          <div class="w-full flex flex-wrap items-center justify-around lg:justify-between mb-5" id="scrolling-wrapper">
              <div class="flex flex-col justify-around w-48 h-28 border-dashboard rounded-lg place-content-center font-dashboard px-5 py-2 ">
                  <div class="flex justify-between">
-                     <h2 class="font-dashboard" id="tulisan-dashboard">24&deg;</h2>
+                     <h2 class="font-dashboard" id="temp"></h2>
                      <img class="rounded-md" id="gambar1" src="{{ url_for('static', filename='img/Temperature.png') }}"
                          alt="">
                  </div>
@@ -18,7 +18,7 @@
              </div>
              <div class="flex flex-col justify-around w-48 h-28 border-dashboard rounded-lg place-content-center font-dashboard px-5 py-2 ">
                  <div class="flex justify-between">
-                     <h2 class="font-dashboard" id="tulisan-dashboard">24&#37;</h2>
+                     <h2 class="font-dashboard" id="hum"></h2>
                      <img class="rounded-md" id="gambar1" src="{{ url_for('static', filename='img/humidity.png') }}"
                          alt="">
                  </div>
@@ -26,14 +26,14 @@
              </div>
              <div class="flex flex-col justify-around w-48 h-28 border-dashboard rounded-lg place-content-center font-dashboard px-5 py-2 ">
                  <div class="flex justify-between">
-                     <h2 class="font-dashboard" id="tulisan-dashboard">24mm</h2>
+                     <h2 class="font-dashboard" id="rain"></h2>
                      <img class="rounded-md" id="gambar1" src="{{ url_for('static', filename='img/rain.png') }}" alt="">
                  </div>
                  <p>Curah Hujan</p>
              </div>
              <div class="flex flex-col justify-around w-48 h-28 border-dashboard rounded-lg place-content-center font-dashboard px-5 py-2 ">
                  <div class="flex justify-between">
-                     <h2 class="font-dashboard" id="tulisan-dashboard">24m/s</h2>
+                     <h2 class="font-dashboard" id="win"></h2>
                      <img class="rounded-md" id="gambar1" src="{{ url_for('static', filename='img/wind.png') }}" alt="">
                  </div>
                  <p>Kecepatan Angin</p>
@@ -73,8 +73,24 @@
 
 
  </div>
+ <div id="data-dashboard" data='{{ data | tojson | safe }}' style="display: none;"></div>
 
+ <script>
+    // var dashboardRealTime = http://127.0.0.1:8001/dashboard/dataApi1
+    var dataDashboard = JSON.parse(document.getElementById('data-dashboard').getAttribute('data'));
+    console.log(dataDashboard);
+    var temp = document.getElementById('temp');
+    var hum = document.getElementById('hum');
+    var rain = document.getElementById('rain');
+    var win = document.getElementById('win');
 
+    temp.innerHTML = dataDashboard.temperature + ' &deg;C';
+    hum.innerHTML = dataDashboard.humidity + ' &#37;';
+    rain.innerHTML = dataDashboard.rainfall + ' mm';
+    win.innerHTML = dataDashboard.wind + ' m/s';
+
+    
+ </script>
 
 
  {% endblock content %}

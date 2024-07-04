@@ -22,37 +22,67 @@
         
                     </tr>
                 </thead>
-                <tbody class="">
-                    <tr class="bg-white border-b dark:bg-gray-800" id="tbody-tr">
+                <tbody class="" id="tbody">
+                    <tr class="bg-white border-b dark:bg-gray-800">
         
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
+    <!-- <p>{{ data }}</p> -->
 </div>
 
 
 <script>
-    var data = JSON.parse('{{ data | safe }}')[0];
-    // console.log(data['Nilai Prediksi'])
+    var data = JSON.parse('{{ data | tojson | safe }}');
+    var tbody = document.getElementById('tbody')
     var thead_tr = document.getElementById('thead-tr')
-    var tbody_tr = document.getElementById('tbody-tr')
-    for (const key in data) {
+    // var tbody_tr = document.getElementById('tbody-tr')
+    // header table
+    table_head = ['hum', 'soil nitro', 'soil phos', 'soil pot', 'soiltemp', 'soil_ph', 'temp', 'nilai_prediksi', 'tanggal dan waktu']
+
+    // Mapping of table_head values to data keys
+    var keyMap = {
+        'hum': 'hum',
+        'soil nitro': 'soil_nitro',
+        'soil phos': 'soil_phos',
+        'soil pot': 'soil_pot',
+        'soiltemp': 'soil_temp',
+        'soil_ph': 'soil_ph',
+        'temp': 'temp',
+        'nilai_prediksi': 'nilai_prediksi',
+        'tanggal dan waktu': 'timeStamp'
+    };
+
+    // Process the data to match the order in table_head
+    var processedData = data.map(item => {
+        var orderedItem = {};
+        table_head.forEach(header => {
+            var key = keyMap[header];
+            orderedItem[header] = item[key];
+        });
+        return orderedItem;
+    });
+
+    for (const key in table_head){
         var th = document.createElement('th')
         th.setAttribute('scope', 'col')
         th.setAttribute('class', 'px-6 py-3')
-        th.innerText = key
+        th.innerText = table_head[key]
         thead_tr.appendChild(th)
-
-        var td = document.createElement('td')
-        td.setAttribute('class', 'px-6 py-4 whitespace-nowrap ')
-        td.innerText = data[key]
-        // if (data['Nilai Prediksi'] == 'Tidak') {
-        //     td.setAttribute('class', 'px-6 py-4 whitespace-nowrap text-red-500')
-        // }
-        tbody_tr.appendChild(td)
     }
+    
+    processedData.forEach(item => {
+        var tr = document.createElement('tr');
+        table_head.forEach(header => {
+            var td = document.createElement('td');
+            td.setAttribute('class', 'px-6 py-4 whitespace-nowrap');
+            td.innerText = item[header]; // Use the header as key to get the correct value from item
+            tr.appendChild(td);
+        });
+        tbody.appendChild(tr); // Append the completed row to the table body
+    });
     
 </script>
 {% endblock content %}

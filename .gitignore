@@ -8,11 +8,10 @@ instance/
 *.csv
 *.log
 
-migration/
+# migration/
 
 # datasets
 /app/blueprints/land_predict/static/datasets
 # dependencies
 /app/node_modules
-# build
-/app/static/dist
+/app/static/img/uploads

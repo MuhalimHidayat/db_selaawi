@@ -31,7 +31,7 @@ def real_time_data():
         start_date_formatted = start_date_obj.strftime("%Y-%m-%d %H:%M")
         end_date_formatted = end_date_obj.strftime("%Y-%m-%d %H:%M")
         
-        api_data = f"https://alimhidayat.pythonanywhere.com/real-time/dataApi2?start_date={start_date_formatted}&end_date={end_date_formatted}"
+        api_data = f"https://flask-selaawi-api.vercel.app/real-time/dataApi2?start_date={start_date_formatted}&end_date={end_date_formatted}"
         headers = {'Accept': 'application/json'}  # mengatur header request
         response = requests.get(api_data, headers=headers)
         
@@ -39,8 +39,11 @@ def real_time_data():
             "start_date": start_date_formatted,
             "end_date": end_date_formatted
         }
+        # return api_data
         if response.status_code == 200:
             data = response.json()
+            # return "nilai"
+            # return api_data
             return render_template('pre_content/result/real_time.html', data=data, admin_name=admin_name(), date=date)
         else:
             return jsonify({'error': 'Gagal mengambil data'}), 500

@@ -3,9 +3,11 @@ from flask import Flask, send_from_directory, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import joblib
-
+import psycopg2
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
+# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://selaawi_owner:kS5TYUyR0dcN@ep-still-recipe-a1p69oue.ap-southeast-1.aws.neon.tech/selaawi?sslmode=require"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 # db.init_app(app)
 migrate = Migrate(app, db)

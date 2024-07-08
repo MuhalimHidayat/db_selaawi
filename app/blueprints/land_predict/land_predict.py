@@ -46,7 +46,8 @@ def dashboard():
         flash('You must be logged in to access this page','danger')
         return redirect(url_for('auth.sign_in'))
     
-    dashboard_api_data = "https://alimhidayat.pythonanywhere.com/dashboard/dataApi1"
+    # dashboard_api_data = "https://alimhidayat.pythonanywhere.com/dashboard/dataApi1"
+    dashboard_api_data = "https://flask-selaawi-api.vercel.app/dashboard/dataApi1"
     headers = {'Accept': 'application/json'}  # mengatur header request
     response = requests.get(dashboard_api_data, headers=headers)
     if response.status_code == 200:

@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/292e6747-23b0-43f1-b609-f5702bea2b40/resourceGroups/tanera-selaawi_group/providers/Microsoft.Web/sites/tanera-selaawi",
+    "appService.deploySubpath": "."
+}

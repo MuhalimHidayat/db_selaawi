@@ -1,14 +1,12 @@
 {% extends 'base.html' %}
 {% block css_url %}
-
+<!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/pred/form.css') }}"> -->
 {% endblock css_url %}
 {% block content %}
 <div class="flex justify-center w-full">
     <div class="w-4/5">
         <div id="content-header" class="w-full bg-header-predictions-color rounded-md p-6 mb-8">
             <h1 class="text-2xl font-semibold font-predictions-color-header">Real Time Data</h1>
-            <p class="text-slate-50 mt-3 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, nesciunt.
-            </p>
         </div>
         <div class="overflow-x-auto shadow-md sm:rounded-lg px-5 py-3">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -26,13 +24,13 @@
             </table>
         </div>
         <!-- tombol prediksi -->
-        <div id="prediksi-path" data-url="{{ url_for('land_predict.real_time_data_predict') }}"></div>
+        <div id="prediksi-path" data-url="{{ url_for('land_predict.real_time_data_predict', alghoritm=alghoritm) }}"></div>
         <div id="date-informs" date-inf='{{date | tojson | safe}}'></div>
         <div id="start_date" date-start={{start_date}}></div>
         <div id="end_date" date-end={{end_date}}></div>
         
         <div class="flex justify-end me-14 my-5">
-            <a id="prediksi-button" href="" class="px-8 py-3 rounded bg-primary-color font-medium text-slate-100" id="prediksi-button">Lihat
+            <a id="prediksi-button" href="" class="px-5 py-2 rounded bg-button-user-color font-medium text-slate-100" id="prediksi-button">Lihat
                 Prediksi</a>
         </div>
     </div>
@@ -55,7 +53,7 @@
     for (const data_parameter in data[0]){
         var th = document.createElement('th')
         th.setAttribute('scope', 'col')
-        th.setAttribute('class', 'px-6 py-3')
+        th.setAttribute('class', 'px-6 py-3 text-white')
         
         // jika data_parameter sama dengan id_realtime maka skip
         if (data_parameter == 'id_realtime') {

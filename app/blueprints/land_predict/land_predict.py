@@ -164,15 +164,21 @@ def search_dataset():
     if 'id' not in session:
         flash('You must be logged in to access this page', 'danger')
         return redirect(url_for('auth.sign_in'))
-    page = request.args.get('page')
+    page = request.args.get('page', 1)  # Provide a default value of 1 if 'page' is not found
+    try:
+        page = int(page)  # Ensure 'page' is converted to an integer
+    except ValueError:
+        page = 1  # Set to default value if conversion fails
+    start_number = (page - 1) * 5
     search = request.form['keyword']
+    
     
     # jika nilai search kosong
     if search == '' or search == ' ':
         return redirect(url_for('land_predict.stage_dataset', page=1))
     
     datasets = Dataset.query.filter(Dataset.file_name.like('%'+search+'%')).paginate(page=page, per_page=5, error_out=False)
-    return render_template('pre_content/stage/dataset.html', datasets=datasets, admin_name=admin_name())
+    return render_template('pre_content/stage/dataset.html', datasets=datasets, admin_name=admin_name(), start_number=start_number)
 
 @lp.route('/stage-dataset/<string:file_hash>/predict')
 def predict_dataset(file_hash):
@@ -181,9 +187,18 @@ def predict_dataset(file_hash):
         return redirect(url_for('auth.sign_in'))
 
     dataset = db.session.execute(db.select(Dataset).filter_by(file_hash=file_hash)).scalar()
+    # Cek jika dataset adalah None
+    if dataset is None:
+        flash('Dataset not found.', 'danger')
+        return redirect(url_for('land_predict.stage_dataset', page=1))
+    
     df = pd.read_excel('app/blueprints/land_predict/static/datasets/'+dataset.file_hash)
+    print(df)
+    
+
     # melihat kolom apa saja pada dataset df
     x = df['prediction'].value_counts()
+    
     # print(x)
     nilai_tidak = 0 if 'Tidak' not in x.index else df['prediction'].value_counts()['Tidak']
     nilai_cocok = 0 if 'Cocok' not in x.index else df['prediction'].value_counts()['Cocok']
@@ -196,8 +211,8 @@ def predict_dataset(file_hash):
     values = [x[val] for val in labels]
     
     if len(x.index) > 1:
-        color = ((232/255, 106/255, 51/255, 1), (51/255, 106/255, 232/255, 1))
-    ax.bar(labels, values, color=color, label=labels)
+        color = (color, color)
+    ax.bar(labels, values, color=color)
     
     ax.set_ylabel("Jumlah Data")
     ax.set_xlabel("Label Prediksi")
@@ -214,12 +229,11 @@ def predict_dataset(file_hash):
     # Embed the result in the htl output
     data = base64.b64encode(buf.getbuffer()).decode("ascii")
 
-    # area
-    
-    area = db.session.execute(db.select(Area).filter_by(id_d=dataset.id_d)).scalar_one()
-    area = {key: value for key, value in area.__dict__.items() if not key.startswith('_sa_')}
-    # area to json
-    area = pd.DataFrame([area]).to_json(orient='records')
+    statement = db.select(Area).join(Dataset, Dataset.id_d == Area.id_d).filter(Dataset.id == session['id'])
+    area = db.session.execute(statement).scalars()
+    area = [{key: value for key, value in data.__dict__.items() if not key.startswith('_sa_')} for data in area]
+    area = pd.DataFrame(area)
+    area = area.to_json(orient='records')
     
     
     return render_template('pre_content/result/dataset.html', prediction_data=Markup(prediction_data), dimensions=[rows, cols], data_test = df.to_json(orient='records'), img=data, nilai_tidak=nilai_tidak, nilai_cocok=nilai_cocok, admin_name=admin_name(), area=area)

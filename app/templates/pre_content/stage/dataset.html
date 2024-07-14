@@ -43,7 +43,7 @@
                             No
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Nama
+                            Titik Pengukuran
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Prediksi
@@ -186,8 +186,7 @@
 
     for (let i = 0; i < area.length; i++) {
         var marker = L.marker([area[i].area_latitude, area[i].area_longitude]).addTo(map);
-        marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
-        marker.bindPopup(`<b>${area[i].area_name}</b><br>Ini Akan jadi alamat`).closePopup();
+        marker.bindPopup(`<b>${area[i].area_name}</b>`).closePopup();
     }
     var popup = L.popup();
 

@@ -22,7 +22,7 @@
           <div class="flex flex-col gap-y-3 p-6">
             <!-- area -->
             <div class="form-group">
-              <label for="area">Area</label>
+              <label for="area">Titik Pengukuran</label>
               <input type="text"
                 class="shadow appearance-none border rounded w-2/4 py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="area" name="area" placeholder="Lokasi Pengambilan Nilai Parameter" required>
@@ -90,14 +90,23 @@
 
     </div>
     
-    <div class="my-10 font-base-color" id="informations">
+    
+
+  </div>
+  <!-- /#page-content-wrapper -->
+
+  <br>
+</div>  
+<div class="mt-10 mb-0 py-10 font-base-color bg-predictions-content-color" id="informations">
+  <div class="w-4/5 flex justify-center">
+    <div>
       <div class="flex gap-x-2 items-center mb-3">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
         </svg>
         <h3 class="text-xl font-semibold">Informasi</h3>
       </div>
-
+    
       <ul class="list-disc ms-8" id="info-parameter">
         <li>hum = humidty (kelembaban tanah)</li>
         <li>soil_nitro = soil nitrogen (nitrogen)</li>
@@ -108,11 +117,7 @@
         <li>temp = temperature (temperatur)</li>
       </ul>
     </div>
-
+    
   </div>
-  <!-- /#page-content-wrapper -->
-
-  <br>
-
-  <!-- <h1>{{prediction}}</h1> -->
+</div>
   {% endblock content %}

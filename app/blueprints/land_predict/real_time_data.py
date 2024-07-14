@@ -9,6 +9,8 @@ import pandas as pd
 from app import model, model_dt, model_rf, db
 from flask import session, flash, url_for
 import base64
+from datetime import datetime
+import pytz
 from io import BytesIO
 from app.blueprints.auth.models.Admin import Admin
 api = Api(lp)
@@ -48,8 +50,17 @@ def real_time_data():
         if response.status_code == 200:
             data = response.json()
             # return "nilai"
-            # return api_data
-            return render_template('pre_content/result/real_time.html', data=data, admin_name=admin_name(), alghoritm=alghoritm, date=date)
+            dataset = pd.DataFrame(data)
+            dataset = dataset[['timeStamp','hum', 'soil_nitro', 'soil_phos', 'soil_pot', 'soil_temp', 'soil_ph', 'temp']]
+            # merubah nilai_prediksi 0 = cocok, 1 = tidak cocok
+            # dataset['nilai_prediksi'] = dataset['nilai_prediksi'].apply(lambda x: 'Tidak' if x == 1 else 'Cocok')
+            
+            # merubah format timestamp
+            dataset['timeStamp'] = pd.to_datetime(dataset['timeStamp'])
+            dataset['timeStamp'] = dataset['timeStamp'].dt.strftime('%Y-%m-%d %H:%M:%S')
+            rows, cols = dataset.shape
+            dataset = dataset.to_dict(orient='records')
+            return render_template('pre_content/result/real_time.html', data=dataset, admin_name=admin_name(), alghoritm=alghoritm, date=date, dimensions=[rows, cols])
         else:
             return jsonify({'error': 'Gagal mengambil data'}), 500
     return render_template('pre_content/real_time_data.html', data={}, admin_name=admin_name())
@@ -99,7 +110,13 @@ def real_time_data_predict(alghoritm):
         dataset['nilai_prediksi'] = prediction
         # mengubah urutan kolom 
         
-        dataset = dataset[['hum', 'soil_nitro', 'soil_phos', 'soil_pot', 'soil_temp', 'soil_ph', 'temp', 'nilai_prediksi','timeStamp']]
+        dataset = dataset[['timeStamp','hum', 'soil_nitro', 'soil_phos', 'soil_pot', 'soil_temp', 'soil_ph', 'temp', 'nilai_prediksi']]
+        # merubah nilai_prediksi 0 = cocok, 1 = tidak cocok
+        dataset['nilai_prediksi'] = dataset['nilai_prediksi'].apply(lambda x: 'Tidak' if x == 1 else 'Cocok')
+        
+        # merubah format timestamp
+        dataset['timeStamp'] = pd.to_datetime(dataset['timeStamp'])
+        dataset['timeStamp'] = dataset['timeStamp'].dt.strftime('%Y-%m-%d %H:%M:%S')
         rows, cols = dataset.shape
         # menghitung jumlah nilai prediksi
         x = dataset['nilai_prediksi'].value_counts()
@@ -114,7 +131,7 @@ def real_time_data_predict(alghoritm):
         values = [x[val] for val in labels]
         
         if len(x.index) > 1:
-            color = ((232/255, 106/255, 51/255, 1), (51/255, 106/255, 232/255, 1))
+            color = (color, color)
         ax.bar(labels, values, color=color, label=labels)
         
         ax.set_ylabel("Jumlah Data")
@@ -129,8 +146,7 @@ def real_time_data_predict(alghoritm):
         data_img = base64.b64encode(buf.getbuffer()).decode("ascii")
         # mengubah menjadi json
         dataset = dataset.to_dict(orient='records')
-        print(admin_name.image_file)
-        return "memanggil"
-        return render_template('pre_content/result/result_real_time.html',admin_name=admin_name(), img=data_img ,data=dataset, dimension=[rows, cols], nilai_tidak=nilai_tidak, nilai_cocok=nilai_cocok, alghoritm=alghoritm)
+        # return admin_name().image_file
+        return render_template('pre_content/result/result_real_time.html',admin_name=admin_name(), img=data_img ,data=dataset, dimensions=[rows, cols], nilai_tidak=nilai_tidak, nilai_cocok=nilai_cocok, alghoritm=alghoritm)
     else:
         return jsonify({'error': 'Gagal mengambil data'}), 500

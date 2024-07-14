@@ -257,11 +257,11 @@ def result_manual_data(alghoritm, dataset):
     values = [x[val] for val in labels]
     
     if len(x.index) > 1:
-        color = ((65/255, 100/255, 74/255, 1),(232/255, 106/255, 51/255, 1))
-    ax.bar(labels, values, color=color, label=labels)
+        color = (color,color)
+    ax.bar(labels, values, color=color)
     
     ax.set_ylabel("Jumlah Data")
-    ax.set_xlabel("Label Prediksi")
+    # ax.set_xlabel("Label Prediksi")
     # ax.set_title("Persebaran Bawang Merah Berdasarkan Prediksi")
     ax.set_axisbelow(True)
     ax.yaxis.grid(True, color='#EEEEEE')

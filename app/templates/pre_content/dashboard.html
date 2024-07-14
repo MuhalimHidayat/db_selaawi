@@ -1,7 +1,7 @@
  {% extends 'base.html' %}
 
  {% block css_url %}
- <link rel="stylesheet" href="{{ url_for('static', filename='css/pred/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pred/dashboard.css') }}">
  {% endblock css_url %}
 
  {% block content %}
@@ -10,7 +10,7 @@
          <div class="w-full flex flex-wrap items-center justify-around lg:justify-between" id="scrolling-wrapper">
              <div class="flex flex-col justify-around w-48 h-28 border-dashboard rounded-lg place-content-center font-dashboard px-5 py-2 ">
                  <div class="flex justify-between">
-                     <h2 class="font-dashboard" id="temp"></h2>
+                     <h2 class="font-semibold text-xl" id="temp"></h2>
                      <img class="rounded-md" id="gambar1" src="{{ url_for('static', filename='img/Temperature.png') }}"
                          alt="">
                  </div>
@@ -18,7 +18,7 @@
              </div>
              <div class="flex flex-col justify-around w-48 h-28 border-dashboard rounded-lg place-content-center font-dashboard px-5 py-2 ">
                  <div class="flex justify-between">
-                     <h2 class="font-dashboard" id="hum"></h2>
+                     <h2 class="font-semibold text-xl" id="hum"></h2>
                      <img class="rounded-md" id="gambar1" src="{{ url_for('static', filename='img/humidity.png') }}"
                          alt="">
                  </div>
@@ -26,14 +26,14 @@
              </div>
              <div class="flex flex-col justify-around w-48 h-28 border-dashboard rounded-lg place-content-center font-dashboard px-5 py-2 ">
                  <div class="flex justify-between">
-                     <h2 class="font-dashboard" id="rain"></h2>
+                     <h2 class="font-semibold text-xl" id="rain"></h2>
                      <img class="rounded-md" id="gambar1" src="{{ url_for('static', filename='img/rain.png') }}" alt="">
                  </div>
                  <p>Curah Hujan</p>
              </div>
              <div class="flex flex-col justify-around w-48 h-28 border-dashboard rounded-lg place-content-center font-dashboard px-5 py-2 ">
                  <div class="flex justify-between">
-                     <h2 class="font-dashboard" id="win"></h2>
+                     <h2 class="font-semibold text-xl" id="win"></h2>
                      <img class="rounded-md" id="gambar1" src="{{ url_for('static', filename='img/wind.png') }}" alt="">
                  </div>
                  <p>Kecepatan Angin</p>

@@ -9,7 +9,7 @@
 <div class="flex justify-center w-full">
     <div class="w-4/5">
         <div id="content-header" class="w-full bg-header-predictions-color rounded-md p-6 mb-8">
-            <h1 class="text-2xl font-semibold font-predictions-color-header">Hasil Prediksi Data Manual</h1>
+            <h1 class="text-2xl font-semibold font-predictions-color-header">Hasil Prediksi Dataset</h1>
             <!-- <p class="text-slate-50 mt-3 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, nesciunt.
             </p> -->
         </div>
@@ -41,18 +41,31 @@
                 </div>
                 <div class="w-3/6 flex flex-col gap-y-5 justify-center" id="bar-chart-description">
                     <div
-                        class="description shadow-md rounded-md font-predictions-color-header flex flex-col gap-y-3 items-center justify-center">
+                        class=" py-4 description shadow-md rounded-md font-predictions-color-header flex flex-col gap-y-3 items-center justify-center">
                         <h3 class="text-xl">Total Label <span class="font-bold">"Cocok"</span></h3>
                         <h1 class="font-bold text-6xl">{{nilai_cocok}}</h1>
                     </div>
                     <div
-                        class="description shadow-md rounded-md font-predictions-color-header flex flex-col gap-y-3 items-center justify-center">
+                        class="py-4 description shadow-md rounded-md font-predictions-color-header flex flex-col gap-y-3 items-center justify-center">
                         <h3 class="text-xl">Total Label <span class="font-bold">"Tidak Cocok"</span></h3>
                         <h1 class="font-bold text-6xl">{{nilai_tidak}}</h1>
                     </div>
                 </div>
             </div>
         </div>
+
+        {% if nilai_cocok > nilai_tidak %}
+        <p class="ml-7">Hasil model perhitungan menunjukan kategori lahan <b>cocok </b> lebih banyak dari pada kategori lahan <b>tidak cocok</b>. </p>
+
+        {% elif nilai_cocok == 0 %}
+        <p class="ml-7">Hasil model perhitungan menunjukan hanya kategori lahan <b>Tidak cocok </b> saja. </p>
+
+        {% elif nilai_tidak == 0 %}
+        <p class="ml-7">Hasil model perhitungan menunjukan hanya kategori lahan <b>Cocok </b> saja. </p>
+
+        {% else %}
+        <p class="ml-7">Hasil model perhitungan menunjukan kategori lahan <b>tidak cocok </b> lebih banyak dari pada kategori lahan <b>cocok</b>. </p>
+        {% endif %}
 
         <!-- location content -->
 
@@ -105,15 +118,18 @@
             console.log(item, data[item])
             if (item != 'id_m') {
                 const td = document.createElement('td');
+                var p_td = document.createElement('p');
                 td.setAttribute('class', 'px-4 py-4 whitespace-nowrap');
-                td.innerText = data[item];
+                p_td.innerText = data[item];
+                // td.innerText = data[item];
+                td.appendChild(p_td);
                 tr_body.appendChild(td);
 
                 if (item == 'prediction' || item == 'output') {
                     if (data[item] == 'Cocok') {
-                        td.setAttribute('class', 'px-4 py-4 whitespace-nowrap text-green-500');
+                        p_td.setAttribute('class', 'whitespace-nowrap text-white bg-cocok rounded-xl py-0 px-3');
                     } else {
-                        td.setAttribute('class', 'px-4 py-4 whitespace-nowrap text-red-500');
+                        p_td.setAttribute('class', 'whitespace-nowrap text-white bg-tidak-cocok rounded-xl py-0 px-3');
                     }
                 }
             }
@@ -126,7 +142,7 @@
     }).addTo(map);
 
     L.marker([area.area_latitude, area.area_longitude]).addTo(map)
-        .bindPopup(`<b>${area.area_name}</b>.<br> Easily customizable.`)
+        .bindPopup(`<b>${area.area_name}</b>`)
         .openPopup();
 </script>
 

@@ -62,7 +62,19 @@
             </div>
 
         </div>
-        <p class="ml-7">Hasil model perhitungan menunjukan kategori lahan <b>cocok </b> untuk di tanami tanaman bawang merah. </p>
+        
+        {% if nilai_cocok > nilai_tidak %}
+        <p class="ml-7">Hasil model perhitungan menunjukan kategori lahan <b>cocok </b> lebih banyak dari pada kategori lahan <b>tidak cocok</b>. </p>
+
+        {% elif nilai_cocok == 0 %}
+        <p class="ml-7">Hasil model perhitungan menunjukan hanya kategori lahan <b>Tidak cocok </b> saja. </p>
+
+        {% elif nilai_tidak == 0 %}
+        <p class="ml-7">Hasil model perhitungan menunjukan hanya kategori lahan <b>Cocok </b> saja. </p>
+
+        {% else %}
+        <p class="ml-7">Hasil model perhitungan menunjukan kategori lahan <b>tidak cocok </b> lebih banyak dari pada kategori lahan <b>cocok</b>. </p>
+        {% endif %}
         <!-- peta sebaran -->
         <div class="flex mt-10">
             <h1 class="text-lg font-bold font-predictions-color-header">Peta Sebaran Bawang Merah</h1>
@@ -75,6 +87,32 @@
 
     </div>
     
+</div>
+
+<div class="mt-10 mb-0 py-10 font-base-color bg-predictions-content-color" id="informations">
+    <div class="w-4/5 flex justify-center">
+        <div>
+            <div class="flex gap-x-2 items-center mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                </svg>
+                <h3 class="text-xl font-semibold">Informasi</h3>
+            </div>
+
+            <ul class="list-disc ms-8" id="info-parameter">
+                <li>hum = humidty (kelembaban tanah)</li>
+                <li>soil_nitro = soil nitrogen (nitrogen)</li>
+                <li>soil_phos = soil phospor (fosfor)</li>
+                <li>soil_pot = soil potassium (kalium)</li>
+                <li>soil_temp = soil temperature (temperatur tanah)</li>
+                <li>soil_ph = Ph tanah</li>
+                <li>temp = temperature (temperatur)</li>
+            </ul>
+        </div>
+
+    </div>
 </div>
 
 <!-- maps icon -->
@@ -120,16 +158,19 @@
                 }
 
                 const td = document.createElement('td');
+                const p_td = document.createElement('p');
                 td.setAttribute('class', 'px-6 py-4 whitespace-nowrap');
-                td.innerText = data[item];
-                tr_body.appendChild(td);
-
+                p_td.innerText = data[item];
                 if (data[item] == 'Tidak') {
-                    td.setAttribute('class', 'px-6 py-4 whitespace-nowrap tdkCocok font-bold');
+                    p_td.setAttribute('class', 'whitespace-nowrap text-white bg-tidak-cocok rounded-xl py-0 px-4');
                 }
                 if (data[item] == 'Cocok') {
-                    td.setAttribute('class', 'px-6 py-4 whitespace-nowrap cocok font-bold');
+                    p_td.setAttribute('class', 'whitespace-nowrap text-white bg-cocok rounded-xl py-0 px-4');
                 }
+                td.appendChild(p_td);
+                tr_body.appendChild(td);
+
+                
             }
         }
     }
@@ -169,7 +210,7 @@
         } else {
             var marker = L.marker([area[i].area_latitude, area[i].area_longitude]).addTo(map);
         }
-        marker.bindPopup(`<b>${area[i].area_name}</b><br>${area[i].area_address}`).closePopup();
+        marker.bindPopup(`<b>${area[i].area_name}`).openPopup();
     }
 
     var popup = L.popup();

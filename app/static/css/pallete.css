@@ -40,6 +40,14 @@
   background-color: #CD5C08B2;
 }
 
+.bg-cocok {
+  background-color: rgba(65, 100, 74, 0.7)
+}
+
+.bg-tidak-cocok {
+  background-color: rgba(200, 121, 121, 1)
+}
+
 .font-header-color {
   color: #41644A;
   font-weight: 700;

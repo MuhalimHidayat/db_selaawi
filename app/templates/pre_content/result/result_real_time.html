@@ -1,36 +1,38 @@
 {% extends 'base.html' %}
 {% block css_url %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pred/table_result.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pred/form.css') }}">
 
 {% endblock css_url %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/pallete.css') }}">
+
 {% block content %}
 <div class="flex justify-center w-full">
     <!-- header -->
     <div class="w-4/5">
         <div id="content-header" class="w-full bg-header-predictions-color rounded-md p-6 mb-8">
             <h1 class="text-2xl font-semibold font-predictions-color-header">Real Time Data</h1>
-            <p class="text-slate-50 mt-3 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, nesciunt.</p>
         </div>
         <!-- content -->
-        <div class="overflow-x-auto shadow-md sm:rounded-lg px-5 py-3">
-            <h4 class="text-xl text-amber-950 py-3 font-semibold">
-                Result
-            </h4>
+        <h4 class="text-xl text-amber-950 py-3 ms-5 font-semibold">
+            Result
+        </h4>
+        <div
+            class="scroll-table scroll-smooth focus:scroll-auto overflow-x-auto shadow-md sm:rounded-lg px-5 py-3 scrollbar-hide md:scrollbar-default">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-white uppercase bg-primary-color  dark:bg-gray-700 dark:text-gray-400">
                     <tr id="thead-tr">
-        
+
                     </tr>
                 </thead>
                 <tbody class="" id="tbody">
                     <tr class="bg-white border-b dark:bg-gray-800">
-        
+
                     </tr>
                 </tbody>
             </table>
-            <div>
-                <p class="font-semibold text-sm">{{ dimensions[0] }} rows X {{ dimensions[1] }} columns</p>
-            </div>
+        </div>
+        <div>
+            <p class="font-semibold text-sm ms-5 my-2">{{ dimensions[0] }} rows X {{ dimensions[1] }} columns</p>
         </div>
 
         <!-- graph content -->
@@ -61,6 +63,32 @@
     <!-- <p>{{ data }}</p> -->
 </div>
 
+<div class="mt-10 mb-0 py-10 font-base-color bg-predictions-content-color" id="informations">
+    <div class="w-4/5 flex justify-center">
+        <div>
+            <div class="flex gap-x-2 items-center mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                </svg>
+                <h3 class="text-xl font-semibold">Informasi</h3>
+            </div>
+
+            <ul class="list-disc ms-8" id="info-parameter">
+                <li>hum = humidty (kelembaban tanah)</li>
+                <li>soil_nitro = soil nitrogen (nitrogen)</li>
+                <li>soil_phos = soil phospor (fosfor)</li>
+                <li>soil_pot = soil potassium (kalium)</li>
+                <li>soil_temp = soil temperature (temperatur tanah)</li>
+                <li>soil_ph = Ph tanah</li>
+                <li>temp = temperature (temperatur)</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
 
 <script>
     var data = JSON.parse('{{ data | tojson | safe }}');
@@ -68,10 +96,13 @@
     var thead_tr = document.getElementById('thead-tr')
     // var tbody_tr = document.getElementById('tbody-tr')
     // header table
-    table_head = ['hum', 'soil nitro', 'soil phos', 'soil pot', 'soiltemp', 'soil_ph', 'temp', 'nilai_prediksi', 'tanggal dan waktu']
+    table_head = ['Waktu pengambilan', 'hum', 'soil nitro', 'soil phos', 'soil pot', 'soiltemp', 'soil_ph', 'temp',
+        'nilai_prediksi'
+    ]
 
     // Mapping of table_head values to data keys
     var keyMap = {
+        'Waktu pengambilan': 'timeStamp',
         'hum': 'hum',
         'soil nitro': 'soil_nitro',
         'soil phos': 'soil_phos',
@@ -80,7 +111,7 @@
         'soil_ph': 'soil_ph',
         'temp': 'temp',
         'nilai_prediksi': 'nilai_prediksi',
-        'tanggal dan waktu': 'timeStamp'
+
     };
 
     // Process the data to match the order in table_head
@@ -93,24 +124,38 @@
         return orderedItem;
     });
 
-    for (const key in table_head){
+    for (const key in table_head) {
         var th = document.createElement('th')
         th.setAttribute('scope', 'col')
         th.setAttribute('class', 'px-6 py-3')
         th.innerText = table_head[key]
         thead_tr.appendChild(th)
     }
-    
+
     processedData.forEach(item => {
         var tr = document.createElement('tr');
         table_head.forEach(header => {
             var td = document.createElement('td');
+            var p = document.createElement('p');
             td.setAttribute('class', 'px-6 py-4 whitespace-nowrap');
-            td.innerText = item[header]; // Use the header as key to get the correct value from item
+            p.innerText = item[header];
+            // td.innerText = item[header]; // Use the header as key to get the correct value from item
+            if (header === 'nilai_prediksi') {
+                // p.setAttribute('class', 'px-6 py-4 whitespace-nowrap font-bold');
+                if (item[header] === 'Cocok') {
+                    p.setAttribute('class',
+                        'whitespace-nowrap text-white bg-cocok rounded-xl py-0 text-center');
+                } else {
+                    p.setAttribute('class',
+                        'whitespace-nowrap text-white bg-tidak-cocok rounded-xl py-0 text-center'
+                        );
+                }
+            }
+            td.appendChild(p);
+
             tr.appendChild(td);
         });
         tbody.appendChild(tr); // Append the completed row to the table body
     });
-    
 </script>
 {% endblock content %}

@@ -11,8 +11,8 @@
         </div>
         <div
             class="scroll-table scroll-smooth focus:scroll-auto overflow-x-auto shadow-md sm:rounded-lg px-5 py-3 scrollbar-hide md:scrollbar-default">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr id="thead-tr">
                         <!-- 
                         th
@@ -110,7 +110,7 @@
     // create tbody
     for (const data_detail in data) {
         var tbody_tr = document.createElement('tr');
-        tbody_tr.setAttribute('class', 'bg-white border-b dark:bg-gray-800');
+        tbody_tr.setAttribute('class', 'bg-white border-b');
 
         // Membuat td untuk timeStamp terlebih dahulu
         if (data[data_detail].hasOwnProperty('timeStamp')) {

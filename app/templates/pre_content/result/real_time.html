@@ -74,13 +74,9 @@
 <div id="slave-data" slave-data={{slave}} style="display: none;"></div>
 
 <script>
-    // var data = JSON.parse(document.getElementById('data-json').getAttribute('data'));   
-    // console.log(data)
     data = JSON.parse('{{ data | tojson | safe }}')
     console.log(data)
-    // dataJson = document.getElementById('data-json').getAttribute('data')
-
-    // var data_parameter = ['timeStamp','hum', 'soil nitro', 'soil phos', 'soil pot', 'soiltemp', 'soil_ph', 'temp']
+    
     var tbody = document.getElementById('tbody')
     var thead_tr = document.getElementById('thead-tr') // th, th, th
 
@@ -133,60 +129,11 @@
         tbody.appendChild(tbody_tr)
     }
 
-
-
-
-
-    // for (const data_parameter in data[0]){
-    //     var th = document.createElement('th')
-    //     th.setAttribute('scope', 'col')
-    //     th.setAttribute('class', 'px-6 py-3 text-white')
-
-    //     // jika data_parameter sama dengan id_realtime maka skip
-    //     if (data_parameter == 'id_realtime') {
-    //         continue
-    //     }
-    //     th.innerHTML = data_parameter
-    //     console.log(data_parameter)
-    //     thead_tr.appendChild(th)
-    // }
-
-    // for (const data_detail in data){
-    //     var tbody_tr = document.createElement('tr');
-    //     tbody_tr.setAttribute('class', 'bg-white border-b dark:bg-gray-800');
-
-    //     // Membuat td untuk timeStamp terlebih dahulu
-    // if(data[data_detail].hasOwnProperty('timeStamp')){
-    //     var tdTime = document.createElement('td');
-    //     tdTime.setAttribute('class', 'px-6 py-4 whitespace-nowrap');
-    //     tdTime.innerHTML = data[data_detail]['timeStamp'];
-    //     tbody_tr.appendChild(tdTime);
-    // }
-
-    // for (const data_detail2 in data[data_detail]){
-    //     if(data_detail2 == 'id_realtime' || data_detail2 == 'timeStamp'){
-    //         continue; // Skip id_realtime dan timeStamp karena timeStamp sudah ditambahkan
-    //     }
-    //     var td = document.createElement('td');
-    //     td.setAttribute('class', 'px-6 py-4 whitespace-nowrap');
-    //     td.innerHTML = data[data_detail][data_detail2];
-    //     tbody_tr.appendChild(td);
-    // }
-
-    //     tbody.appendChild(tbody_tr)
-    // }
-
     // prediksi button
     var prediksi_button = document.getElementById('prediksi-button')
     var prediksi_path = document.getElementById('prediksi-path').getAttribute('data-url')
     var date_informs = JSON.parse(document.getElementById('date-informs').getAttribute('date-inf'))
 
-    // console.log(date_informs)
-
-    // // console.log(start_date)
-    // // console.log(end_date)
-
-    // var date_informs = JSON.parse(date_informs_str)
     prediksi_button.setAttribute('href',
         `${prediksi_path}?start_date=${date_informs['start_date']}&end_date=${date_informs['end_date']}`)
 </script>

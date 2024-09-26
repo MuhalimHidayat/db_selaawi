@@ -4,13 +4,11 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import joblib
 import psycopg2
-from werkzeug.middleware.proxy_fix import ProxyFix
 app = Flask(__name__, instance_relative_config=True)
 # app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
-# app.wsgi_app = ProxyFix(app.wsgi_app)
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://selaawi_owner:kS5TYUyR0dcN@ep-still-recipe-a1p69oue.ap-southeast-1.aws.neon.tech/selaawi?sslmode=require"
+# app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://selaawi_owner:kS5TYUyR0dcN@ep-still-recipe-a1p69oue.ap-southeast-1.aws.neon.tech/selaawi?sslmode=require"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://selaawi_owner:kS5TYUyR0dcN@ep-still-recipe-a1p69oue-pooler.ap-southeast-1.aws.neon.tech/selaawi?sslmode=require"
 # app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://selaawi_owner:endpoint=ep-still-recipe-a1p69oue;kS5TYUyR0dcN@ep-still-recipe-a1p69oue.ap-southeast-1.aws.neon.tech/selaawi?sslmode=require"
-
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 # db.init_app(app)
@@ -24,7 +22,6 @@ model_dt = joblib.load('app/blueprints/land_predict/static/ml_model/DT_model.sav
 
 from app.blueprints.land_predict.land_predict import lp
 app.register_blueprint(lp)
-
 
 @app.route('/download-dataset/<dataset_name>')
 def download_dataset(dataset_name):

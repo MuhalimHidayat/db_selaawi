@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import joblib
 import psycopg2
+from werkzeug.middleware.proxy_fix import ProxyFix
 app = Flask(__name__, instance_relative_config=True)
 # app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
 
@@ -23,6 +24,7 @@ model_dt = joblib.load('app/blueprints/land_predict/static/ml_model/DT_model.sav
 
 from app.blueprints.land_predict.land_predict import lp
 app.register_blueprint(lp)
+app.wsgi_app = ProxyFix(app.wsgi_app)
 
 @app.route('/download-dataset/<dataset_name>')
 def download_dataset(dataset_name):

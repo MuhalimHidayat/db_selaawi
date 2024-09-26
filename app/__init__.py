@@ -7,7 +7,7 @@ import psycopg2
 from werkzeug.middleware.proxy_fix import ProxyFix
 app = Flask(__name__, instance_relative_config=True)
 # app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
-app.wsgi_app = ProxyFix(app.wsgi_app)
+# app.wsgi_app = ProxyFix(app.wsgi_app)
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://selaawi_owner:kS5TYUyR0dcN@ep-still-recipe-a1p69oue.ap-southeast-1.aws.neon.tech/selaawi?sslmode=require"
 # app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://selaawi_owner:endpoint=ep-still-recipe-a1p69oue;kS5TYUyR0dcN@ep-still-recipe-a1p69oue.ap-southeast-1.aws.neon.tech/selaawi?sslmode=require"
 

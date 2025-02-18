@@ -16,3 +16,6 @@ instance/
 /app/node_modules
 /app/static/img/uploads
 .vercel
+
+package-lock.json
+script
